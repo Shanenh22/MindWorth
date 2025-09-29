@@ -1,0 +1,2515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Readiness Assessment - MindWorth AI Solutions</title>
+    <style>
+        :root {
+            --primary: #00f2ff;
+            --secondary: #ff00ff;
+            --accent: #ffff00;
+            --dark: #0a0a1a;
+            --darker: #050510;
+            --card-bg: rgba(15, 15, 35, 0.8);
+            --holographic: linear-gradient(135deg, #00f2ff 0%, #ff00ff 50%, #ffff00 100%);
+            --success: #00ff88;
+            --warning: #ffaa00;
+            --danger: #ff0055;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--darker);
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 242, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255, 0, 255, 0.1) 0%, transparent 50%);
+            animation: bgPulse 8s ease-in-out infinite;
+        }
+
+        @keyframes bgPulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 3rem 0;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            background: var(--holographic);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: holographic-text 4s ease-in-out infinite;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes holographic-text {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Auto-save indicator */
+        .save-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 255, 136, 0.2);
+            border: 1px solid var(--success);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            color: var(--success);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 1000;
+        }
+
+        .save-indicator.show {
+            opacity: 1;
+        }
+	/* Progress Section */
+        .progress-section {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(0, 242, 255, 0.2);
+        }
+
+        .progress-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .progress-text {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .time-estimate {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--holographic);
+            background-size: 200% 200%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            animation: holographic-flow 3s ease infinite;
+        }
+
+        @keyframes holographic-flow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Section Indicator */
+        .section-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .section-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .section-dot.completed {
+            background: var(--success);
+            box-shadow: 0 0 10px var(--success);
+        }
+
+        .section-dot.active {
+            background: var(--primary);
+            box-shadow: 0 0 15px var(--primary);
+            transform: scale(1.3);
+        }
+
+        .section-dot:hover {
+            transform: scale(1.2);
+        }
+
+        /* Assessment Container */
+        .assessment-container {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2.5rem;
+            border: 1px solid rgba(0, 242, 255, 0.2);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            background: var(--holographic);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-description {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
+	/* Question Styles */
+        .question {
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .question:last-child {
+            border-bottom: none;
+        }
+
+        .question-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            gap: 1rem;
+        }
+
+        .question-text {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .question-number {
+            background: rgba(0, 242, 255, 0.2);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            border: 1px solid var(--primary);
+        }
+
+        /* Desktop Radio Options */
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option {
+            position: relative;
+        }
+
+        .option input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .option label {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .option label:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .option input[type="radio"]:checked + label {
+            background: rgba(0, 242, 255, 0.15);
+            border-color: var(--primary);
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
+        }
+
+        .option label::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            margin-right: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .option input[type="radio"]:checked + label::before {
+            background: var(--primary);
+            border-color: var(--primary);
+            box-shadow: 0 0 10px var(--primary), inset 0 0 0 4px var(--dark);
+        }
+	/* Mobile Horizontal Options */
+        .options-mobile {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .options {
+                display: none;
+            }
+
+            .options-mobile {
+                display: flex;
+                justify-content: space-between;
+                gap: 0.5rem;
+                padding: 1rem 0;
+            }
+
+            .option-mobile {
+                flex: 1;
+                position: relative;
+            }
+
+            .option-mobile input[type="radio"] {
+                position: absolute;
+                opacity: 0;
+            }
+
+            .option-mobile label {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding: 1rem 0.5rem;
+                background: rgba(255, 255, 255, 0.05);
+                border: 2px solid rgba(255, 255, 255, 0.1);
+                border-radius: 10px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                min-height: 80px;
+            }
+
+            .option-mobile .number {
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: rgba(255, 255, 255, 0.7);
+                margin-bottom: 0.3rem;
+            }
+
+            .option-mobile .label-text {
+                font-size: 0.7rem;
+                color: rgba(255, 255, 255, 0.5);
+                text-align: center;
+            }
+
+            .option-mobile input[type="radio"]:checked + label {
+                background: rgba(0, 242, 255, 0.2);
+                border-color: var(--primary);
+                box-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
+                transform: scale(1.05);
+            }
+
+            .option-mobile input[type="radio"]:checked + label .number {
+                color: var(--primary);
+            }
+
+            .option-mobile input[type="radio"]:checked + label .label-text {
+                color: var(--primary);
+            }
+        }
+
+        /* Navigation Buttons */
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-top: 2.5rem;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: var(--holographic);
+            background-size: 200% 200%;
+            color: var(--dark);
+            animation: holographic-flow 3s ease infinite;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.5);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+	/* Results Container */
+        .results-container {
+            display: none;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2.5rem;
+            border: 1px solid rgba(0, 242, 255, 0.2);
+        }
+
+        .results-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .results-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .score-circle {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 2rem;
+            border-radius: 50%;
+            background: var(--holographic);
+            background-size: 200% 200%;
+            animation: holographic-flow 3s ease infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .score-circle::before {
+            content: '';
+            position: absolute;
+            inset: 8px;
+            background: var(--dark);
+            border-radius: 50%;
+        }
+
+        .score-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        #totalScore {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .score-max {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        #readinessLevel {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            background: var(--holographic);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        #resultsDescription {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Section Scores */
+        .section-scores {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-score-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .section-score-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 242, 255, 0.2);
+        }
+
+        .score-value {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .score-label {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 0.8rem;
+        }
+
+        .score-status {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .score-excellent {
+            background: rgba(0, 255, 136, 0.2);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+
+        .score-good {
+            background: rgba(0, 242, 255, 0.2);
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .score-moderate {
+            background: rgba(255, 170, 0, 0.2);
+            color: var(--warning);
+            border: 1px solid var(--warning);
+        }
+
+        .score-needs-work {
+            background: rgba(255, 0, 85, 0.2);
+            color: var(--danger);
+            border: 1px solid var(--danger);
+        }
+	/* Detailed Breakdown */
+        .detailed-breakdown {
+            margin: 3rem 0;
+        }
+
+        .breakdown-toggle {
+            width: 100%;
+            padding: 1.5rem;
+            background: rgba(0, 242, 255, 0.1);
+            border: 2px solid var(--primary);
+            border-radius: 10px;
+            color: var(--primary);
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .breakdown-toggle:hover {
+            background: rgba(0, 242, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .breakdown-toggle .arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .breakdown-toggle.active .arrow {
+            transform: rotate(180deg);
+        }
+
+        .breakdown-content {
+            display: none;
+            margin-top: 2rem;
+        }
+
+        .breakdown-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .breakdown-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .breakdown-section h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .breakdown-question {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 4px solid transparent;
+            border-radius: 6px;
+        }
+
+        .breakdown-question.answer-5 { border-left-color: var(--success); }
+        .breakdown-question.answer-4 { border-left-color: #00d4ff; }
+        .breakdown-question.answer-3 { border-left-color: var(--warning); }
+        .breakdown-question.answer-2 { border-left-color: #ff8800; }
+        .breakdown-question.answer-1 { border-left-color: var(--danger); }
+
+        .breakdown-question-text {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .breakdown-answer {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .answer-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        /* Recommendations */
+        .recommendations {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .recommendations h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .recommendations ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .recommendations li {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 4px solid var(--primary);
+            border-radius: 6px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+	/* Review Section */
+        .review-container {
+            display: none;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2.5rem;
+            border: 1px solid rgba(0, 242, 255, 0.2);
+        }
+
+        .review-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .review-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .review-section-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .review-section-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        .review-section-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .review-completion {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Loading Animation */
+        .loading-container {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loading-container.active {
+            display: flex;
+        }
+
+        .loading-content {
+            text-align: center;
+        }
+
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 2rem;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .loading-subtext {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Calendly Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 9998;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--dark);
+            border-radius: 15px;
+            width: 90%;
+            max-width: 1000px;
+            height: 80vh;
+            position: relative;
+            border: 2px solid var(--primary);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 0, 85, 0.3);
+            border-color: var(--danger);
+            transform: rotate(90deg);
+        }
+
+        .calendly-embed {
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+        }
+	/* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .header p {
+                font-size: 1rem;
+            }
+
+            .assessment-container,
+            .results-container,
+            .review-container {
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .question-text {
+                font-size: 1rem;
+            }
+
+            .btn {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.95rem;
+            }
+
+            .score-circle {
+                width: 150px;
+                height: 150px;
+            }
+
+            #totalScore {
+                font-size: 2.5rem;
+            }
+
+            .section-scores {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                width: 95%;
+                height: 90vh;
+            }
+
+            .save-indicator {
+                top: 10px;
+                right: 10px;
+                font-size: 0.75rem;
+                padding: 0.4rem 0.8rem;
+            }
+        }
+        /* Contact Container */
+.contact-container {
+    display: none;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 2.5rem;
+    border: 1px solid rgba(0, 242, 255, 0.2);
+}
+
+.contact-container.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+    </style>
+</head>
+<body>
+    <div class="bg-animation"></div>
+    <div class="save-indicator" id="saveIndicator">
+        <span>✓ Saved</span>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>AI Readiness Assessment</h1>
+            <p>Discover your organization's AI readiness and get personalized recommendations for your transformation journey.</p>
+        </div>
+
+        <!-- Progress Section -->
+        <div class="progress-section">
+            <div class="progress-header">
+                <div class="progress-text">
+                    <span id="progressText">Section 1 of 4</span>
+                </div>
+                <div class="time-estimate">
+                    <span id="timeEstimate">Estimated time: 8-10 minutes</span>
+                </div>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+            </div>
+            <div class="section-indicator" id="sectionIndicator">
+                <div class="section-dot active" data-section="0"></div>
+                <div class="section-dot" data-section="1"></div>
+                <div class="section-dot" data-section="2"></div>
+                <div class="section-dot" data-section="3"></div>
+            </div>
+        </div>
+
+        <!-- Assessment Container -->
+        <div class="assessment-container" id="assessmentContainer">
+	<!-- Section 1: Business Foundation -->
+            <div class="section active" data-section="0">
+                <h2 class="section-title">Business Foundation</h2>
+                <p class="section-description">Let's assess your current business structure and objectives.</p>
+
+                <!-- Question 1 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-text">How clearly defined are your business goals and objectives?</div>
+                        <div class="question-number">Question 1 of 5</div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q1" value="1" id="q1-1"><label for="q1-1">No clear goals defined</label></div>
+                        <div class="option"><input type="radio" name="q1" value="2" id="q1-2"><label for="q1-2">Vague goals, not well documented</label></div>
+                        <div class="option"><input type="radio" name="q1" value="3" id="q1-3"><label for="q1-3">Goals exist but need refinement</label></div>
+                        <div class="option"><input type="radio" name="q1" value="4" id="q1-4"><label for="q1-4">Well-defined and documented goals</label></div>
+                        <div class="option"><input type="radio" name="q1" value="5" id="q1-5"><label for="q1-5">Crystal clear strategic goals with KPIs</label></div>
+                    </div>
+                    <div class="options-mobile">
+                        <div class="option-mobile"><input type="radio" name="q1" value="1" id="q1-m1"><label for="q1-m1"><div class="number">1</div><div class="label-text">Not Clear</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q1" value="2" id="q1-m2"><label for="q1-m2"><div class="number">2</div><div class="label-text">Vague</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q1" value="3" id="q1-m3"><label for="q1-m3"><div class="number">3</div><div class="label-text">Average</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q1" value="4" id="q1-m4"><label for="q1-m4"><div class="number">4</div><div class="label-text">Good</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q1" value="5" id="q1-m5"><label for="q1-m5"><div class="number">5</div><div class="label-text">Excellent</div></label></div>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-text">What is your current understanding of how AI could benefit your business?</div>
+                        <div class="question-number">Question 2 of 5</div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q2" value="1" id="q2-1"><label for="q2-1">Little to no understanding</label></div>
+                        <div class="option"><input type="radio" name="q2" value="2" id="q2-2"><label for="q2-2">Heard about AI but unclear on benefits</label></div>
+                        <div class="option"><input type="radio" name="q2" value="3" id="q2-3"><label for="q2-3">Some understanding, need more clarity</label></div>
+                        <div class="option"><input type="radio" name="q2" value="4" id="q2-4"><label for="q2-4">Good understanding with specific use cases</label></div>
+                        <div class="option"><input type="radio" name="q2" value="5" id="q2-5"><label for="q2-5">Clear vision of AI integration opportunities</label></div>
+                    </div>
+                    <div class="options-mobile">
+                        <div class="option-mobile"><input type="radio" name="q2" value="1" id="q2-m1"><label for="q2-m1"><div class="number">1</div><div class="label-text">Little</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q2" value="2" id="q2-m2"><label for="q2-m2"><div class="number">2</div><div class="label-text">Basic</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q2" value="3" id="q2-m3"><label for="q2-m3"><div class="number">3</div><div class="label-text">Some</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q2" value="4" id="q2-m4"><label for="q2-m4"><div class="number">4</div><div class="label-text">Good</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q2" value="5" id="q2-m5"><label for="q2-m5"><div class="number">5</div><div class="label-text">Clear</div></label></div>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-text">How would you rate your business processes documentation?</div>
+                        <div class="question-number">Question 3 of 5</div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q3" value="1" id="q3-1"><label for="q3-1">No documentation exists</label></div>
+                        <div class="option"><input type="radio" name="q3" value="2" id="q3-2"><label for="q3-2">Minimal, outdated documentation</label></div>
+                        <div class="option"><input type="radio" name="q3" value="3" id="q3-3"><label for="q3-3">Some key processes documented</label></div>
+                        <div class="option"><input type="radio" name="q3" value="4" id="q3-4"><label for="q3-4">Most processes well documented</label></div>
+                        <div class="option"><input type="radio" name="q3" value="5" id="q3-5"><label for="q3-5">Comprehensive, up-to-date documentation</label></div>
+                    </div>
+                    <div class="options-mobile">
+                        <div class="option-mobile"><input type="radio" name="q3" value="1" id="q3-m1"><label for="q3-m1"><div class="number">1</div><div class="label-text">None</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q3" value="2" id="q3-m2"><label for="q3-m2"><div class="number">2</div><div class="label-text">Minimal</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q3" value="3" id="q3-m3"><label for="q3-m3"><div class="number">3</div><div class="label-text">Some</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q3" value="4" id="q3-m4"><label for="q3-m4"><div class="number">4</div><div class="label-text">Most</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q3" value="5" id="q3-m5"><label for="q3-m5"><div class="number">5</div><div class="label-text">Complete</div></label></div>
+                    </div>
+                </div>
+		<!-- Question 4 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-text">What budget have you allocated for AI initiatives?</div>
+                        <div class="question-number">Question 4 of 5</div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q4" value="1" id="q4-1"><label for="q4-1">No budget allocated</label></div>
+                        <div class="option"><input type="radio" name="q4" value="2" id="q4-2"><label for="q4-2">Limited exploratory budget</label></div>
+                        <div class="option"><input type="radio" name="q4" value="3" id="q4-3"><label for="q4-3">Moderate budget for pilot projects</label></div>
+                        <div class="option"><input type="radio" name="q4" value="4" id="q4-4"><label for="q4-4">Significant budget allocated</label></div>
+                        <div class="option"><input type="radio" name="q4" value="5" id="q4-5"><label for="q4-5">Substantial budget with executive buy-in</label></div>
+                    </div>
+                    <div class="options-mobile">
+                        <div class="option-mobile"><input type="radio" name="q4" value="1" id="q4-m1"><label for="q4-m1"><div class="number">1</div><div class="label-text">None</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q4" value="2" id="q4-m2"><label for="q4-m2"><div class="number">2</div><div class="label-text">Limited</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q4" value="3" id="q4-m3"><label for="q4-m3"><div class="number">3</div><div class="label-text">Moderate</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q4" value="4" id="q4-m4"><label for="q4-m4"><div class="number">4</div><div class="label-text">Significant</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q4" value="5" id="q4-m5"><label for="q4-m5"><div class="number">5</div><div class="label-text">Substantial</div></label></div>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-text">How urgent is AI implementation for your business?</div>
+                        <div class="question-number">Question 5 of 5</div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q5" value="1" id="q5-1"><label for="q5-1">Just exploring, no urgency</label></div>
+                        <div class="option"><input type="radio" name="q5" value="2" id="q5-2"><label for="q5-2">Long-term consideration (1-2 years)</label></div>
+                        <div class="option"><input type="radio" name="q5" value="3" id="q5-3"><label for="q5-3">Planning to start within a year</label></div>
+                        <div class="option"><input type="radio" name="q5" value="4" id="q5-4"><label for="q5-4">Need to start within 6 months</label></div>
+                        <div class="option"><input type="radio" name="q5" value="5" id="q5-5"><label for="q5-5">Immediate priority (within 3 months)</label></div>
+                    </div>
+                    <div class="options-mobile">
+                        <div class="option-mobile"><input type="radio" name="q5" value="1" id="q5-m1"><label for="q5-m1"><div class="number">1</div><div class="label-text">Exploring</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q5" value="2" id="q5-m2"><label for="q5-m2"><div class="number">2</div><div class="label-text">Long-term</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q5" value="3" id="q5-m3"><label for="q5-m3"><div class="number">3</div><div class="label-text">1 Year</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q5" value="4" id="q5-m4"><label for="q5-m4"><div class="number">4</div><div class="label-text">6 Months</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q5" value="5" id="q5-m5"><label for="q5-m5"><div class="number">5</div><div class="label-text">Immediate</div></label></div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="navigation">
+                    <button class="btn btn-secondary" id="prevBtn" onclick="previousSection()" style="visibility: hidden;">Previous</button>
+                    <button class="btn btn-primary" id="nextBtn" onclick="nextSection()">Next Section</button>
+                </div>
+            </div>
+	    <!-- Section 2: AI Knowledge -->
+            <div class="section" data-section="1">
+                <h2 class="section-title">AI Knowledge & Awareness</h2>
+                <p class="section-description">Evaluate your team's understanding of AI technologies.</p>
+
+                <!-- Question 6 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-text">How familiar is your leadership team with AI concepts?</div>
+                        <div class="question-number">Question 1 of 5</div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q6" value="1" id="q6-1"><label for="q6-1">No knowledge of AI</label></div>
+                        <div class="option"><input type="radio" name="q6" value="2" id="q6-2"><label for="q6-2">Basic awareness from media</label></div>
+                        <div class="option"><input type="radio" name="q6" value="3" id="q6-3"><label for="q6-3">General understanding of AI applications</label></div>
+                        <div class="option"><input type="radio" name="q6" value="4" id="q6-4"><label for="q6-4">Good working knowledge</label></div>
+                        <div class="option"><input type="radio" name="q6" value="5" id="q6-5"><label for="q6-5">Expert-level understanding</label></div>
+                    </div>
+                    <div class="options-mobile">
+                        <div class="option-mobile"><input type="radio" name="q6" value="1" id="q6-m1"><label for="q6-m1"><div class="number">1</div><div class="label-text">None</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q6" value="2" id="q6-m2"><label for="q6-m2"><div class="number">2</div><div class="label-text">Basic</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q6" value="3" id="q6-m3"><label for="q6-m3"><div class="number">3</div><div class="label-text">General</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q6" value="4" id="q6-m4"><label for="q6-m4"><div class="number">4</div><div class="label-text">Good</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q6" value="5" id="q6-m5"><label for="q6-m5"><div class="number">5</div><div class="label-text">Expert</div></label></div>
+                    </div>
+                </div>
+
+                <!-- Question 7 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-text">Have you identified specific use cases for AI in your business?</div>
+                        <div class="question-number">Question 2 of 5</div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q7" value="1" id="q7-1"><label for="q7-1">No use cases identified</label></div>
+                        <div class="option"><input type="radio" name="q7" value="2" id="q7-2"><label for="q7-2">Vague ideas, nothing concrete</label></div>
+                        <div class="option"><input type="radio" name="q7" value="3" id="q7-3"><label for="q7-3">1-2 potential use cases identified</label></div>
+                        <div class="option"><input type="radio" name="q7" value="4" id="q7-4"><label for="q7-4">Multiple use cases documented</label></div>
+                        <div class="option"><input type="radio" name="q7" value="5" id="q7-5"><label for="q7-5">Comprehensive use case portfolio with ROI</label></div>
+                    </div>
+                    <div class="options-mobile">
+                        <div class="option-mobile"><input type="radio" name="q7" value="1" id="q7-m1"><label for="q7-m1"><div class="number">1</div><div class="label-text">None</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q7" value="2" id="q7-m2"><label for="q7-m2"><div class="number">2</div><div class="label-text">Vague</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q7" value="3" id="q7-m3"><label for="q7-m3"><div class="number">3</div><div class="label-text">1-2 Cases</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q7" value="4" id="q7-m4"><label for="q7-m4"><div class="number">4</div><div class="label-text">Multiple</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q7" value="5" id="q7-m5"><label for="q7-m5"><div class="number">5</div><div class="label-text">Portfolio</div></label></div>
+                    </div>
+                </div>
+
+                <!-- Question 8 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-text">Does your team understand the difference between various AI technologies (ML, NLP, Computer Vision)?</div>
+                        <div class="question-number">Question 3 of 5</div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q8" value="1" id="q8-1"><label for="q8-1">No understanding of distinctions</label></div>
+                        <div class="option"><input type="radio" name="q8" value="2" id="q8-2"><label for="q8-2">Heard terms but unclear</label></div>
+                        <div class="option"><input type="radio" name="q8" value="3" id="q8-3"><label for="q8-3">Basic understanding of differences</label></div>
+                        <div class="option"><input type="radio" name="q8" value="4" id="q8-4"><label for="q8-4">Good grasp of various AI types</label></div>
+                        <div class="option"><input type="radio" name="q8" value="5" id="q8-5"><label for="q8-5">Deep understanding with practical knowledge</label></div>
+                    </div>
+                    <div class="options-mobile">
+                        <div class="option-mobile"><input type="radio" name="q8" value="1" id="q8-m1"><label for="q8-m1"><div class="number">1</div><div class="label-text">No</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q8" value="2" id="q8-m2"><label for="q8-m2"><div class="number">2</div><div class="label-text">Unclear</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q8" value="3" id="q8-m3"><label for="q8-m3"><div class="number">3</div><div class="label-text">Basic</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q8" value="4" id="q8-m4"><label for="q8-m4"><div class="number">4</div><div class="label-text">Good</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q8" value="5" id="q8-m5"><label for="q8-m5"><div class="number">5</div><div class="label-text">Deep</div></label></div>
+                    </div>
+                </div>
+		<!-- Question 9 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-text">Have you researched AI solutions available in your industry?</div>
+                        <div class="question-number">Question 4 of 5</div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q9" value="1" id="q9-1"><label for="q9-1">No research conducted</label></div>
+                        <div class="option"><input type="radio" name="q9" value="2" id="q9-2"><label for="q9-2">Minimal browsing</label></div>
+                        <div class="option"><input type="radio" name="q9" value="3" id="q9-3"><label for="q9-3">Some research done</label></div>
+                        <div class="option"><input type="radio" name="q9" value="4" id="q9-4"><label for="q9-4">Thorough competitive analysis</label></div>
+                        <div class="option"><input type="radio" name="q9" value="5" id="q9-5"><label for="q9-5">Comprehensive market research with vendor comparisons</label></div>
+                    </div>
+                    <div class="options-mobile">
+                        <div class="option-mobile"><input type="radio" name="q9" value="1" id="q9-m1"><label for="q9-m1"><div class="number">1</div><div class="label-text">None</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q9" value="2" id="q9-m2"><label for="q9-m2"><div class="number">2</div><div class="label-text">Minimal</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q9" value="3" id="q9-m3"><label for="q9-m3"><div class="number">3</div><div class="label-text">Some</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q9" value="4" id="q9-m4"><label for="q9-m4"><div class="number">4</div><div class="label-text">Thorough</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q9" value="5" id="q9-m5"><label for="q9-m5"><div class="number">5</div><div class="label-text">Complete</div></label></div>
+                    </div>
+                </div>
+
+                <!-- Question 10 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-text">What is your awareness of AI risks and ethical considerations?</div>
+                        <div class="question-number">Question 5 of 5</div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q10" value="1" id="q10-1"><label for="q10-1">Not considered</label></div>
+                        <div class="option"><input type="radio" name="q10" value="2" id="q10-2"><label for="q10-2">Aware but haven't explored</label></div>
+                        <div class="option"><input type="radio" name="q10" value="3" id="q10-3"><label for="q10-3">Basic understanding of main risks</label></div>
+                        <div class="option"><input type="radio" name="q10" value="4" id="q10-4"><label for="q10-4">Good awareness with mitigation plans</label></div>
+                        <div class="option"><input type="radio" name="q10" value="5" id="q10-5"><label for="q10-5">Comprehensive risk framework established</label></div>
+                    </div>
+                    <div class="options-mobile">
+                        <div class="option-mobile"><input type="radio" name="q10" value="1" id="q10-m1"><label for="q10-m1"><div class="number">1</div><div class="label-text">None</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q10" value="2" id="q10-m2"><label for="q10-m2"><div class="number">2</div><div class="label-text">Aware</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q10" value="3" id="q10-m3"><label for="q10-m3"><div class="number">3</div><div class="label-text">Basic</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q10" value="4" id="q10-m4"><label for="q10-m4"><div class="number">4</div><div class="label-text">Good</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q10" value="5" id="q10-m5"><label for="q10-m5"><div class="number">5</div><div class="label-text">Complete</div></label></div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="navigation">
+                    <button class="btn btn-secondary" id="prevBtn" onclick="previousSection()">Previous</button>
+                    <button class="btn btn-primary" id="nextBtn" onclick="nextSection()">Next Section</button>
+                </div>
+            </div>
+	 <!-- Section 3: Technical Readiness -->
+            <div class="section" data-section="2">
+                <h2 class="section-title">Technical Readiness</h2>
+                <p class="section-description">Assess your technical infrastructure and data capabilities.</p>
+
+                <!-- Question 11 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-text">How would you rate your current data infrastructure?</div>
+                        <div class="question-number">Question 1 of 5</div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q11" value="1" id="q11-1"><label for="q11-1">No centralized data system</label></div>
+                        <div class="option"><input type="radio" name="q11" value="2" id="q11-2"><label for="q11-2">Basic spreadsheets and files</label></div>
+                        <div class="option"><input type="radio" name="q11" value="3" id="q11-3"><label for="q11-3">Some databases, needs improvement</label></div>
+                        <div class="option"><input type="radio" name="q11" value="4" id="q11-4"><label for="q11-4">Solid database systems in place</label></div>
+                        <div class="option"><input type="radio" name="q11" value="5" id="q11-5"><label for="q11-5">Advanced data warehouse/lake infrastructure</label></div>
+                    </div>
+                    <div class="options-mobile">
+                        <div class="option-mobile"><input type="radio" name="q11" value="1" id="q11-m1"><label for="q11-m1"><div class="number">1</div><div class="label-text">None</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q11" value="2" id="q11-m2"><label for="q11-m2"><div class="number">2</div><div class="label-text">Basic</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q11" value="3" id="q11-m3"><label for="q11-m3"><div class="number">3</div><div class="label-text">Some</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q11" value="4" id="q11-m4"><label for="q11-m4"><div class="number">4</div><div class="label-text">Solid</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q11" value="5" id="q11-m5"><label for="q11-m5"><div class="number">5</div><div class="label-text">Advanced</div></label></div>
+                    </div>
+                </div>
+
+                <!-- Question 12 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-text">What is the quality and accessibility of your data?</div>
+                        <div class="question-number">Question 2 of 5</div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q12" value="1" id="q12-1"><label for="q12-1">Poor quality, scattered data</label></div>
+                        <div class="option"><input type="radio" name="q12" value="2" id="q12-2"><label for="q12-2">Inconsistent, difficult to access</label></div>
+                        <div class="option"><input type="radio" name="q12" value="3" id="q12-3"><label for="q12-3">Acceptable quality, some silos exist</label></div>
+                        <div class="option"><input type="radio" name="q12" value="4" id="q12-4"><label for="q12-4">Good quality, mostly accessible</label></div>
+                        <div class="option"><input type="radio" name="q12" value="5" id="q12-5"><label for="q12-5">High quality, easily accessible across systems</label></div>
+                    </div>
+                    <div class="options-mobile">
+                        <div class="option-mobile"><input type="radio" name="q12" value="1" id="q12-m1"><label for="q12-m1"><div class="number">1</div><div class="label-text">Poor</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q12" value="2" id="q12-m2"><label for="q12-m2"><div class="number">2</div><div class="label-text">Inconsistent</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q12" value="3" id="q12-m3"><label for="q12-m3"><div class="number">3</div><div class="label-text">Acceptable</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q12" value="4" id="q12-m4"><label for="q12-m4"><div class="number">4</div><div class="label-text">Good</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q12" value="5" id="q12-m5"><label for="q12-m5"><div class="number">5</div><div class="label-text">Excellent</div></label></div>
+                    </div>
+                </div>
+
+                <!-- Question 13 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-text">Do you have IT staff capable of supporting AI implementation?</div>
+                        <div class="question-number">Question 3 of 5</div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q13" value="1" id="q13-1"><label for="q13-1">No IT staff</label></div>
+                        <div class="option"><input type="radio" name="q13" value="2" id="q13-2"><label for="q13-2">Limited IT, no AI experience</label></div>
+                        <div class="option"><input type="radio" name="q13" value="3" id="q13-3"><label for="q13-3">IT staff but need AI training</label></div>
+                        <div class="option"><input type="radio" name="q13" value="4" id="q13-4"><label for="q13-4">Capable IT with some AI knowledge</label></div>
+                        <div class="option"><input type="radio" name="q13" value="5" id="q13-5"><label for="q13-5">Experienced team with AI/ML expertise</label></div>
+                    </div>
+                    <div class="options-mobile">
+                        <div class="option-mobile"><input type="radio" name="q13" value="1" id="q13-m1"><label for="q13-m1"><div class="number">1</div><div class="label-text">None</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q13" value="2" id="q13-m2"><label for="q13-m2"><div class="number">2</div><div class="label-text">Limited</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q13" value="3" id="q13-m3"><label for="q13-m3"><div class="number">3</div><div class="label-text">Need Training</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q13" value="4" id="q13-m4"><label for="q13-m4"><div class="number">4</div><div class="label-text">Capable</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q13" value="5" id="q13-m5"><label for="q13-m5"><div class="number">5</div><div class="label-text">Expert</div></label></div>
+                    </div>
+                </div>
+		<!-- Question 14 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-text">Are your current systems cloud-ready or cloud-based?</div>
+                        <div class="question-number">Question 4 of 5</div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q14" value="1" id="q14-1"><label for="q14-1">Entirely on-premise, legacy systems</label></div>
+                        <div class="option"><input type="radio" name="q14" value="2" id="q14-2"><label for="q14-2">Mostly on-premise, considering cloud</label></div>
+                        <div class="option"><input type="radio" name="q14" value="3" id="q14-3"><label for="q14-3">Hybrid environment, some cloud adoption</label></div>
+                        <div class="option"><input type="radio" name="q14" value="4" id="q14-4"><label for="q14-4">Majority cloud-based systems</label></div>
+                        <div class="option"><input type="radio" name="q14" value="5" id="q14-5"><label for="q14-5">Fully cloud-native infrastructure</label></div>
+                    </div>
+                    <div class="options-mobile">
+                        <div class="option-mobile"><input type="radio" name="q14" value="1" id="q14-m1"><label for="q14-m1"><div class="number">1</div><div class="label-text">On-Premise</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q14" value="2" id="q14-m2"><label for="q14-m2"><div class="number">2</div><div class="label-text">Considering</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q14" value="3" id="q14-m3"><label for="q14-m3"><div class="number">3</div><div class="label-text">Hybrid</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q14" value="4" id="q14-m4"><label for="q14-m4"><div class="number">4</div><div class="label-text">Mostly Cloud</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q14" value="5" id="q14-m5"><label for="q14-m5"><div class="number">5</div><div class="label-text">Full Cloud</div></label></div>
+                    </div>
+                </div>
+
+                <!-- Question 15 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-text">Do you have data governance policies in place?</div>
+                        <div class="question-number">Question 5 of 5</div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q15" value="1" id="q15-1"><label for="q15-1">No policies exist</label></div>
+                        <div class="option"><input type="radio" name="q15" value="2" id="q15-2"><label for="q15-2">Informal guidelines only</label></div>
+                        <div class="option"><input type="radio" name="q15" value="3" id="q15-3"><label for="q15-3">Basic policies, not enforced</label></div>
+                        <div class="option"><input type="radio" name="q15" value="4" id="q15-4"><label for="q15-4">Well-defined and mostly followed</label></div>
+                        <div class="option"><input type="radio" name="q15" value="5" id="q15-5"><label for="q15-5">Comprehensive governance framework</label></div>
+                    </div>
+                    <div class="options-mobile">
+                        <div class="option-mobile"><input type="radio" name="q15" value="1" id="q15-m1"><label for="q15-m1"><div class="number">1</div><div class="label-text">None</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q15" value="2" id="q15-m2"><label for="q15-m2"><div class="number">2</div><div class="label-text">Informal</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q15" value="3" id="q15-m3"><label for="q15-m3"><div class="number">3</div><div class="label-text">Basic</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q15" value="4" id="q15-m4"><label for="q15-m4"><div class="number">4</div><div class="label-text">Good</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q15" value="5" id="q15-m5"><label for="q15-m5"><div class="number">5</div><div class="label-text">Complete</div></label></div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="navigation">
+                    <button class="btn btn-secondary" id="prevBtn" onclick="previousSection()">Previous</button>
+                    <button class="btn btn-primary" id="nextBtn" onclick="nextSection()">Next Section</button>
+                </div>
+            </div>
+	    <!-- Section 4: Team & Change Management -->
+            <div class="section" data-section="3">
+                <h2 class="section-title">Team & Change Management</h2>
+                <p class="section-description">Evaluate your organization's readiness for AI adoption.</p>
+
+                <!-- Question 16 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-text">How would you describe your organizational culture regarding innovation?</div>
+                        <div class="question-number">Question 1 of 5</div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q16" value="1" id="q16-1"><label for="q16-1">Resistant to change</label></div>
+                        <div class="option"><input type="radio" name="q16" value="2" id="q16-2"><label for="q16-2">Cautious, slow to adopt new technologies</label></div>
+                        <div class="option"><input type="radio" name="q16" value="3" id="q16-3"><label for="q16-3">Open but need convincing</label></div>
+                        <div class="option"><input type="radio" name="q16" value="4" id="q16-4"><label for="q16-4">Generally embraces innovation</label></div>
+                        <div class="option"><input type="radio" name="q16" value="5" id="q16-5"><label for="q16-5">Highly innovative, early adopter culture</label></div>
+                    </div>
+                    <div class="options-mobile">
+                        <div class="option-mobile"><input type="radio" name="q16" value="1" id="q16-m1"><label for="q16-m1"><div class="number">1</div><div class="label-text">Resistant</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q16" value="2" id="q16-m2"><label for="q16-m2"><div class="number">2</div><div class="label-text">Cautious</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q16" value="3" id="q16-m3"><label for="q16-m3"><div class="number">3</div><div class="label-text">Open</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q16" value="4" id="q16-m4"><label for="q16-m4"><div class="number">4</div><div class="label-text">Embracing</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q16" value="5" id="q16-m5"><label for="q16-m5"><div class="number">5</div><div class="label-text">Innovative</div></label></div>
+                    </div>
+                </div>
+
+                <!-- Question 17 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-text">Do you have executive leadership support for AI initiatives?</div>
+                        <div class="question-number">Question 2 of 5</div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q17" value="1" id="q17-1"><label for="q17-1">No executive awareness</label></div>
+                        <div class="option"><input type="radio" name="q17" value="2" id="q17-2"><label for="q17-2">Aware but not prioritized</label></div>
+                        <div class="option"><input type="radio" name="q17" value="3" id="q17-3"><label for="q17-3">Some interest from leadership</label></div>
+                        <div class="option"><input type="radio" name="q17" value="4" id="q17-4"><label for="q17-4">Strong support from key executives</label></div>
+                        <div class="option"><input type="radio" name="q17" value="5" id="q17-5"><label for="q17-5">Full C-suite commitment and sponsorship</label></div>
+                    </div>
+                    <div class="options-mobile">
+                        <div class="option-mobile"><input type="radio" name="q17" value="1" id="q17-m1"><label for="q17-m1"><div class="number">1</div><div class="label-text">None</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q17" value="2" id="q17-m2"><label for="q17-m2"><div class="number">2</div><div class="label-text">Aware</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q17" value="3" id="q17-m3"><label for="q17-m3"><div class="number">3</div><div class="label-text">Interest</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q17" value="4" id="q17-m4"><label for="q17-m4"><div class="number">4</div><div class="label-text">Strong</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q17" value="5" id="q17-m5"><label for="q17-m5"><div class="number">5</div><div class="label-text">Full</div></label></div>
+                    </div>
+                </div>
+
+                <!-- Question 18 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-text">Have you identified internal AI champions or leaders?</div>
+                        <div class="question-number">Question 3 of 5</div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q18" value="1" id="q18-1"><label for="q18-1">No champions identified</label></div>
+                        <div class="option"><input type="radio" name="q18" value="2" id="q18-2"><label for="q18-2">Considering who might lead</label></div>
+                        <div class="option"><input type="radio" name="q18" value="3" id="q18-3"><label for="q18-3">1-2 interested individuals</label></div>
+                        <div class="option"><input type="radio" name="q18" value="4" id="q18-4"><label for="q18-4">Dedicated team members assigned</label></div>
+                        <div class="option"><input type="radio" name="q18" value="5" id="q18-5"><label for="q18-5">Established AI steering committee</label></div>
+                    </div>
+                    <div class="options-mobile">
+                        <div class="option-mobile"><input type="radio" name="q18" value="1" id="q18-m1"><label for="q18-m1"><div class="number">1</div><div class="label-text">None</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q18" value="2" id="q18-m2"><label for="q18-m2"><div class="number">2</div><div class="label-text">Considering</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q18" value="3" id="q18-m3"><label for="q18-m3"><div class="number">3</div><div class="label-text">1-2 People</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q18" value="4" id="q18-m4"><label for="q18-m4"><div class="number">4</div><div class="label-text">Team</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q18" value="5" id="q18-m5"><label for="q18-m5"><div class="number">5</div><div class="label-text">Committee</div></label></div>
+                    </div>
+                </div>
+		<!-- Question 19 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-text">What is your plan for training employees on AI tools?</div>
+                        <div class="question-number">Question 4 of 5</div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q19" value="1" id="q19-1"><label for="q19-1">No training plan</label></div>
+                        <div class="option"><input type="radio" name="q19" value="2" id="q19-2"><label for="q19-2">Haven't thought about it yet</label></div>
+                        <div class="option"><input type="radio" name="q19" value="3" id="q19-3"><label for="q19-3">Considering training options</label></div>
+                        <div class="option"><input type="radio" name="q19" value="4" id="q19-4"><label for="q19-4">Training plan drafted</label></div>
+                        <div class="option"><input type="radio" name="q19" value="5" id="q19-5"><label for="q19-5">Comprehensive training program ready</label></div>
+                    </div>
+                    <div class="options-mobile">
+                        <div class="option-mobile"><input type="radio" name="q19" value="1" id="q19-m1"><label for="q19-m1"><div class="number">1</div><div class="label-text">None</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q19" value="2" id="q19-m2"><label for="q19-m2"><div class="number">2</div><div class="label-text">Not Yet</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q19" value="3" id="q19-m3"><label for="q19-m3"><div class="number">3</div><div class="label-text">Considering</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q19" value="4" id="q19-m4"><label for="q19-m4"><div class="number">4</div><div class="label-text">Drafted</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q19" value="5" id="q19-m5"><label for="q19-m5"><div class="number">5</div><div class="label-text">Ready</div></label></div>
+                    </div>
+                </div>
+
+                <!-- Question 20 -->
+                <div class="question">
+                    <div class="question-header">
+                        <div class="question-text">How do you expect employees to react to AI implementation?</div>
+                        <div class="question-number">Question 5 of 5</div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><input type="radio" name="q20" value="1" id="q20-1"><label for="q20-1">Significant resistance expected</label></div>
+                        <div class="option"><input type="radio" name="q20" value="2" id="q20-2"><label for="q20-2">Some concerns and pushback likely</label></div>
+                        <div class="option"><input type="radio" name="q20" value="3" id="q20-3"><label for="q20-3">Mixed reactions expected</label></div>
+                        <div class="option"><input type="radio" name="q20" value="4" id="q20-4"><label for="q20-4">Generally positive reception expected</label></div>
+                        <div class="option"><input type="radio" name="q20" value="5" id="q20-5"><label for="q20-5">Enthusiastic adoption anticipated</label></div>
+                    </div>
+                    <div class="options-mobile">
+                        <div class="option-mobile"><input type="radio" name="q20" value="1" id="q20-m1"><label for="q20-m1"><div class="number">1</div><div class="label-text">Resistant</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q20" value="2" id="q20-m2"><label for="q20-m2"><div class="number">2</div><div class="label-text">Concerns</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q20" value="3" id="q20-m3"><label for="q20-m3"><div class="number">3</div><div class="label-text">Mixed</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q20" value="4" id="q20-m4"><label for="q20-m4"><div class="number">4</div><div class="label-text">Positive</div></label></div>
+                        <div class="option-mobile"><input type="radio" name="q20" value="5" id="q20-m5"><label for="q20-m5"><div class="number">5</div><div class="label-text">Enthusiastic</div></label></div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="navigation">
+                    <button class="btn btn-secondary" id="prevBtn" onclick="previousSection()">Previous</button>
+                    <button class="btn btn-primary" id="nextBtn" onclick="showReview()">Review Answers</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Review Container -->
+        <div class="review-container" id="reviewContainer">
+            <h2 class="section-title">Review Your Answers</h2>
+            <p class="section-description">Review your responses before submitting. Click on any section to make changes.</p>
+            
+            <div class="review-summary" id="reviewSummary"></div>
+
+            <div class="navigation">
+                <button class="btn btn-secondary" onclick="backToAssessment()">Back to Assessment</button>
+                <button class="btn btn-primary" onclick="submitAssessment()">Submit Assessment</button>
+            </div>
+        </div>
+        <!-- Contact Information Container (Appears after Review) -->
+        <div class="contact-container" id="contactContainer">
+            <div style="background: var(--card-bg); backdrop-filter: blur(10px); border-radius: 15px; padding: 2.5rem; border: 1px solid rgba(0, 242, 255, 0.2);">
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;"></div>
+                    <h2 class="section-title">You're Almost Done!</h2>
+                    <p class="section-description">Enter your information to unlock your personalized AI readiness report.</p>
+                </div>
+
+                <form id="contactForm">
+                    <!-- Full Name -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <label for="fullName" style="display: block; color: rgba(255, 255, 255, 0.9); font-size: 1rem; margin-bottom: 0.5rem;">
+                            Full Name *
+                        </label>
+                        <input 
+                            type="text" 
+                            id="fullName" 
+                            name="fullName" 
+                            required
+                            placeholder="John Doe"
+                            style="width: 100%; padding: 1rem; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 10px; color: #ffffff; font-size: 1rem; transition: all 0.3s ease;"
+                            onfocus="this.style.borderColor='#00f2ff'; this.style.background='rgba(0, 242, 255, 0.05)';"
+                            onblur="this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.background='rgba(255, 255, 255, 0.05)';"
+                        >
+                    </div>
+
+                    <!-- Email Address -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <label for="email" style="display: block; color: rgba(255, 255, 255, 0.9); font-size: 1rem; margin-bottom: 0.5rem;">
+                            Email Address *
+                        </label>
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            required
+                            placeholder="john@company.com"
+                            style="width: 100%; padding: 1rem; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 10px; color: #ffffff; font-size: 1rem; transition: all 0.3s ease;"
+                            onfocus="this.style.borderColor='#00f2ff'; this.style.background='rgba(0, 242, 255, 0.05)';"
+                            onblur="this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.background='rgba(255, 255, 255, 0.05)';"
+                        >
+                    </div>
+
+                    <!-- Company Name -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <label for="company" style="display: block; color: rgba(255, 255, 255, 0.9); font-size: 1rem; margin-bottom: 0.5rem;">
+                            Company Name *
+                        </label>
+                        <input 
+                            type="text" 
+                            id="company" 
+                            name="company" 
+                            required
+                            placeholder="Acme Corporation"
+                            style="width: 100%; padding: 1rem; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 10px; color: #ffffff; font-size: 1rem; transition: all 0.3s ease;"
+                            onfocus="this.style.borderColor='#00f2ff'; this.style.background='rgba(0, 242, 255, 0.05)';"
+                            onblur="this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.background='rgba(255, 255, 255, 0.05)';"
+                        >
+                    </div>
+
+                    <!-- Industry -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <label for="industry" style="display: block; color: rgba(255, 255, 255, 0.9); font-size: 1rem; margin-bottom: 0.5rem;">
+                            Industry *
+                        </label>
+                        <select 
+                            id="industry" 
+                            name="industry" 
+                            required
+                            style="width: 100%; padding: 1rem; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 10px; color: #ffffff; font-size: 1rem; transition: all 0.3s ease; cursor: pointer;"
+                            onfocus="this.style.borderColor='#00f2ff'; this.style.background='rgba(0, 242, 255, 0.05)';"
+                            onblur="this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.background='rgba(255, 255, 255, 0.05)';"
+                        >
+                            <option value="" style="background: #0a0a1a;">Select your industry</option>
+                            <option value="Technology" style="background: #0a0a1a;">Technology</option>
+                            <option value="Healthcare" style="background: #0a0a1a;">Healthcare</option>
+                            <option value="Finance" style="background: #0a0a1a;">Finance & Banking</option>
+                            <option value="Retail" style="background: #0a0a1a;">Retail & E-commerce</option>
+                            <option value="Manufacturing" style="background: #0a0a1a;">Manufacturing</option>
+                            <option value="Education" style="background: #0a0a1a;">Education</option>
+                            <option value="Real Estate" style="background: #0a0a1a;">Real Estate</option>
+                            <option value="Consulting" style="background: #0a0a1a;">Consulting</option>
+                            <option value="Legal" style="background: #0a0a1a;">Legal</option>
+                            <option value="Marketing" style="background: #0a0a1a;">Marketing & Advertising</option>
+                            <option value="Other" style="background: #0a0a1a;">Other</option>
+                        </select>
+                    </div>
+
+                    <!-- Company Size -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <label for="companySize" style="display: block; color: rgba(255, 255, 255, 0.9); font-size: 1rem; margin-bottom: 0.5rem;">
+                            Company Size *
+                        </label>
+                        <select 
+                            id="companySize" 
+                            name="companySize" 
+                            required
+                            style="width: 100%; padding: 1rem; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 10px; color: #ffffff; font-size: 1rem; transition: all 0.3s ease; cursor: pointer;"
+                            onfocus="this.style.borderColor='#00f2ff'; this.style.background='rgba(0, 242, 255, 0.05)';"
+                            onblur="this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.background='rgba(255, 255, 255, 0.05)';"
+                        >
+                            <option value="" style="background: #0a0a1a;">Select company size</option>
+                            <option value="1-10" style="background: #0a0a1a;">1-10 employees</option>
+                            <option value="11-50" style="background: #0a0a1a;">11-50 employees</option>
+                            <option value="51-200" style="background: #0a0a1a;">51-200 employees</option>
+                            <option value="201-500" style="background: #0a0a1a;">201-500 employees</option>
+                            <option value="501-1000" style="background: #0a0a1a;">501-1,000 employees</option>
+                            <option value="1000+" style="background: #0a0a1a;">1,000+ employees</option>
+                        </select>
+                    </div>
+
+                    <!-- Phone Number (Optional) -->
+                    <div style="margin-bottom: 1.5rem;">
+                        <label for="phone" style="display: block; color: rgba(255, 255, 255, 0.9); font-size: 1rem; margin-bottom: 0.5rem;">
+                            Phone Number <span style="color: rgba(255, 255, 255, 0.5);">(Optional)</span>
+                        </label>
+                        <input 
+                            type="tel" 
+                            id="phone" 
+                            name="phone"
+                            placeholder="+1 (555) 123-4567"
+                            style="width: 100%; padding: 1rem; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 10px; color: #ffffff; font-size: 1rem; transition: all 0.3s ease;"
+                            onfocus="this.style.borderColor='#00f2ff'; this.style.background='rgba(0, 242, 255, 0.05)';"
+                            onblur="this.style.borderColor='rgba(255, 255, 255, 0.1)'; this.style.background='rgba(255, 255, 255, 0.05)';"
+                        >
+                    </div>
+
+                    <!-- Privacy Notice -->
+                    <div style="margin-bottom: 2rem; padding: 1rem; background: rgba(0, 242, 255, 0.05); border-left: 4px solid var(--primary); border-radius: 8px;">
+                        <p style="color: rgba(255, 255, 255, 0.7); font-size: 0.9rem; margin: 0; line-height: 1.6;">
+                            🔒 <strong style="color: var(--primary);">Privacy Guarantee:</strong> Your information is secure and will only be used to send your personalized assessment results and schedule your free AI consultation. We never share your data with third parties.
+                        </p>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div style="text-align: center;">
+                        <button type="submit" class="btn btn-primary" style="font-size: 1.2rem; padding: 1.2rem 3rem; width: 100%;">
+                            Get My Results →
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+	<!-- Loading Container -->
+        <div class="loading-container" id="loadingContainer">
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <div class="loading-text">Calculating Your Results...</div>
+                <div class="loading-subtext">Analyzing your responses and generating personalized recommendations</div>
+            </div>
+        </div>
+
+        <!-- Results Container -->
+        <div class="results-container" id="resultsContainer">
+            <div class="results-header">
+                <div class="score-circle">
+                    <div class="score-content">
+                        <div id="totalScore">0</div>
+                        <div class="score-max">/100</div>
+                    </div>
+                </div>
+                <h2 id="readinessLevel">AI Ready</h2>
+                <p id="resultsDescription">Your readiness description will appear here.</p>
+            </div>
+
+            <div class="section-scores" id="sectionScores"></div>
+
+            <div class="detailed-breakdown">
+                <button class="breakdown-toggle" onclick="toggleBreakdown()">
+                    <span>View Detailed Breakdown</span>
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="breakdown-content" id="breakdownContent"></div>
+            </div>
+
+            <div class="recommendations" id="recommendationsSection"></div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <h3 style="font-size: 2rem; margin-bottom: 1rem; background: var(--holographic); background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; animation: holographic-text 4s ease-in-out infinite;">Ready to Start Your AI Journey?</h3>
+                <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Schedule a free consultation with our AI experts to create your customized implementation plan.
+                </p>
+                <button class="btn btn-primary" onclick="openCalendly()" style="font-size: 1.2rem; padding: 1.2rem 2.5rem; margin-right: 1rem;">
+                    Schedule Free Consultation
+                </button>
+                <button class="btn btn-secondary" onclick="downloadPDF()" style="font-size: 1.2rem; padding: 1.2rem 2.5rem;">
+                    Download PDF Report
+                </button>
+            </div>
+        </div>
+
+        <!-- Calendly Modal -->
+        <div class="modal-overlay" id="calendlyModal">
+            <div class="modal-content">
+                <button class="modal-close" onclick="closeCalendly()">×</button>
+                <iframe src="https://calendly.com/your-calendly-link" class="calendly-embed" frameborder="0"></iframe>
+            </div>
+        </div>
+
+    </div>
+   <!-- EmailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <script>
+        // Initialize EmailJS
+        (function() {
+            emailjs.init("aIpJ43JHY7Y1GUVmX"); // Replace with your EmailJS user ID
+        })();
+
+        // Assessment Data & State
+        let currentSection = 0;
+        let assessmentData = {
+            contact: {
+                fullName: '',
+                email: '',
+                company: '',
+                industry: '',
+                companySize: '',
+                phone: ''
+            },
+            answers: {},
+            sections: {
+                businessFoundation: { questions: ['q1', 'q2', 'q3', 'q4', 'q5'], score: 0 },
+                aiKnowledge: { questions: ['q6', 'q7', 'q8', 'q9', 'q10'], score: 0 },
+                technicalReadiness: { questions: ['q11', 'q12', 'q13', 'q14', 'q15'], score: 0 },
+                teamManagement: { questions: ['q16', 'q17', 'q18', 'q19', 'q20'], score: 0 }
+            }
+        };
+
+        // Question texts for review and PDF
+        const questionTexts = {
+            q1: "How clearly defined are your business goals and objectives?",
+            q2: "What is your current understanding of how AI could benefit your business?",
+            q3: "How would you rate your business processes documentation?",
+            q4: "What budget have you allocated for AI initiatives?",
+            q5: "How urgent is AI implementation for your business?",
+            q6: "How familiar is your leadership team with AI concepts?",
+            q7: "Have you identified specific use cases for AI in your business?",
+            q8: "Does your team understand the difference between various AI technologies?",
+            q9: "Have you researched AI solutions available in your industry?",
+            q10: "What is your awareness of AI risks and ethical considerations?",
+            q11: "How would you rate your current data infrastructure?",
+            q12: "What is the quality and accessibility of your data?",
+            q13: "Do you have IT staff capable of supporting AI implementation?",
+            q14: "Are your current systems cloud-ready or cloud-based?",
+            q15: "Do you have data governance policies in place?",
+            q16: "How would you describe your organizational culture regarding innovation?",
+            q17: "Do you have executive leadership support for AI initiatives?",
+            q18: "Have you identified internal AI champions or leaders?",
+            q19: "What is your plan for training employees on AI tools?",
+            q20: "How do you expect employees to react to AI implementation?"
+        };
+
+        const answerTexts = {
+            1: "Needs significant improvement",
+            2: "Below average",
+            3: "Average/Moderate",
+            4: "Good/Strong",
+            5: "Excellent/Comprehensive"
+        };
+
+        // Initialize on page load
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('contactContainer').style.display = 'none'; // ← ADD THIS LINE
+    loadSavedProgress();
+    updateProgress();
+    updateSectionIndicator();
+    updateNavigationButtons();
+    updateTimeEstimate();
+});
+	// Navigation Functions
+        function nextSection() {
+            if (!validateCurrentSection()) {
+                alert('Please answer all questions in this section before proceeding.');
+                return;
+            }
+            
+            if (currentSection < 3) {
+                currentSection++;
+                showSection(currentSection);
+                updateProgress();
+                updateSectionIndicator();
+                updateNavigationButtons();
+                updateTimeEstimate();
+                scrollToTop();
+                autoSave();
+            }
+        }
+
+        function previousSection() {
+            if (currentSection > 0) {
+                currentSection--;
+                showSection(currentSection);
+                updateProgress();
+                updateSectionIndicator();
+                updateNavigationButtons();
+                updateTimeEstimate();
+                scrollToTop();
+            }
+        }
+
+        function showSection(index) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach((section, i) => {
+                section.classList.remove('active');
+                if (i === index) {
+                    section.classList.add('active');
+                }
+            });
+        }
+
+        function validateCurrentSection() {
+            const sectionNames = ['businessFoundation', 'aiKnowledge', 'technicalReadiness', 'teamManagement'];
+            const currentSectionName = sectionNames[currentSection];
+            const questions = assessmentData.sections[currentSectionName].questions;
+            
+            for (let q of questions) {
+                if (!document.querySelector(`input[name="${q}"]:checked`)) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function updateProgress() {
+            const totalSections = 4;
+            const progress = ((currentSection + 1) / totalSections) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressText').textContent = `Section ${currentSection + 1} of ${totalSections}`;
+        }
+
+        function updateSectionIndicator() {
+            const dots = document.querySelectorAll('.section-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.remove('active', 'completed');
+                if (index < currentSection) {
+                    dot.classList.add('completed');
+                } else if (index === currentSection) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+
+        function updateNavigationButtons() {
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            if (currentSection === 0) {
+                prevBtn.style.visibility = 'hidden';
+            } else {
+                prevBtn.style.visibility = 'visible';
+            }
+            
+            if (currentSection === 3) {
+                nextBtn.textContent = 'Review Answers';
+                nextBtn.onclick = showReview;
+            } else {
+                nextBtn.textContent = 'Next Section';
+                nextBtn.onclick = nextSection;
+            }
+        }
+
+        function updateTimeEstimate() {
+            const totalQuestions = 20;
+            let answeredQuestions = 0;
+            
+            for (let i = 1; i <= totalQuestions; i++) {
+                if (document.querySelector(`input[name="q${i}"]:checked`)) {
+                    answeredQuestions++;
+                }
+            }
+            
+            const remainingQuestions = totalQuestions - answeredQuestions;
+            const estimatedMinutes = Math.ceil(remainingQuestions * 0.5);
+            
+            if (remainingQuestions === 0) {
+                document.getElementById('timeEstimate').textContent = 'All questions answered! Ready to review.';
+            } else {
+                document.getElementById('timeEstimate').textContent = `Estimated time remaining: ${estimatedMinutes} minutes`;
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+	// Auto-save Functions
+        function autoSave() {
+            const answers = {};
+            for (let i = 1; i <= 20; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected) {
+                    answers[`q${i}`] = selected.value;
+                }
+            }
+            assessmentData.answers = answers;
+            
+            // Silent save indicator
+            const indicator = document.getElementById('saveIndicator');
+            indicator.classList.add('show');
+            setTimeout(() => {
+                indicator.classList.remove('show');
+            }, 2000);
+        }
+
+        function loadSavedProgress() {
+            // Load from memory only (no localStorage)
+            if (Object.keys(assessmentData.answers).length > 0) {
+                for (let [question, value] of Object.entries(assessmentData.answers)) {
+                    const input = document.querySelector(`input[name="${question}"][value="${value}"]`);
+                    if (input) input.checked = true;
+                }
+            }
+        }
+
+        // Review Functions
+        function showReview() {
+            if (!validateAllSections()) {
+                alert('Please complete all sections before reviewing.');
+                return;
+            }
+            
+            // Collect all answers
+            for (let i = 1; i <= 20; i++) {
+                const selected = document.querySelector(`input[name="q${i}"]:checked`);
+                if (selected) {
+                    assessmentData.answers[`q${i}`] = selected.value;
+                }
+            }
+            
+            // Hide assessment, show review
+            document.getElementById('assessmentContainer').style.display = 'none';
+            document.getElementById('reviewContainer').classList.add('active');
+            
+            // Generate review summary
+            generateReviewSummary();
+            scrollToTop();
+        }
+
+        function validateAllSections() {
+            for (let i = 0; i < 4; i++) {
+                const sectionNames = ['businessFoundation', 'aiKnowledge', 'technicalReadiness', 'teamManagement'];
+                const questions = assessmentData.sections[sectionNames[i]].questions;
+                
+                for (let q of questions) {
+                    if (!document.querySelector(`input[name="${q}"]:checked`)) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        function generateReviewSummary() {
+            const summaryContainer = document.getElementById('reviewSummary');
+            const sectionNames = {
+                businessFoundation: 'Business Foundation',
+                aiKnowledge: 'AI Knowledge & Awareness',
+                technicalReadiness: 'Technical Readiness',
+                teamManagement: 'Team & Change Management'
+            };
+            
+            let html = '';
+            
+            for (let [key, section] of Object.entries(assessmentData.sections)) {
+                const answered = section.questions.filter(q => assessmentData.answers[q]).length;
+                const total = section.questions.length;
+                
+                html += `
+                    <div class="review-section-card" onclick="jumpToSection('${key}')">
+                        <h3>${sectionNames[key]}</h3>
+                        <div class="review-completion">${answered}/${total} questions answered</div>
+                    </div>
+                `;
+            }
+            
+            summaryContainer.innerHTML = html;
+        }
+
+        function jumpToSection(sectionName) {
+            const sectionMap = {
+                businessFoundation: 0,
+                aiKnowledge: 1,
+                technicalReadiness: 2,
+                teamManagement: 3
+            };
+            
+            currentSection = sectionMap[sectionName];
+            backToAssessment();
+        }
+
+        function backToAssessment() {
+            document.getElementById('reviewContainer').classList.remove('active');
+            document.getElementById('assessmentContainer').style.display = 'block';
+            showSection(currentSection);
+            updateProgress();
+            updateSectionIndicator();
+            updateNavigationButtons();
+            scrollToTop();
+        }
+
+        // Auto-save on input change
+        document.addEventListener('change', function(e) {
+            if (e.target.type === 'radio') {
+                updateTimeEstimate();
+                autoSave();
+            }
+        });
+
+        // Section dot navigation
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('section-dot')) {
+                const targetSection = parseInt(e.target.dataset.section);
+                if (targetSection <= currentSection || validateSectionsUpTo(targetSection)) {
+                    currentSection = targetSection;
+                    showSection(currentSection);
+                    updateProgress();
+                    updateSectionIndicator();
+                    updateNavigationButtons();
+                    updateTimeEstimate();
+                    scrollToTop();
+                }
+            }
+        });
+
+        function validateSectionsUpTo(targetSection) {
+            const sectionNames = ['businessFoundation', 'aiKnowledge', 'technicalReadiness', 'teamManagement'];
+            for (let i = 0; i < targetSection; i++) {
+                const questions = assessmentData.sections[sectionNames[i]].questions;
+                for (let q of questions) {
+                    if (!document.querySelector(`input[name="${q}"]:checked`)) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+	// Submit Assessment - Show Contact Form First
+function submitAssessment() {
+    // Hide review, show contact form
+    document.getElementById('reviewContainer').classList.remove('active');
+    document.getElementById('contactContainer').style.display = 'block';
+    scrollToTop();
+}
+
+// Contact Form Handler (processes after user enters info)
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Collect contact information
+    assessmentData.contact.fullName = document.getElementById('fullName').value;
+    assessmentData.contact.email = document.getElementById('email').value;
+    assessmentData.contact.company = document.getElementById('company').value;
+    assessmentData.contact.industry = document.getElementById('industry').value;
+    assessmentData.contact.companySize = document.getElementById('companySize').value;
+    assessmentData.contact.phone = document.getElementById('phone').value;
+    
+    // Hide contact form, show loading
+    document.getElementById('contactContainer').style.display = 'none';
+    document.getElementById('loadingContainer').classList.add('active');
+    
+    // Simulate calculation delay
+    setTimeout(() => {
+        calculateResults();
+        document.getElementById('loadingContainer').classList.remove('active');
+        document.getElementById('resultsContainer').classList.add('active');
+        scrollToTop();
+    }, 3000);
+});
+
+        // Calculate Results
+        function calculateResults() {
+            // Calculate section scores
+            let totalScore = 0;
+            
+            for (let [sectionName, section] of Object.entries(assessmentData.sections)) {
+                let sectionScore = 0;
+                section.questions.forEach(q => {
+                    sectionScore += parseInt(assessmentData.answers[q] || 0);
+                });
+                section.score = sectionScore;
+                section.percentage = (sectionScore / (section.questions.length * 5)) * 100;
+                totalScore += sectionScore;
+            }
+            
+            // Determine readiness level
+            const readinessLevel = getReadinessLevel(totalScore);
+            
+            // Display results
+            displayResults(totalScore, readinessLevel);
+            
+            // Generate recommendations
+            generateRecommendations();
+            
+            // Send email with results
+            sendResultsEmail(totalScore, readinessLevel);
+        }
+
+        function getReadinessLevel(score) {
+            if (score >= 85) {
+                return {
+                    level: 'AI Ready',
+                    description: 'Your organization is well-positioned to implement AI solutions. You have strong foundations across all key areas.'
+                };
+            } else if (score >= 70) {
+                return {
+                    level: 'Nearly Ready',
+                    description: 'You have good foundations in place. With some focused improvements, you\'ll be ready for AI implementation.'
+                };
+            } else if (score >= 50) {
+                return {
+                    level: 'Getting Started',
+                    description: 'You have made progress but need to strengthen several areas before full AI implementation.'
+                };
+            } else if (score >= 30) {
+                return {
+                    level: 'Early Stage',
+                    description: 'You\'re in the early stages of AI readiness. Focus on building strong foundations first.'
+                };
+            } else {
+                return {
+                    level: 'Foundation Building',
+                    description: 'Start with the basics. Build your business foundation and AI knowledge before implementation.'
+                };
+            }
+        }
+
+        function displayResults(totalScore, readinessLevel) {
+            // Animate score
+            animateScore(totalScore);
+            
+            // Display readiness level
+            document.getElementById('readinessLevel').textContent = readinessLevel.level;
+            document.getElementById('resultsDescription').textContent = readinessLevel.description;
+            
+            // Display section scores
+            const sectionsHtml = `
+                <div class="section-score-card">
+                    <div class="score-value">${assessmentData.sections.businessFoundation.score}</div>
+                    <div class="score-label">Business Foundation</div>
+                    <div class="score-status ${getScoreClass(assessmentData.sections.businessFoundation.percentage)}">
+                        ${getScoreLabel(assessmentData.sections.businessFoundation.percentage)}
+                    </div>
+                </div>
+                <div class="section-score-card">
+                    <div class="score-value">${assessmentData.sections.aiKnowledge.score}</div>
+                    <div class="score-label">AI Knowledge</div>
+                    <div class="score-status ${getScoreClass(assessmentData.sections.aiKnowledge.percentage)}">
+                        ${getScoreLabel(assessmentData.sections.aiKnowledge.percentage)}
+                    </div>
+                </div>
+                <div class="section-score-card">
+                    <div class="score-value">${assessmentData.sections.technicalReadiness.score}</div>
+                    <div class="score-label">Technical Readiness</div>
+                    <div class="score-status ${getScoreClass(assessmentData.sections.technicalReadiness.percentage)}">
+                        ${getScoreLabel(assessmentData.sections.technicalReadiness.percentage)}
+                    </div>
+                </div>
+                <div class="section-score-card">
+                    <div class="score-value">${assessmentData.sections.teamManagement.score}</div>
+                    <div class="score-label">Team Management</div>
+                    <div class="score-status ${getScoreClass(assessmentData.sections.teamManagement.percentage)}">
+                        ${getScoreLabel(assessmentData.sections.teamManagement.percentage)}
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('sectionScores').innerHTML = sectionsHtml;
+            
+            // Generate detailed breakdown
+            generateDetailedBreakdown();
+        }
+
+        function animateScore(targetScore) {
+            const scoreElement = document.getElementById('totalScore');
+            let currentScore = 0;
+            const increment = Math.max(1, Math.floor(targetScore / 50));
+            
+            const timer = setInterval(() => {
+                currentScore += increment;
+                if (currentScore >= targetScore) {
+                    currentScore = targetScore;
+                    clearInterval(timer);
+                }
+                scoreElement.textContent = currentScore;
+            }, 30);
+        }
+
+        function getScoreClass(percentage) {
+            if (percentage >= 80) return 'score-excellent';
+            if (percentage >= 60) return 'score-good';
+            if (percentage >= 40) return 'score-moderate';
+            return 'score-needs-work';
+        }
+
+        function getScoreLabel(percentage) {
+            if (percentage >= 80) return 'Excellent';
+            if (percentage >= 60) return 'Good';
+            if (percentage >= 40) return 'Moderate';
+            return 'Needs Work';
+        }
+	// Generate Recommendations
+        function generateRecommendations() {
+            const recommendations = [];
+            
+            // Business Foundation recommendations
+            if (assessmentData.sections.businessFoundation.percentage < 60) {
+                recommendations.push("Establish clear business objectives and document your AI strategy before implementation");
+                recommendations.push("Start with small pilot projects to build confidence and demonstrate ROI");
+                recommendations.push("Develop a realistic budget allocation for AI initiatives (typically 5-10% of IT budget)");
+            } else if (assessmentData.sections.businessFoundation.percentage >= 80) {
+                recommendations.push("Your business foundation is strong - consider advanced AI implementations and custom solutions");
+            }
+            
+            // AI Knowledge recommendations
+            if (assessmentData.sections.aiKnowledge.percentage < 60) {
+                recommendations.push("Invest in AI literacy training for your leadership team through workshops or courses");
+                recommendations.push("Research AI solutions specific to your industry and document potential use cases");
+                recommendations.push("Develop an understanding of AI risks and establish ethical guidelines");
+            } else if (assessmentData.sections.aiKnowledge.percentage >= 80) {
+                recommendations.push("Leverage your AI expertise to explore cutting-edge technologies like generative AI");
+            }
+            
+            // Technical Readiness recommendations
+            if (assessmentData.sections.technicalReadiness.percentage < 60) {
+                recommendations.push("Conduct a data audit to assess quality and accessibility of your current data");
+                recommendations.push("Consider upgrading to cloud-based infrastructure for better scalability");
+                recommendations.push("Implement data governance policies before AI deployment");
+                recommendations.push("Evaluate whether SaaS AI tools requiring minimal technical setup are better suited");
+            } else if (assessmentData.sections.technicalReadiness.percentage >= 80) {
+                recommendations.push("Your technical infrastructure is ready for advanced AI solutions and custom development");
+            }
+            
+            // Team Management recommendations
+            if (assessmentData.sections.teamManagement.percentage < 60) {
+                recommendations.push("Identify and train internal AI champions within each department");
+                recommendations.push("Create a cross-functional AI steering committee to guide implementation");
+                recommendations.push("Develop a comprehensive change management plan to address employee concerns");
+                recommendations.push("Design an employee training program focused on AI tools and best practices");
+            } else if (assessmentData.sections.teamManagement.percentage >= 80) {
+                recommendations.push("Your team is ready - focus on execution and share success stories to maintain momentum");
+            }
+            
+            // Universal recommendations
+            recommendations.push("Schedule a consultation to create your customized AI implementation roadmap");
+            
+            // Display recommendations
+            const html = `
+                <h3>Your Personalized Recommendations</h3>
+                <ul>
+                    ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
+                </ul>
+            `;
+            
+            document.getElementById('recommendationsSection').innerHTML = html;
+        }
+
+        // Generate Detailed Breakdown
+        function generateDetailedBreakdown() {
+            const sections = {
+                businessFoundation: 'Business Foundation',
+                aiKnowledge: 'AI Knowledge & Awareness',
+                technicalReadiness: 'Technical Readiness',
+                teamManagement: 'Team & Change Management'
+            };
+            
+            let html = '';
+            
+            for (let [key, title] of Object.entries(sections)) {
+                const section = assessmentData.sections[key];
+                html += `
+                    <div class="breakdown-section">
+                        <h3>${title} (${section.score}/${section.questions.length * 5})</h3>
+                `;
+                
+                section.questions.forEach(q => {
+                    const answer = assessmentData.answers[q];
+                    html += `
+                        <div class="breakdown-question answer-${answer}">
+                            <div class="breakdown-question-text">${questionTexts[q]}</div>
+                            <div class="breakdown-answer">
+                                <span class="answer-indicator"></span>
+                                Your answer: ${answerTexts[answer]} (${answer}/5)
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                html += `</div>`;
+            }
+            
+            document.getElementById('breakdownContent').innerHTML = html;
+        }
+
+        function toggleBreakdown() {
+            const content = document.getElementById('breakdownContent');
+            const toggle = document.querySelector('.breakdown-toggle');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                toggle.classList.remove('active');
+            } else {
+                content.classList.add('active');
+                toggle.classList.add('active');
+            }
+        }
+	// Send Results via EmailJS
+        function sendResultsEmail(totalScore, readinessLevel) {
+           const emailParams = {
+                to_email: assessmentData.contact.email,
+                user_name: assessmentData.contact.fullName,
+                company_name: assessmentData.contact.company,
+                industry: assessmentData.contact.industry,
+                company_size: assessmentData.contact.companySize,
+                phone: assessmentData.contact.phone || 'Not provided',
+                total_score: totalScore,
+                readiness_level: readinessLevel.level,
+                business_foundation: assessmentData.sections.businessFoundation.score,
+                ai_knowledge: assessmentData.sections.aiKnowledge.score,
+                technical_readiness: assessmentData.sections.technicalReadiness.score,
+                team_management: assessmentData.sections.teamManagement.score,
+                assessment_date: new Date().toLocaleDateString()
+            };
+
+            // Send email via EmailJS
+            emailjs.send('service_9q1181g', 'template_7xlew3s', emailParams)
+                .then(function(response) {
+                    console.log('Email sent successfully!', response.status, response.text);
+                }, function(error) {
+                    console.log('Email failed to send, triggering PDF download as fallback', error);
+                    // Fallback: automatically download PDF if email fails
+                    downloadPDF();
+                });
+        }
+
+        // Download PDF Report
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Set colors
+            const primaryColor = [0, 242, 255];
+            const darkColor = [10, 10, 26];
+            
+            // Title Page
+            doc.setFillColor(...primaryColor);
+            doc.rect(0, 0, 210, 40, 'F');
+            doc.setTextColor(255, 255, 255);
+            doc.setFontSize(28);
+            doc.text('AI Readiness Assessment', 105, 25, { align: 'center' });
+            doc.setFontSize(14);
+            doc.text('MindWorth AI Solutions', 105, 33, { align: 'center' });
+            
+            // Reset text color
+            doc.setTextColor(0, 0, 0);
+            
+            // Date
+            doc.setFontSize(10);
+            doc.text(`Assessment Date: ${new Date().toLocaleDateString()}`, 20, 50);
+            
+            // Overall Score
+            doc.setFontSize(16);
+            doc.setTextColor(...primaryColor);
+            doc.text('Overall Results', 20, 65);
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(12);
+            
+            const totalScore = assessmentData.sections.businessFoundation.score + 
+                             assessmentData.sections.aiKnowledge.score + 
+                             assessmentData.sections.technicalReadiness.score + 
+                             assessmentData.sections.teamManagement.score;
+            
+            const readinessLevel = getReadinessLevel(totalScore);
+            
+            doc.text(`Total Score: ${totalScore}/100`, 20, 75);
+            doc.text(`Readiness Level: ${readinessLevel.level}`, 20, 82);
+            doc.setFontSize(10);
+            const descLines = doc.splitTextToSize(readinessLevel.description, 170);
+            doc.text(descLines, 20, 89);
+            
+            // Section Scores
+            let yPos = 105;
+            doc.setFontSize(16);
+            doc.setTextColor(...primaryColor);
+            doc.text('Section Breakdown', 20, yPos);
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(11);
+            
+            yPos += 10;
+            doc.text(`Business Foundation: ${assessmentData.sections.businessFoundation.score}/25 - ${getScoreLabel(assessmentData.sections.businessFoundation.percentage)}`, 20, yPos);
+            yPos += 7;
+            doc.text(`AI Knowledge: ${assessmentData.sections.aiKnowledge.score}/25 - ${getScoreLabel(assessmentData.sections.aiKnowledge.percentage)}`, 20, yPos);
+            yPos += 7;
+            doc.text(`Technical Readiness: ${assessmentData.sections.technicalReadiness.score}/25 - ${getScoreLabel(assessmentData.sections.technicalReadiness.percentage)}`, 20, yPos);
+            yPos += 7;
+            doc.text(`Team Management: ${assessmentData.sections.teamManagement.score}/25 - ${getScoreLabel(assessmentData.sections.teamManagement.percentage)}`, 20, yPos);
+            
+            // Add new page for detailed answers
+            doc.addPage();
+            
+            // Detailed Answers
+            yPos = 20;
+            doc.setFontSize(16);
+            doc.setTextColor(...primaryColor);
+            doc.text('Detailed Question Responses', 20, yPos);
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(9);
+            
+            yPos += 10;
+            
+            const sections = {
+                businessFoundation: 'Business Foundation',
+                aiKnowledge: 'AI Knowledge & Awareness',
+                technicalReadiness: 'Technical Readiness',
+                teamManagement: 'Team & Change Management'
+            };
+            
+            for (let [key, title] of Object.entries(sections)) {
+                const section = assessmentData.sections[key];
+                
+                // Check if we need a new page
+                if (yPos > 250) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+                
+                doc.setFontSize(12);
+                doc.setTextColor(...primaryColor);
+                doc.text(title, 20, yPos);
+                doc.setTextColor(0, 0, 0);
+                doc.setFontSize(9);
+                yPos += 7;
+                
+                section.questions.forEach(q => {
+                    const answer = assessmentData.answers[q];
+                    const questionText = doc.splitTextToSize(`Q: ${questionTexts[q]}`, 170);
+                    
+                    // Check if we need a new page
+                    if (yPos + (questionText.length * 5) + 10 > 280) {
+                        doc.addPage();
+                        yPos = 20;
+                    }
+                    
+                    doc.text(questionText, 20, yPos);
+                    yPos += questionText.length * 5;
+                    doc.setTextColor(100, 100, 100);
+                    doc.text(`A: ${answerTexts[answer]} (${answer}/5)`, 20, yPos);
+                    doc.setTextColor(0, 0, 0);
+                    yPos += 8;
+                });
+                
+                yPos += 5;
+            }
+            
+            // Add recommendations page
+            doc.addPage();
+            yPos = 20;
+            doc.setFontSize(16);
+            doc.setTextColor(...primaryColor);
+            doc.text('Personalized Recommendations', 20, yPos);
+            doc.setTextColor(0, 0, 0);
+            doc.setFontSize(10);
+            yPos += 10;
+            
+            // Generate recommendations for PDF
+            const pdfRecommendations = [];
+            if (assessmentData.sections.businessFoundation.percentage < 60) {
+                pdfRecommendations.push("Establish clear business objectives before AI implementation");
+                pdfRecommendations.push("Start with small pilot projects to demonstrate ROI");
+            }
+            if (assessmentData.sections.aiKnowledge.percentage < 60) {
+                pdfRecommendations.push("Invest in AI literacy training for leadership");
+                pdfRecommendations.push("Research industry-specific AI solutions");
+            }
+            if (assessmentData.sections.technicalReadiness.percentage < 60) {
+                pdfRecommendations.push("Conduct a data quality audit");
+                pdfRecommendations.push("Consider cloud-based infrastructure upgrades");
+            }
+            if (assessmentData.sections.teamManagement.percentage < 60) {
+                pdfRecommendations.push("Identify internal AI champions");
+                pdfRecommendations.push("Develop employee training programs");
+            }
+            
+            pdfRecommendations.forEach((rec, index) => {
+                const recLines = doc.splitTextToSize(`${index + 1}. ${rec}`, 170);
+                if (yPos + (recLines.length * 6) > 280) {
+                    doc.addPage();
+                    yPos = 20;
+                }
+                doc.text(recLines, 20, yPos);
+                yPos += recLines.length * 6 + 3;
+            });
+            
+            // Footer with contact info
+            yPos += 10;
+            if (yPos > 250) {
+                doc.addPage();
+                yPos = 20;
+            }
+            doc.setFontSize(12);
+            doc.setTextColor(...primaryColor);
+            doc.text('Next Steps', 20, yPos);
+            doc.setFontSize(10);
+            doc.setTextColor(0, 0, 0);
+            yPos += 8;
+            doc.text('Schedule a free consultation with our AI experts:', 20, yPos);
+            yPos += 6;
+            doc.text('Visit: https://calendly.com/your-link', 20, yPos);
+            yPos += 6;
+            doc.text('Email: contact@mindworth.ai', 20, yPos);
+            
+            // Save PDF
+            doc.save('AI-Readiness-Assessment-Report.pdf');
+        }
+	// Calendly Functions
+        function openCalendly() {
+            document.getElementById('calendlyModal').classList.add('active');
+        }
+
+        function closeCalendly() {
+            document.getElementById('calendlyModal').classList.remove('active');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('calendlyModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeCalendly();
+            }
+        });
+
+        // Mobile optimization
+        function enhanceMobileExperience() {
+            const isMobile = window.innerWidth <= 768;
+            
+            if (isMobile) {
+                // Ensure mobile options are properly displayed
+                document.querySelectorAll('.options-mobile').forEach(el => {
+                    el.style.display = 'flex';
+                });
+            }
+        }
+
+        window.addEventListener('resize', enhanceMobileExperience);
+        enhanceMobileExperience();
+    </script>
+</body>
+</html>	

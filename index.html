@@ -1,0 +1,2415 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MindWorth - Revolutionary AI Consulting for Business Excellence</title>
+<meta content="Transform your business with cutting-edge AI solutions designed for modern enterprises" name="description"/>
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        :root {
+            --electric-purple: #8B5CF6;
+            --neon-cyan: #06D6A0;
+            --sunset-coral: #FF6B9D;
+            --golden-yellow: #FFD60A;
+            --deep-space: #0F0F23;
+            --midnight-blue: #1A1B3E;
+            --pearl-white: #FEFEFE;
+            --soft-gray: #F8FAFC;
+            --holographic: linear-gradient(45deg, #8B5CF6, #06D6A0, #FF6B9D, #FFD60A);
+            --neural-glow: 0 0 30px rgba(139, 92, 246, 0.6);
+            --quantum-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --morphic-glass: rgba(255, 255, 255, 0.1);
+            --transition-smooth: all 0.8s cubic-bezier(0.23, 1, 0.320, 1);
+            --transition-bounce: all 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--deep-space);
+            color: var(--pearl-white);
+            overflow-x: hidden;
+        }
+
+        /* Skip link for accessibility */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 6px;
+            background: var(--electric-purple);
+            color: white;
+            padding: 8px;
+            border-radius: 4px;
+            text-decoration: none;
+            z-index: 10000;
+            transition: top 0.3s;
+        }
+
+        .skip-link:focus {
+            top: 6px;
+        }
+
+        /* Revolutionary Cursor System */
+        .quantum-cursor {
+            position: fixed;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--holographic);
+            pointer-events: none;
+            z-index: 10000;
+            mix-blend-mode: difference;
+            transition: transform 0.15s ease;
+            opacity: 1;
+        }
+
+        .cursor-trail {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--neon-cyan);
+            pointer-events: none;
+            z-index: 9999;
+            opacity: 0.7;
+        }
+
+        .quantum-cursor.expand {
+            transform: scale(3);
+            background: radial-gradient(circle, var(--electric-purple), var(--neon-cyan));
+            mix-blend-mode: screen;
+        }
+
+        /* AI Neural Network Background */
+        .neural-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -10;
+            background: var(--deep-space);
+        }
+
+        .neural-node {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--electric-purple);
+            border-radius: 50%;
+            animation: neural-pulse 4s ease-in-out infinite;
+        }
+
+        .neural-connection {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+            animation: data-flow 3s linear infinite;
+        }
+
+        @keyframes neural-pulse {
+            0%, 100% { 
+                opacity: 0.3;
+                transform: scale(1);
+                box-shadow: 0 0 5px var(--electric-purple);
+            }
+            50% { 
+                opacity: 1;
+                transform: scale(2);
+                box-shadow: 0 0 25px var(--electric-purple);
+            }
+        }
+
+        @keyframes data-flow {
+            0% { opacity: 0; transform: scaleX(0); }
+            50% { opacity: 1; transform: scaleX(1); }
+            100% { opacity: 0; transform: scaleX(0); }
+        }
+
+        /* Header with Hide/Show Animation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--morphic-glass);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform: translateY(0);
+        }
+
+        header.hidden {
+            transform: translateY(-100%);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--holographic);
+            background-size: 200% 200%;
+            animation: holographic-flow 3s linear infinite;
+        }
+
+        @keyframes holographic-flow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            height: 80px;
+        }
+
+        .mindworth-logo {
+            font-size: 2.4rem;
+            font-weight: 900;
+            background: var(--holographic);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: holographic-text 4s ease-in-out infinite;
+            text-decoration: none;
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            white-space: nowrap;
+        }
+
+        .mindworth-logo::before {
+            content: '◉';
+            font-size: 2.2rem;
+            animation: brain-pulse 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px var(--electric-purple));
+        }
+
+        @keyframes brain-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 0 20px var(--neon-cyan)); }
+        }
+
+        @keyframes holographic-text {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+
+        .nav-link {
+            color: var(--pearl-white);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 0.8rem 1.2rem;
+            border-radius: 50px;
+            transition: var(--transition-smooth);
+            background: transparent;
+            border: 1px solid transparent;
+            white-space: nowrap;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50px;
+            background: var(--holographic);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .nav-link:hover::before {
+            opacity: 1;
+        }
+
+        .nav-link:hover {
+            color: var(--deep-space);
+            transform: translateY(-2px);
+            box-shadow: var(--neural-glow);
+        }
+
+        /* AI CTA Button */
+        .ai-cta {
+            background: var(--holographic);
+            background-size: 300% 300%;
+            color: var(--deep-space);
+            padding: 1rem 1.8rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-bounce);
+            animation: holographic-bg 4s ease-in-out infinite;
+            white-space: nowrap;
+        }
+
+        @keyframes holographic-bg {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .ai-cta::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: var(--pearl-white);
+            border-radius: 50%;
+            transition: all 0.6s ease;
+            transform: translate(-50%, -50%);
+            opacity: 0.3;
+        }
+
+        .ai-cta:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .ai-cta:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: var(--quantum-shadow);
+        }
+
+        /* Mobile Menu */
+        .mobile-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 8px;
+            border: none;
+            background: none;
+            z-index: 1001;
+            position: relative;
+        }
+
+        .hamburger-line {
+            width: 28px;
+            height: 3px;
+            background: var(--neon-cyan);
+            margin: 3px 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+            transform-origin: center;
+        }
+
+        .mobile-toggle.active .hamburger-line:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .mobile-toggle.active .hamburger-line:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-toggle.active .hamburger-line:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 80px;
+            right: -100%;
+            width: 100%;
+            height: calc(100vh - 80px);
+            background: rgba(15, 15, 35, 0.98);
+            backdrop-filter: blur(20px);
+            transition: right 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 999;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-nav-links {
+            display: flex;
+            flex-direction: column;
+            padding: 3rem 2rem;
+            gap: 1.5rem;
+        }
+
+        .mobile-nav-links .nav-link {
+            font-size: 1.2rem;
+            padding: 1.2rem;
+            text-align: center;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+            scroll-margin-top: 0;
+        }
+
+        .particle-field {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -5;
+        }
+
+        .particle {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: var(--neon-cyan);
+            border-radius: 50%;
+            animation: particle-float 25s linear infinite;
+        }
+
+        @keyframes particle-float {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(200px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 5%;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-text h1 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            background: var(--holographic);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: holographic-text 4s ease-in-out infinite;
+            position: relative;
+        }
+
+        .hero-text h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--holographic);
+            transform: scaleX(0);
+            animation: underline-grow 2s ease forwards;
+            animation-delay: 1s;
+        }
+
+        @keyframes underline-grow {
+            to { transform: scaleX(1); }
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            margin-bottom: 3rem;
+            color: rgba(255, 255, 255, 0.85);
+            animation: text-shimmer 4s ease-in-out infinite;
+        }
+
+        @keyframes text-shimmer {
+            0%, 100% { opacity: 0.85; }
+            50% { opacity: 1; text-shadow: 0 0 20px rgba(6, 214, 160, 0.4); }
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--neon-cyan);
+            padding: 1rem 2rem;
+            border: 2px solid var(--neon-cyan);
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-bounce);
+        }
+
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--neon-cyan);
+            transition: left 0.5s ease;
+            z-index: -1;
+        }
+
+        .btn-secondary:hover::before {
+            left: 0;
+        }
+
+        .btn-secondary:hover {
+            color: var(--deep-space);
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(6, 214, 160, 0.6);
+        }
+
+        /* Stats */
+        .stats {
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--morphic-glass);
+            border-radius: 20px;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            min-width: 140px;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: var(--holographic);
+            transition: left 0.5s ease;
+        }
+
+        .stat:hover::before {
+            left: 100%;
+        }
+
+        .stat:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: var(--neural-glow);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: var(--holographic);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: holographic-text 3s ease-in-out infinite;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 8rem 0;
+            position: relative;
+            scroll-margin-top: 80px;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--holographic);
+            background-size: 200% 200%;
+            animation: section-pulse 6s linear infinite;
+        }
+
+        @keyframes section-pulse {
+            0%, 100% { opacity: 0.4; background-position: 0% 50%; }
+            50% { opacity: 1; background-position: 100% 50%; }
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 5rem;
+            padding: 0 5%;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: var(--holographic);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: holographic-text 4s ease-in-out infinite;
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.8);
+            animation: text-glow 4s ease-in-out infinite;
+        }
+
+        @keyframes text-glow {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; text-shadow: 0 0 25px rgba(255, 255, 255, 0.4); }
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .feature-card {
+            background: var(--morphic-glass);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-bounce);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            cursor: pointer;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(139, 92, 246, 0.15), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .feature-card:hover::before {
+            left: 100%;
+        }
+
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--holographic);
+            transform: scaleX(0);
+            transition: transform 0.6s ease;
+        }
+
+        .feature-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-20px) scale(1.02);
+            box-shadow: var(--quantum-shadow), var(--neural-glow);
+        }
+
+        /* Unique AI Icons */
+        .feature-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 2rem;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            position: relative;
+            transition: var(--transition-bounce);
+            background: var(--holographic);
+            background-size: 300% 300%;
+            animation: holographic-bg 4s ease-in-out infinite;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: rotateY(360deg) scale(1.15);
+            animation-duration: 0.8s;
+        }
+
+        .feature-card h3 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--pearl-white);
+            text-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .feature-link {
+            color: var(--neon-cyan);
+            text-decoration: none;
+            font-weight: 700;
+            position: relative;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            border: 1px solid var(--neon-cyan);
+            transition: var(--transition-smooth);
+            display: inline-block;
+        }
+
+        .feature-link:hover {
+            background: var(--neon-cyan);
+            color: var(--deep-space);
+            transform: scale(1.05);
+            box-shadow: 0 0 25px var(--neon-cyan);
+        }
+
+        /* Tabs Section */
+        .tabs-section {
+            padding: 8rem 0;
+            background: linear-gradient(135deg, var(--midnight-blue) 0%, var(--deep-space) 100%);
+            position: relative;
+        }
+
+        .tabs-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .tab-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 4rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 1.2rem 2rem;
+            background: var(--morphic-glass);
+            border: 2px solid transparent;
+            border-radius: 50px;
+            color: rgba(255, 255, 255, 0.7);
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(15px);
+            white-space: nowrap;
+        }
+
+        .tab-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: var(--holographic);
+            border-radius: 50%;
+            transition: all 0.8s ease;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        .tab-btn.active::before,
+        .tab-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            color: var(--deep-space);
+            transform: translateY(-3px) scale(1.05);
+            border-color: var(--holographic);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fade-in 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .tab-content.active {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            opacity: 1;
+        }
+
+        @keyframes fade-in {
+            from { 
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .tab-text h3 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            background: var(--holographic);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: holographic-text 4s ease-in-out infinite;
+        }
+
+        .tab-text p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+        }
+
+        .features-list {
+            list-style: none;
+        }
+
+        .features-list li {
+            padding: 1rem 0;
+            position: relative;
+            padding-left: 3rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 500;
+        }
+
+        .features-list li::before {
+            content: '◉';
+            position: absolute;
+            left: 0;
+            top: 1rem;
+            font-size: 1.5rem;
+            animation: icon-glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes icon-glow {
+            from { 
+                filter: drop-shadow(0 0 5px var(--golden-yellow));
+            }
+            to { 
+                filter: drop-shadow(0 0 15px var(--golden-yellow));
+            }
+        }
+
+        /* Data Visualization */
+        .tab-visual {
+            background: var(--morphic-glass);
+            border-radius: 25px;
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
+        .data-orb {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: var(--holographic);
+            background-size: 400% 400%;
+            animation: data-pulse 3s ease-in-out infinite, holographic-bg 6s ease-in-out infinite;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--neural-glow);
+        }
+
+        @keyframes data-pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .data-rings {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .data-ring {
+            position: absolute;
+            border: 2px solid;
+            border-radius: 50%;
+            animation: ring-spin 10s linear infinite;
+        }
+
+        .data-ring:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            border-color: var(--electric-purple);
+            animation-duration: 8s;
+        }
+
+        .data-ring:nth-child(2) {
+            width: 350px;
+            height: 350px;
+            border-color: var(--neon-cyan);
+            animation-duration: 12s;
+            animation-direction: reverse;
+        }
+
+        .data-ring:nth-child(3) {
+            width: 400px;
+            height: 400px;
+            border-color: var(--sunset-coral);
+            animation-duration: 15s;
+        }
+
+        @keyframes ring-spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        .performance-metric {
+            text-align: center;
+            color: var(--deep-space);
+            font-weight: 900;
+            font-size: 2rem;
+            z-index: 10;
+        }
+
+        /* Metrics Section */
+        .metrics-section {
+            padding: 8rem 0;
+            background: var(--deep-space);
+            position: relative;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 4rem auto 0;
+            padding: 0 5%;
+        }
+
+        .metric-card {
+            background: var(--morphic-glass);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-bounce);
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .metric-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 0deg, var(--electric-purple), var(--neon-cyan), var(--sunset-coral), var(--golden-yellow), var(--electric-purple));
+            animation: conic-spin 4s linear infinite;
+            z-index: -2;
+        }
+
+        .metric-card::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            right: 2px;
+            bottom: 2px;
+            background: var(--deep-space);
+            border-radius: 28px;
+            z-index: -1;
+        }
+
+        @keyframes conic-spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .metric-card:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: var(--quantum-shadow);
+        }
+
+        .metric-value {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: var(--holographic);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: holographic-text 4s ease-in-out infinite;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .metric-label {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 8rem 0;
+            background: var(--holographic);
+            background-size: 400% 400%;
+            animation: holographic-bg 8s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(15, 15, 35, 0.8) 70%);
+            z-index: 1;
+        }
+
+        .cta-content {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 5%;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 900;
+            color: var(--deep-space);
+            margin-bottom: 1.5rem;
+            text-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: rgba(15, 15, 35, 0.8);
+            margin-bottom: 3rem;
+            font-weight: 600;
+        }
+
+        .cta-button {
+            background: var(--deep-space);
+            color: var(--pearl-white);
+            padding: 1.5rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 900;
+            font-size: 1.3rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition-bounce);
+            box-shadow: var(--quantum-shadow);
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: var(--holographic);
+            border-radius: 50%;
+            transition: all 0.8s ease;
+            transform: translate(-50%, -50%);
+            z-index: -1;
+        }
+
+        .cta-button:hover::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            color: var(--deep-space);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--midnight-blue);
+            padding: 6rem 0 2rem;
+            position: relative;
+            border-top: 2px solid var(--morphic-glass);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 5%;
+        }
+
+        .footer-section h3 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            background: var(--holographic);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: holographic-text 3s ease-in-out infinite;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            position: relative;
+        }
+
+        .footer-section ul li a::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-cyan);
+            transition: width 0.3s ease;
+        }
+
+        .footer-section ul li a:hover::before {
+            width: 100%;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--neon-cyan);
+            text-shadow: 0 0 10px rgba(6, 214, 160, 0.5);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--morphic-glass);
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 10000;
+            animation: modal-fade-in 0.5s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes modal-fade-in {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: var(--morphic-glass);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 3rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+            border: 2px solid var(--electric-purple);
+            animation: modal-slide-up 0.5s ease;
+        }
+
+        @keyframes modal-slide-up {
+            from { transform: translateY(50px) scale(0.9); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--sunset-coral);
+            transition: var(--transition-smooth);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-close:hover {
+            background: var(--sunset-coral);
+            color: var(--deep-space);
+            transform: scale(1.1);
+        }
+
+        .modal-title {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: var(--holographic);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: holographic-text 4s ease-in-out infinite;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            color: var(--pearl-white);
+            text-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--electric-purple);
+            border-radius: 15px;
+            color: var(--pearl-white);
+            font-size: 1rem;
+            transition: var(--transition-smooth);
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(6, 214, 160, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Utility Classes */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 4px;
+            background: var(--holographic);
+            z-index: 10000;
+            transition: width 0.1s ease;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            background: var(--holographic);
+            background-size: 300% 300%;
+            animation: holographic-bg 4s ease-in-out infinite;
+            border: none;
+            border-radius: 50%;
+            color: var(--deep-space);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition-bounce);
+            opacity: 0;
+            transform: translateY(20px);
+            z-index: 1000;
+            box-shadow: var(--quantum-shadow);
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.15);
+            box-shadow: var(--neural-glow);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {            
+            .tab-content.active {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-toggle {
+                display: flex;
+            }
+            
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .stats {
+                justify-content: center;
+            }
+            
+            .tab-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                padding: 0 1rem;
+            }
+            
+            .section {
+                padding: 4rem 0;
+            }
+            
+            .section-header, .tabs-container, .cta-content {
+                padding: 0 1rem;
+            }
+            
+            .modal-content {
+                padding: 2rem;
+                margin: 1rem;
+            }
+        }
+
+        /* Accessibility */
+        @media (prefers-contrast: high) {
+            :root {
+                --electric-purple: #9333EA;
+                --neon-cyan: #00E5FF;
+                --sunset-coral: #FF1744;
+                --golden-yellow: #FFC107;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        button:focus,
+        a:focus,
+        input:focus,
+        textarea:focus,
+        select:focus {
+            outline: 3px solid var(--golden-yellow);
+            outline-offset: 2px;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+    </style>
+<style>
+
+/* Nav/Hamburger visibility override (keep minimal) */
+header.support-header { position: sticky; top: 0; z-index: 10000; }
+header.support-header nav { display: flex; align-items: center; justify-content: space-between; }
+header.support-header .nav-links { display: flex; gap: 1rem; align-items: center; }
+header.support-header .mobile-toggle { display: none; }
+@media (max-width: 900px) {
+  header.support-header .nav-links { display: none; }
+  header.support-header .mobile-toggle { display: inline-flex; align-items: center; justify-content: center; }
+  #mobileMenu { display: none; }
+  #mobileMenu.active { display: block; }
+}
+
+</style></head>
+<body>
+<!-- Skip Navigation -->
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<!-- Neural Network Background -->
+<div aria-hidden="true" class="neural-background">
+<!-- Dynamic neural nodes and connections -->
+</div>
+<!-- Quantum Cursor -->
+<div aria-hidden="true" class="quantum-cursor"></div>
+<div aria-hidden="true" class="cursor-trail"></div>
+<!-- Scroll Progress -->
+<div aria-label="Page scroll progress" class="scroll-progress" role="progressbar"></div>
+<!-- Header -->
+<header class="support-header" id="header">
+<nav aria-label="Main navigation" role="navigation">
+<a aria-label="MindWorth Home" class="mindworth-logo" href="#home">
+                MindWorth
+            </a>
+<ul class="nav-links">
+<li><a class="nav-link" href="#home">Home</a></li>
+<li><a class="nav-link" href="#about">About</a></li>
+<li><a class="nav-link" href="#features">Features</a></li>
+<li><a class="nav-link" href="#use-cases">Use Cases</a></li>
+<li><a class="nav-link" href="#how-it-works">How it Works</a></li>
+<li><a class="nav-link" href="#contact">Contact</a></li>
+<li><button class="ai-cta" onclick="openModal()">Get Started</button></li>
+</ul>
+<button aria-expanded="false" aria-label="Toggle menu" class="mobile-toggle" id="mobileToggle">
+<div class="hamburger-line"></div>
+<div class="hamburger-line"></div>
+<div class="hamburger-line"></div>
+</button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+<ul class="mobile-nav-links">
+<li><a class="nav-link" href="#home">Home</a></li>
+<li><a class="nav-link" href="#about">About</a></li>
+<li><a class="nav-link" href="#features">Features</a></li>
+<li><a class="nav-link" href="#use-cases">Use Cases</a></li>
+<li><a class="nav-link" href="#how-it-works">How it Works</a></li>
+<li><a class="nav-link" href="#contact">Contact</a></li>
+<li><button class="ai-cta" onclick="openModal()">Get Started</button></li>
+</ul>
+</div>
+</header>
+<main id="main-content">
+<!-- Hero Section -->
+<section class="hero" id="home">
+<div aria-hidden="true" class="particle-field"></div>
+<div class="hero-content">
+<div class="hero-text">
+<h1>Transform Your Business with <span class="highlight">Revolutionary AI</span></h1>
+<p>MindWorth empowers businesses with cutting-edge AI solutions that automate operations, boost productivity, and unlock exponential growth.</p>
+<div class="hero-buttons">
+<button class="ai-cta" onclick="openModal()">Start Transformation</button>
+<a class="btn-secondary" href="#features">Explore Features</a>
+</div>
+<div class="stats">
+<div class="stat">
+<span class="stat-number" data-target="500">0</span>
+<span class="stat-label">Businesses Transformed</span>
+</div>
+<div class="stat">
+<span class="stat-number" data-target="400">0</span>
+<span class="stat-label">% ROI Average</span>
+</div>
+<div class="stat">
+<span class="stat-number" data-target="98">0</span>
+<span class="stat-label">Success Rate</span>
+</div>
+<div class="stat">
+<span class="stat-number" data-target="30">0</span>
+<span class="stat-label">Days to Results</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- About Us Section -->
+<section class="tabs-section" id="about">
+<div class="section-header">
+<h2 class="section-title">About MindWorth</h2>
+<p class="section-subtitle">We're pioneers in making enterprise-grade AI accessible to businesses of all sizes.</p>
+</div>
+<div class="tabs-container">
+<div class="tab-buttons" role="tablist">
+<button class="tab-btn active" data-tab="mission" role="tab">Our Mission</button>
+<button class="tab-btn" data-tab="expertise" role="tab">Our Expertise</button>
+<button class="tab-btn" data-tab="approach" role="tab">Our Approach</button>
+<button class="tab-btn" data-tab="commitment" role="tab">Our Commitment</button>
+</div>
+<div class="tab-content active" id="mission-content">
+<div class="tab-text">
+<h3>Democratizing AI Excellence</h3>
+<p>MindWorth bridges the gap between enterprise AI capabilities and business accessibility, making cutting-edge technology available to everyone.</p>
+<ul class="features-list">
+<li>Making AI accessible to businesses of all sizes</li>
+<li>Eliminating technical barriers to AI adoption</li>
+<li>Delivering measurable ROI within 30 days</li>
+<li>Creating sustainable competitive advantages</li>
+<li>Empowering teams with intelligent automation</li>
+</ul>
+</div>
+<div class="tab-visual">
+<div class="data-orb">
+<div class="performance-metric">◉</div>
+</div>
+<div class="data-rings">
+<div class="data-ring"></div>
+<div class="data-ring"></div>
+<div class="data-ring"></div>
+</div>
+</div>
+</div>
+<div class="tab-content" id="expertise-content">
+<div class="tab-text">
+<h3>Deep AI Expertise</h3>
+<p>Our team combines decades of enterprise AI experience with deep understanding of business challenges.</p>
+<ul class="features-list">
+<li>15+ years of enterprise AI development</li>
+<li>Expertise across all major AI frameworks</li>
+<li>Deep industry knowledge in key sectors</li>
+<li>Proven track record of implementations</li>
+<li>Continuous research in emerging AI</li>
+</ul>
+</div>
+<div class="tab-visual">
+<div class="data-orb">
+<div class="performance-metric">◈</div>
+</div>
+<div class="data-rings">
+<div class="data-ring"></div>
+<div class="data-ring"></div>
+<div class="data-ring"></div>
+</div>
+</div>
+</div>
+<div class="tab-content" id="approach-content">
+<div class="tab-text">
+<h3>Human-Centric AI</h3>
+<p>We believe AI should augment human capabilities. Our approach empowers teams while automating routine tasks.</p>
+<ul class="features-list">
+<li>Human-in-the-loop AI design philosophy</li>
+<li>Intuitive interfaces requiring minimal training</li>
+<li>Transparent AI decisions with explanations</li>
+<li>Gradual implementation minimizing disruption</li>
+<li>Continuous support and optimization</li>
+</ul>
+</div>
+<div class="tab-visual">
+<div class="data-orb">
+<div class="performance-metric">○</div>
+</div>
+<div class="data-rings">
+<div class="data-ring"></div>
+<div class="data-ring"></div>
+<div class="data-ring"></div>
+</div>
+</div>
+</div>
+<div class="tab-content" id="commitment-content">
+<div class="tab-text">
+<h3>Results-Driven Partnership</h3>
+<p>We're your AI transformation partner. Our success is measured by your success and long-term growth.</p>
+<ul class="features-list">
+<li>ROI guarantee on all AI implementations</li>
+<li>24/7 support and monitoring services</li>
+<li>Continuous optimization and improvement</li>
+<li>Flexible engagement models for any budget</li>
+<li>Long-term strategic AI roadmap development</li>
+</ul>
+</div>
+<div class="tab-visual">
+<div class="data-orb">
+<div class="performance-metric">◢</div>
+</div>
+<div class="data-rings">
+<div class="data-ring"></div>
+<div class="data-ring"></div>
+<div class="data-ring"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Features Section -->
+<section class="section" id="features">
+<div class="section-header">
+<h2 class="section-title">Revolutionary AI Features</h2>
+<p class="section-subtitle">Experience the power of enterprise-grade AI technology designed to transform your business operations.</p>
+</div>
+<div class="features-grid">
+<article class="feature-card">
+<div class="feature-icon">⚡</div>
+<h3>Intelligent Automation</h3>
+<p>Transform repetitive tasks into intelligent workflows that learn and adapt, freeing your team for strategic work.</p>
+<a class="feature-link" href="intelligent-automation.html">Explore Automation</a>
+</article>
+<article class="feature-card">
+<div class="feature-icon">◈</div>
+<h3>Predictive Analytics</h3>
+<p>Harness machine learning to predict trends, customer behavior, and opportunities before competition.</p>
+<a class="feature-link" href="predictive-analytics.html">Discover Insights</a>
+</article>
+<article class="feature-card">
+<div class="feature-icon">◉</div>
+<h3>Performance Optimization</h3>
+<p>AI-powered engines continuously improve operations, reducing costs while maximizing efficiency.</p>
+<a class="feature-link" href="performance-optimization.html">Maximize Performance</a>
+</article>
+<article class="feature-card">
+<div class="feature-icon">○</div>
+<h3>Seamless Integration</h3>
+<p>Connect with existing tools through our AI platform that speaks every business language.</p>
+<a class="feature-link" href="business-intelligence.html">Connect Everything</a>
+</article>
+<article class="feature-card">
+<div class="feature-icon">◢</div>
+<h3>AI-Powered Support</h3>
+<p>24/7 intelligent support powered by AI that learns your business inside and out.</p>
+<a class="feature-link" href="ai-support.html">Get Smart Support</a>
+</article>
+<article class="feature-card">
+<div class="feature-icon">◡</div>
+<h3>Business Intelligence</h3>
+<p>Transform data into actionable intelligence with AI that provides strategic recommendations.</p>
+<a class="feature-link" href="business-intelligence.html">Unlock Intelligence</a>
+</article>
+</div>
+</section>
+<!-- Use Cases Section -->
+<section class="tabs-section" id="use-cases">
+<div class="section-header">
+<h2 class="section-title">AI Use Case</h2>
+<p class="section-subtitle">Discover how MindWorth AI transforms different industries with tailored solutions.</p>
+</div>
+<div class="tabs-container">
+<div class="tab-buttons" role="tablist">
+<button class="tab-btn active" data-tab="retail" role="tab">Retail &amp; E-commerce</button>
+<button class="tab-btn" data-tab="manufacturing" role="tab">Manufacturing</button>
+<button class="tab-btn" data-tab="services" role="tab">Professional Services</button>
+<button class="tab-btn" data-tab="healthcare" role="tab">Healthcare</button>
+</div>
+<div class="tab-content active" id="retail-content">
+<div class="tab-text">
+<h3>Smart Retail Revolution</h3>
+<p>Transform retail operations with AI that predicts demand, optimizes inventory, and personalizes customer experiences.</p>
+<ul class="features-list">
+<li>AI-powered inventory management and demand forecasting</li>
+<li>Personalized recommendations and dynamic pricing</li>
+<li>Customer behavior analysis and retention</li>
+<li>Automated supply chain management</li>
+<li>Intelligent customer service chatbots</li>
+</ul>
+</div>
+<div class="tab-visual">
+<div class="data-orb">
+<div class="performance-metric">350%</div>
+</div>
+<div class="data-rings">
+<div class="data-ring"></div>
+<div class="data-ring"></div>
+<div class="data-ring"></div>
+</div>
+</div>
+</div>
+<div class="tab-content" id="manufacturing-content">
+<div class="tab-text">
+<h3>Smart Manufacturing</h3>
+<p>Revolutionize manufacturing with AI-driven predictive maintenance, quality control, and production optimization.</p>
+<ul class="features-list">
+<li>Predictive maintenance to prevent breakdowns</li>
+<li>AI-powered quality control and defect detection</li>
+<li>Production scheduling and resource optimization</li>
+<li>Supply chain risk management</li>
+<li>Real-time performance monitoring</li>
+</ul>
+</div>
+<div class="tab-visual">
+<div class="data-orb">
+<div class="performance-metric">275%</div>
+</div>
+<div class="data-rings">
+<div class="data-ring"></div>
+<div class="data-ring"></div>
+<div class="data-ring"></div>
+</div>
+</div>
+</div>
+<div class="tab-content" id="services-content">
+<div class="tab-text">
+<h3>Professional Services Excellence</h3>
+<p>Elevate professional services with AI that automates tasks and optimizes resource allocation.</p>
+<ul class="features-list">
+<li>Automated project management and resource allocation</li>
+<li>AI-powered client relationship management</li>
+<li>Intelligent document processing</li>
+<li>Predictive billing and financial optimization</li>
+<li>Knowledge management and expertise sharing</li>
+</ul>
+</div>
+<div class="tab-visual">
+<div class="data-orb">
+<div class="performance-metric">450%</div>
+</div>
+<div class="data-rings">
+<div class="data-ring"></div>
+<div class="data-ring"></div>
+<div class="data-ring"></div>
+</div>
+</div>
+</div>
+<div class="tab-content" id="healthcare-content">
+<div class="tab-text">
+<h3>Healthcare &amp; Wellness AI</h3>
+<p>Transform patient care with AI solutions that improve outcomes and reduce costs.</p>
+<ul class="features-list">
+<li>AI-powered patient scheduling optimization</li>
+<li>Predictive health analytics</li>
+<li>Automated administrative processes</li>
+<li>Intelligent patient communication</li>
+<li>Clinical decision support systems</li>
+</ul>
+</div>
+<div class="tab-visual">
+<div class="data-orb">
+<div class="performance-metric">500%</div>
+</div>
+<div class="data-rings">
+<div class="data-ring"></div>
+<div class="data-ring"></div>
+<div class="data-ring"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section -->
+<section class="cta-section" id="contact">
+<div class="cta-content">
+<h2 class="cta-title">Ready to Transform Your Business?</h2>
+<p class="cta-text">Join hundreds of successful businesses who have revolutionized their operations with MindWorth AI. Your competitive advantage awaits.</p>
+<button class="cta-button" onclick="openModal()">Start Your AI Journey Today</button>
+</div>
+</section>
+<!-- How It Works Section -->
+<section class="section" id="how-it-works">
+<div class="section-header">
+<h2 class="section-title">How MindWorth Works</h2>
+<p class="section-subtitle">Our proven 4-step process transforms your business with minimal disruption and maximum impact.</p>
+</div>
+<div class="features-grid">
+<article class="feature-card">
+<div class="feature-icon">◈</div>
+<h3>AI Discovery</h3>
+<p>We analyze your processes, identify opportunities, and create a customized AI roadmap.</p>
+<a class="feature-link" href="predictive-analytics.html">Start Discovery</a>
+</article>
+<article class="feature-card">
+<div class="feature-icon">◉</div>
+<h3>Smart Implementation</h3>
+<p>Seamless integration of AI solutions into existing workflows without disruption.</p>
+<a class="feature-link" href="intelligent-automation.html">See Implementation</a>
+</article>
+<article class="feature-card">
+<div class="feature-icon">○</div>
+<h3>Continuous Optimization</h3>
+<p>AI systems learn and adapt, automatically optimizing performance over time.</p>
+<a class="feature-link" href="performance-optimization.html">Optimize Performance</a>
+</article>
+<article class="feature-card">
+<div class="feature-icon">◢</div>
+<h3>Exponential Growth</h3>
+<p>Experience unprecedented growth as AI transforms operations and unlocks opportunities.</p>
+<a class="feature-link" href="business-intelligence.html">Achieve Growth</a>
+</article>
+</div>
+</section>
+<!-- Metrics Section -->
+<section class="metrics-section">
+<div class="section-header">
+<h2 class="section-title">Extraordinary Results</h2>
+<p class="section-subtitle">See the transformative impact MindWorth delivers with measurable results that exceed expectations.</p>
+</div>
+<div class="metrics-grid">
+<div class="metric-card">
+<span class="metric-value" data-target="400">0</span>
+<span class="metric-label">% Average ROI</span>
+</div>
+<div class="metric-card">
+<span class="metric-value" data-target="75">0</span>
+<span class="metric-label">% Cost Reduction</span>
+</div>
+<div class="metric-card">
+<span class="metric-value" data-target="98">0</span>
+<span class="metric-label">% Client Satisfaction</span>
+</div>
+<div class="metric-card">
+<span class="metric-value" data-target="30">0</span>
+<span class="metric-label">Days to Results</span>
+</div>
+<div class="metric-card">
+<span class="metric-value" data-target="500">0</span>
+<span class="metric-label">Businesses Transformed</span>
+</div>
+<div class="metric-card">
+<span class="metric-value" data-target="24">0</span>
+<span class="metric-label">Hour Support</span>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer>
+<div class="footer-grid">
+<div class="footer-section">
+<h3>AI Solutions</h3>
+<ul>
+<li><a href="intelligent-automation.html">Intelligent Automation</a></li>
+<li><a href="predictive-analytics.html">Predictive Analytics</a></li>
+<li><a href="performance-optimization.html">Performance Optimization</a></li>
+<li><a href="business-intelligence.html">Business Intelligence</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3>Industries</h3>
+<ul>
+<li><a href="retail.html">Retail &amp; E-commerce</a></li>
+<li><a href="manufacturing.html">Manufacturing</a></li>
+<li><a href="professional-services.html">Professional Services</a></li>
+<li><a href="healthcare.html">Healthcare &amp; Wellness</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3>Resources</h3>
+<ul>
+<li><a href="case-study-1.html">Case Studies</a></li>
+<li><a href="whitepapers.html">Whitepapers</a></li>
+<li><a href="blog.html">Blog</a></li>
+<li><a href="webinars.html">Webinars</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3>Company</h3>
+<ul>
+<li><a href="about.html">About MindWorth</a></li>
+<li><a href="team.html">Our Team</a></li>
+<li><a href="careers.html">Careers</a></li>
+<li><a href="contact.html">Contact Us</a></li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom">
+<p>© 2025 MindWorth. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+</div>
+</footer>
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="modal-title" class="modal" id="modal" role="dialog">
+<div class="modal-content">
+<button aria-label="Close modal" class="modal-close" onclick="closeModal()">×</button>
+<h2 class="modal-title" id="modal-title">Start Your AI Transformation</h2>
+<p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 2rem; line-height: 1.6;">
+                Ready to revolutionize your business with AI? Tell us about your challenges and our experts will contact you within 24 hours.
+            </p>
+<form id="contactForm" novalidate="">
+<div class="form-group">
+<label for="name">Full Name *</label>
+<input aria-required="true" id="name" name="name" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="email">Email Address *</label>
+<input aria-required="true" id="email" name="email" required="" type="email"/>
+</div>
+<div class="form-group">
+<label for="company">Company Name</label>
+<input id="company" name="company" type="text"/>
+</div>
+<div class="form-group">
+<label for="industry">Industry</label>
+<select id="industry" name="industry">
+<option value="">Select Your Industry</option>
+<option value="retail">Retail &amp; E-commerce</option>
+<option value="manufacturing">Manufacturing</option>
+<option value="services">Professional Services</option>
+<option value="healthcare">Healthcare &amp; Wellness</option>
+<option value="other">Other</option>
+</select>
+</div>
+<div class="form-group">
+<label for="message">Describe Your Challenge *</label>
+<textarea aria-required="true" id="message" name="message" placeholder="What processes would you like to optimize with AI?" required="" rows="4"></textarea>
+</div>
+<button class="ai-cta" style="width: 100%; margin-top: 1rem;" type="submit">
+                    Get My AI Solution
+                </button>
+</form>
+</div>
+</div>
+<!-- Back to Top -->
+<button aria-label="Back to top" class="back-to-top" id="backToTop">↑</button>
+<script>
+        // Initialize everything when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeWebsite();
+        });
+
+        function initializeWebsite() {
+            createNeuralNetwork();
+            createParticleField();
+            initializeCursor();
+            initializeScrollEffects();
+            initializeCounters();
+            initializeTabs();
+            initializeMobileMenu();
+            initializeModal();
+            initializeAccessibility();
+            
+            console.log('🚀 MindWorth AI website fully loaded and operational!');
+        }
+
+        // Create Neural Network Background
+        function createNeuralNetwork() {
+            const neuralBg = document.querySelector('.neural-background');
+            if (!neuralBg) return;
+            
+            const nodeCount = 50;
+            const connectionCount = 30;
+
+            // Create neural nodes
+            for (let i = 0; i < nodeCount; i++) {
+                const node = document.createElement('div');
+                node.className = 'neural-node';
+                node.style.left = Math.random() * 100 + '%';
+                node.style.top = Math.random() * 100 + '%';
+                node.style.animationDelay = Math.random() * 4 + 's';
+                neuralBg.appendChild(node);
+            }
+
+            // Create connections
+            for (let i = 0; i < connectionCount; i++) {
+                const connection = document.createElement('div');
+                connection.className = 'neural-connection';
+                connection.style.left = Math.random() * 100 + '%';
+                connection.style.top = Math.random() * 100 + '%';
+                connection.style.width = Math.random() * 200 + 100 + 'px';
+                connection.style.transform = `rotate(${Math.random() * 360}deg)`;
+                connection.style.animationDelay = Math.random() * 3 + 's';
+                neuralBg.appendChild(connection);
+            }
+        }
+
+        // Create Particle Field
+        function createParticleField() {
+            const particleField = document.querySelector('.particle-field');
+            if (!particleField) return;
+            
+            const particleCount = 60;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                particleField.appendChild(particle);
+            }
+        }
+
+        // Cursor System
+        function initializeCursor() {
+            const cursor = document.querySelector('.quantum-cursor');
+            const trail = document.querySelector('.cursor-trail');
+            if (!cursor || !trail) return;
+
+            let mouseX = 0, mouseY = 0;
+            let cursorX = 0, cursorY = 0;
+            let trailX = 0, trailY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            function animateCursor() {
+                cursorX += (mouseX - cursorX) * 0.1;
+                cursorY += (mouseY - cursorY) * 0.1;
+                trailX += (mouseX - trailX) * 0.05;
+                trailY += (mouseY - trailY) * 0.05;
+
+                cursor.style.left = cursorX + 'px';
+                cursor.style.top = cursorY + 'px';
+                trail.style.left = trailX + 'px';
+                trail.style.top = trailY + 'px';
+
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+
+            // Cursor interactions
+            const interactiveElements = document.querySelectorAll('a, button, .feature-card, .tab-btn, .metric-card, .stat');
+            interactiveElements.forEach(element => {
+                element.addEventListener('mouseenter', () => {
+                    cursor.classList.add('expand');
+                });
+                element.addEventListener('mouseleave', () => {
+                    cursor.classList.remove('expand');
+                });
+            });
+        }
+
+        // Scroll Effects with Header Hide/Show
+        function initializeScrollEffects() {
+            const scrollProgress = document.querySelector('.scroll-progress');
+            const backToTop = document.querySelector('.back-to-top');
+            const header = document.getElementById('header');
+            let lastScrollTop = 0;
+            const scrollThreshold = 100;
+
+            window.addEventListener('scroll', () => {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                // Scroll progress
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrollPercent = (scrollTop / docHeight) * 100;
+                if (scrollProgress) scrollProgress.style.width = scrollPercent + '%';
+
+                // Header hide/show with improved logic
+                if (header) {
+                    if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
+                        // Scrolling down past threshold
+                        header.classList.add('hidden');
+                    } else if (scrollTop < lastScrollTop) {
+                        // Scrolling up
+                        header.classList.remove('hidden');
+                    }
+                    
+                    // Always show at top
+                    if (scrollTop <= 50) {
+                        header.classList.remove('hidden');
+                    }
+                    
+                    lastScrollTop = scrollTop;
+                }
+
+                // Back to top button
+                if (backToTop) {
+                    if (scrollTop > 500) {
+                        backToTop.classList.add('visible');
+                    } else {
+                        backToTop.classList.remove('visible');
+                    }
+                }
+            });
+
+            if (backToTop) {
+                backToTop.addEventListener('click', () => {
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+            }
+        }
+
+        // Animated Counters
+        function initializeCounters() {
+            const counters = document.querySelectorAll('.stat-number, .metric-value');
+            
+            const animateCounter = (counter) => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                if (isNaN(target)) return;
+                
+                const duration = 2000;
+                const step = target / (duration / 16);
+                let current = 0;
+
+                const updateCounter = () => {
+                    if (current < target) {
+                        current += step;
+                        counter.textContent = Math.floor(current);
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        counter.textContent = target;
+                    }
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            updateCounter();
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                observer.observe(counter.parentElement);
+            };
+
+            counters.forEach(animateCounter);
+        }
+
+        // Tab System
+        function initializeTabs() {
+            const tabContainers = document.querySelectorAll('.tabs-container');
+            
+            tabContainers.forEach(container => {
+                const tabButtons = container.querySelectorAll('.tab-btn');
+                const tabContents = container.querySelectorAll('.tab-content');
+
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const tabId = button.getAttribute('data-tab');
+                        
+                        // Remove active from all in this container
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        tabContents.forEach(content => content.classList.remove('active'));
+
+                        // Activate selected
+                        button.classList.add('active');
+                        const targetContent = container.querySelector('#' + tabId + '-content');
+                        if (targetContent) {
+                            targetContent.classList.add('active');
+                        }
+                    });
+                });
+            });
+        }
+
+        // Mobile Menu
+        function initializeMobileMenu() {
+            const mobileToggle = document.getElementById('mobileToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            if (!mobileToggle || !mobileMenu) return;
+
+            mobileToggle.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isActive = mobileToggle.classList.contains('active');
+                
+                if (isActive) {
+                    mobileToggle.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    mobileToggle.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                } else {
+                    mobileToggle.classList.add('active');
+                    mobileMenu.classList.add('active');
+                    mobileToggle.setAttribute('aria-expanded', 'true');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+
+            // Close on link click
+            const mobileLinks = mobileMenu.querySelectorAll('a, button');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileToggle.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    mobileToggle.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+            });
+
+            // Close on outside click
+            document.addEventListener('click', (e) => {
+                if (!mobileMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
+                    if (mobileMenu.classList.contains('active')) {
+                        mobileToggle.classList.remove('active');
+                        mobileMenu.classList.remove('active');
+                        mobileToggle.setAttribute('aria-expanded', 'false');
+                        document.body.style.overflow = '';
+                    }
+                }
+            });
+        }
+
+        // Modal System
+        function initializeModal() {
+            const modal = document.getElementById('modal');
+            const form = document.getElementById('contactForm');
+
+            if (!modal || !form) return;
+
+            // Form submission
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value.trim();
+                const email = document.getElementById('email').value.trim();
+                const message = document.getElementById('message').value.trim();
+                
+                if (!name || !email || !message) {
+                    alert('Please fill in all required fields.');
+                    return;
+                }
+                
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(email)) {
+                    alert('Please enter a valid email address.');
+                    return;
+                }
+                
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Processing...';
+                submitBtn.disabled = true;
+                
+                setTimeout(() => {
+                    alert('🚀 Thank you! Our AI experts will contact you within 24 hours with a customized solution.');
+                    form.reset();
+                    closeModal();
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }, 1500);
+            });
+
+            // Close modal on outside click
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+
+            // Close on escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+        }
+
+        function openModal() {
+            const modal = document.getElementById('modal');
+            if (!modal) return;
+            
+            modal.classList.add('active');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            
+            const firstInput = modal.querySelector('input[type="text"]');
+            if (firstInput) {
+                setTimeout(() => firstInput.focus(), 300);
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            if (!modal) return;
+            
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
+
+        // Accessibility Features
+        function initializeAccessibility() {
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Intersection Observer for animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            // Observe elements for animations
+            const animatedElements = document.querySelectorAll('.feature-card, .metric-card, .stat');
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        }
+
+        // Error handling
+        window.addEventListener('error', (e) => {
+            console.warn('System error detected:', e.error);
+        });
+
+        // Performance monitoring
+        if ('PerformanceObserver' in window) {
+            const perfObserver = new PerformanceObserver((list) => {
+                list.getEntries().forEach((entry) => {
+                    if (entry.entryType === 'navigation') {
+                        console.log('🚀 Page load time:', entry.loadEventEnd - entry.loadEventStart, 'ms');
+                    }
+                });
+            });
+            perfObserver.observe({ entryTypes: ['navigation'] });
+        }
+
+        console.log('🌟 Welcome to MindWorth - The Future of AI Business Solutions');
+        console.log('🧠 All systems operational and ready for transformation');
+        console.log('⚡ Your business revolution starts here!');
+    </script>
+</body>
+</html>
