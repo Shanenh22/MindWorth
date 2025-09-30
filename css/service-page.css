@@ -1,0 +1,434 @@
+/* Service Page Specific Styles */
+
+/* Hero Section */
+.hero {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    padding-top: 120px;
+    padding-bottom: 4rem;
+}
+
+.hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.hero-text h1 {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+    background: var(--holographic);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: holographic-text 4s ease-in-out infinite;
+}
+
+.hero-text p {
+    font-size: 1.3rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.hero-stat {
+    background: var(--morphic-glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.hero-stat strong {
+    color: var(--neon-cyan);
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.hero-visual {
+    background: var(--morphic-glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(139, 92, 246, 0.3);
+    border-radius: 25px;
+    padding: 3rem;
+    text-align: center;
+}
+
+/* Problem Cards */
+.problem-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.problem-card {
+    background: var(--morphic-glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: 20px;
+    padding: 2rem;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.problem-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--electric-purple);
+}
+
+.problem-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.problem-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--neon-cyan);
+}
+
+.problem-card p {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+}
+
+/* How It Works Steps */
+.steps-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    margin-top: 3rem;
+}
+
+.step {
+    text-align: center;
+    position: relative;
+}
+
+.step-number {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: var(--holographic);
+    background-size: 300% 300%;
+    animation: holographic-bg 4s ease-in-out infinite;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--deep-space);
+}
+
+.step h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--pearl-white);
+}
+
+.step p {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+}
+
+/* Automation Lists */
+.automation-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.automation-category {
+    background: var(--morphic-glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: 20px;
+    padding: 2.5rem;
+}
+
+.automation-category h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--electric-purple);
+}
+
+.automation-category ul {
+    list-style: none;
+}
+
+.automation-category li {
+    padding: 0.8rem 0;
+    color: rgba(255, 255, 255, 0.9);
+    position: relative;
+    padding-left: 2rem;
+}
+
+.automation-category li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--neon-cyan);
+    font-weight: 900;
+}
+
+/* Case Study */
+.case-study {
+    background: var(--morphic-glass);
+    backdrop-filter: blur(20px);
+    border: 2px solid var(--electric-purple);
+    border-radius: 25px;
+    padding: 3rem;
+    margin-top: 3rem;
+}
+
+.case-study-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.case-study-header h3 {
+    font-size: 2rem;
+    color: var(--neon-cyan);
+    margin-bottom: 1rem;
+}
+
+.case-study-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 2rem;
+}
+
+.before-after {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    padding: 2rem;
+}
+
+.before-after h4 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.before-after.before h4 {
+    color: var(--sunset-coral);
+}
+
+.before-after.after h4 {
+    color: var(--neon-cyan);
+}
+
+.before-after ul {
+    list-style: none;
+}
+
+.before-after li {
+    padding: 0.5rem 0;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.case-study-results {
+    text-align: center;
+    background: rgba(139, 92, 246, 0.1);
+    border-radius: 15px;
+    padding: 2rem;
+}
+
+.case-study-results h4 {
+    font-size: 1.5rem;
+    color: var(--golden-yellow);
+    margin-bottom: 1.5rem;
+}
+
+.results-stats {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.result-stat {
+    text-align: center;
+}
+
+.result-stat strong {
+    display: block;
+    font-size: 2.5rem;
+    color: var(--neon-cyan);
+    margin-bottom: 0.5rem;
+}
+
+.result-stat span {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Pricing Card */
+.pricing-card {
+    background: var(--morphic-glass);
+    backdrop-filter: blur(20px);
+    border: 2px solid var(--electric-purple);
+    border-radius: 25px;
+    padding: 3rem;
+    max-width: 600px;
+    margin: 3rem auto;
+    text-align: center;
+}
+
+.pricing-value {
+    font-size: 3.5rem;
+    font-weight: 900;
+    background: var(--holographic);
+    background-size: 300% 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: holographic-text 4s ease-in-out infinite;
+    margin-bottom: 1rem;
+}
+
+.pricing-includes {
+    text-align: left;
+    margin: 2rem 0;
+}
+
+.pricing-includes ul {
+    list-style: none;
+}
+
+.pricing-includes li {
+    padding: 0.8rem 0;
+    color: rgba(255, 255, 255, 0.9);
+    position: relative;
+    padding-left: 2rem;
+}
+
+.pricing-includes li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--neon-cyan);
+    font-weight: 900;
+}
+
+/* FAQ */
+.faq-container {
+    max-width: 800px;
+    margin: 3rem auto;
+}
+
+.faq-item {
+    background: var(--morphic-glass);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    border-color: var(--electric-purple);
+}
+
+.faq-question {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--pearl-white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-answer {
+    margin-top: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.7;
+    display: none;
+}
+
+.faq-item.active .faq-answer {
+    display: block;
+}
+
+.faq-icon {
+    font-size: 1.5rem;
+    color: var(--neon-cyan);
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(45deg);
+}
+
+/* CTA Section */
+.cta-section {
+    background: var(--holographic);
+    background-size: 400% 400%;
+    animation: holographic-bg 8s ease-in-out infinite;
+    padding: 6rem 0;
+    text-align: center;
+}
+
+.cta-section h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--deep-space);
+    margin-bottom: 1.5rem;
+    font-weight: 900;
+}
+
+.cta-section p {
+    font-size: 1.3rem;
+    color: rgba(15, 15, 35, 0.8);
+    margin-bottom: 2rem;
+    font-weight: 600;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+/* Responsive - Service Pages */
+@media (max-width: 768px) {
+    .hero-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .case-study-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .steps-container,
+    .automation-list,
+    .problem-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-buttons,
+    .cta-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
