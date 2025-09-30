@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>MindWorth - Revolutionary AI Consulting for Business Excellence</title>
-<meta content="Transform your business with cutting-edge AI solutions designed for modern enterprises" name="description"/>
+<title>MindWorth - Affordable AI Automation for Small Businesses</title>
+<meta content="AI automation solutions for businesses with 1-50 employees. Practical tools, transparent pricing, real results." name="description"/>
 <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
         
@@ -372,8 +371,7 @@
             text-align: center;
             border: 1px solid rgba(139, 92, 246, 0.3);
         }
-
-        /* Hero Section */
+	/* Hero Section */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -747,8 +745,7 @@
             transform: scale(1.05);
             box-shadow: 0 0 25px var(--neon-cyan);
         }
-
-        /* Tabs Section */
+	/* Tabs Section */
         .tabs-section {
             padding: 8rem 0;
             background: linear-gradient(135deg, var(--midnight-blue) 0%, var(--deep-space) 100%);
@@ -967,23 +964,23 @@
             z-index: 10;
         }
 
-        /* Metrics Section */
-        .metrics-section {
+        /* Pricing Section */
+        .pricing-section {
             padding: 8rem 0;
             background: var(--deep-space);
             position: relative;
         }
 
-        .metrics-grid {
+        .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 3rem;
             max-width: 1400px;
             margin: 4rem auto 0;
             padding: 0 5%;
         }
 
-        .metric-card {
+        .pricing-card {
             background: var(--morphic-glass);
             backdrop-filter: blur(20px);
             border-radius: 30px;
@@ -996,7 +993,7 @@
             cursor: pointer;
         }
 
-        .metric-card::before {
+        .pricing-card::before {
             content: '';
             position: absolute;
             top: -50%;
@@ -1008,7 +1005,7 @@
             z-index: -2;
         }
 
-        .metric-card::after {
+        .pricing-card::after {
             content: '';
             position: absolute;
             top: 2px;
@@ -1025,13 +1022,26 @@
             100% { transform: rotate(360deg); }
         }
 
-        .metric-card:hover {
+        .pricing-card:hover {
             transform: translateY(-10px) scale(1.05);
             box-shadow: var(--quantum-shadow);
         }
 
-        .metric-value {
-            font-size: 3.5rem;
+        .pricing-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--pearl-white);
+        }
+
+        .pricing-subtitle {
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+        }
+
+        .pricing-value {
+            font-size: 3rem;
             font-weight: 900;
             background: var(--holographic);
             background-size: 300% 300%;
@@ -1039,15 +1049,35 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             animation: holographic-text 4s ease-in-out infinite;
-            margin-bottom: 1rem;
+            margin-bottom: 0.5rem;
             display: block;
         }
 
-        .metric-label {
-            font-size: 1.1rem;
+        .pricing-timeline {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-features li {
+            padding: 0.8rem 0;
             color: rgba(255, 255, 255, 0.9);
-            font-weight: 600;
-            text-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--neon-cyan);
+            font-weight: 900;
         }
 
         /* CTA Section */
@@ -1137,8 +1167,7 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
             color: var(--deep-space);
         }
-
-        /* Footer */
+	/* Footer */
         footer {
             background: var(--midnight-blue);
             padding: 6rem 0 2rem;
@@ -1416,8 +1445,8 @@
                 grid-template-columns: 1fr;
             }
             
-            .metrics-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            .pricing-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
                 gap: 1.5rem;
             }
         }
@@ -1481,8 +1510,7 @@
         }
     </style>
 <style>
-
-/* Nav/Hamburger visibility override (keep minimal) */
+/* Nav/Hamburger visibility override */
 header.support-header { position: sticky; top: 0; z-index: 10000; }
 header.support-header nav { display: flex; align-items: center; justify-content: space-between; }
 header.support-header .nav-links { display: flex; gap: 1rem; align-items: center; }
@@ -1493,20 +1521,24 @@ header.support-header .mobile-toggle { display: none; }
   #mobileMenu { display: none; }
   #mobileMenu.active { display: block; }
 }
-
-</style></head>
+</style>
+</head>
 <body>
 <!-- Skip Navigation -->
 <a class="skip-link" href="#main-content">Skip to main content</a>
+
 <!-- Neural Network Background -->
 <div aria-hidden="true" class="neural-background">
 <!-- Dynamic neural nodes and connections -->
 </div>
+
 <!-- Quantum Cursor -->
 <div aria-hidden="true" class="quantum-cursor"></div>
 <div aria-hidden="true" class="cursor-trail"></div>
+
 <!-- Scroll Progress -->
 <div aria-label="Page scroll progress" class="scroll-progress" role="progressbar"></div>
+
 <!-- Header -->
 <header class="support-header" id="header">
 <nav aria-label="Main navigation" role="navigation">
@@ -1518,9 +1550,9 @@ header.support-header .mobile-toggle { display: none; }
 <li><a class="nav-link" href="#about">About</a></li>
 <li><a class="nav-link" href="#features">Features</a></li>
 <li><a class="nav-link" href="#use-cases">Use Cases</a></li>
-<li><a class="nav-link" href="#how-it-works">How it Works</a></li>
+<li><a class="nav-link" href="#pricing">Pricing</a></li>
 <li><a class="nav-link" href="#contact">Contact</a></li>
-<li><button class="ai-cta" onclick="openModal()">Get Started</button></li>
+<li><a class="ai-cta" href="ai-fit-quiz.html" aria-label="AI Fit Quiz">Fit Quiz</a></li>
 </ul>
 <button aria-expanded="false" aria-label="Toggle menu" class="mobile-toggle" id="mobileToggle">
 <div class="hamburger-line"></div>
@@ -1534,40 +1566,41 @@ header.support-header .mobile-toggle { display: none; }
 <li><a class="nav-link" href="#about">About</a></li>
 <li><a class="nav-link" href="#features">Features</a></li>
 <li><a class="nav-link" href="#use-cases">Use Cases</a></li>
-<li><a class="nav-link" href="#how-it-works">How it Works</a></li>
+<li><a class="nav-link" href="#pricing">Pricing</a></li>
 <li><a class="nav-link" href="#contact">Contact</a></li>
-<li><button class="ai-cta" onclick="openModal()">Get Started</button></li>
+<li><a class="ai-cta" href="ai-fit-quiz.html" aria-label="AI Fit Quiz">Fit Quiz</a></li>
 </ul>
 </div>
 </header>
+
 <main id="main-content">
 <!-- Hero Section -->
 <section class="hero" id="home">
 <div aria-hidden="true" class="particle-field"></div>
 <div class="hero-content">
 <div class="hero-text">
-<h1>Transform Your Business with <span class="highlight">Revolutionary AI</span></h1>
-<p>MindWorth empowers businesses with cutting-edge AI solutions that automate operations, boost productivity, and unlock exponential growth.</p>
+<h1>AI Solutions for Small Businesses<br><span class="highlight">(Without the Enterprise Price Tag)</span></h1>
+<p>We help businesses with 1-50 employees automate repetitive work using affordable AI tools—no technical team required. Most clients see time savings within 2 weeks.</p>
 <div class="hero-buttons">
-<button class="ai-cta" onclick="openModal()">Start Transformation</button>
-<a class="btn-secondary" href="#features">Explore Features</a>
+<button class="ai-cta" onclick="openModal()">Schedule Free Audit</button>
+<a class="btn-secondary" href="#features">See What We Automate</a>
 </div>
 <div class="stats">
 <div class="stat">
-<span class="stat-number" data-target="500">0</span>
-<span class="stat-label">Businesses Transformed</span>
+<span class="stat-number">8</span>
+<span class="stat-label">Avg. Client Size</span>
 </div>
 <div class="stat">
-<span class="stat-number" data-target="400">0</span>
-<span class="stat-label">% ROI Average</span>
+<span class="stat-number">$2.5K</span>
+<span class="stat-label">Starting Price</span>
 </div>
 <div class="stat">
-<span class="stat-number" data-target="98">0</span>
-<span class="stat-label">Success Rate</span>
+<span class="stat-number">2</span>
+<span class="stat-label">Weeks to Results</span>
 </div>
 <div class="stat">
-<span class="stat-number" data-target="30">0</span>
-<span class="stat-label">Days to Results</span>
+<span class="stat-number">0</span>
+<span class="stat-label">IT Team Needed</span>
 </div>
 </div>
 </div>
@@ -1577,7 +1610,7 @@ header.support-header .mobile-toggle { display: none; }
 <section class="tabs-section" id="about">
 <div class="section-header">
 <h2 class="section-title">About MindWorth</h2>
-<p class="section-subtitle">We're pioneers in making enterprise-grade AI accessible to businesses of all sizes.</p>
+<p class="section-subtitle">We specialize in practical AI automation for small businesses—making powerful technology accessible and affordable.</p>
 </div>
 <div class="tabs-container">
 <div class="tab-buttons" role="tablist">
@@ -1586,16 +1619,17 @@ header.support-header .mobile-toggle { display: none; }
 <button class="tab-btn" data-tab="approach" role="tab">Our Approach</button>
 <button class="tab-btn" data-tab="commitment" role="tab">Our Commitment</button>
 </div>
+
 <div class="tab-content active" id="mission-content">
 <div class="tab-text">
-<h3>Democratizing AI Excellence</h3>
-<p>MindWorth bridges the gap between enterprise AI capabilities and business accessibility, making cutting-edge technology available to everyone.</p>
+<h3>Built for Small Business Owners</h3>
+<p>You're probably doing work that should be automated—data entry, scheduling, follow-ups. We help businesses with 1-50 employees implement practical AI solutions without the enterprise complexity or cost.</p>
 <ul class="features-list">
-<li>Making AI accessible to businesses of all sizes</li>
-<li>Eliminating technical barriers to AI adoption</li>
-<li>Delivering measurable ROI within 30 days</li>
-<li>Creating sustainable competitive advantages</li>
-<li>Empowering teams with intelligent automation</li>
+<li>Solutions that cost $2,500-$10,000 (not $100K+)</li>
+<li>Tools you can learn in days, not months</li>
+<li>No coding or IT department required</li>
+<li>Start with one process, expand as you see results</li>
+<li>You own the solution—no vendor lock-in</li>
 </ul>
 </div>
 <div class="tab-visual">
@@ -1609,16 +1643,17 @@ header.support-header .mobile-toggle { display: none; }
 </div>
 </div>
 </div>
+
 <div class="tab-content" id="expertise-content">
 <div class="tab-text">
-<h3>Deep AI Expertise</h3>
-<p>Our team combines decades of enterprise AI experience with deep understanding of business challenges.</p>
+<h3>Small Business AI Specialists</h3>
+<p>We focus exclusively on businesses with 1-50 employees, understanding the unique constraints and opportunities you face. Our team brings enterprise AI knowledge but packages it for small business budgets.</p>
 <ul class="features-list">
-<li>15+ years of enterprise AI development</li>
-<li>Expertise across all major AI frameworks</li>
-<li>Deep industry knowledge in key sectors</li>
-<li>Proven track record of implementations</li>
-<li>Continuous research in emerging AI</li>
+<li>10+ years implementing business automation</li>
+<li>Experience with 50+ small business clients</li>
+<li>Deep knowledge of affordable AI tools</li>
+<li>Understanding of small business cash flow</li>
+<li>Quick implementation—weeks, not months</li>
 </ul>
 </div>
 <div class="tab-visual">
@@ -1632,16 +1667,17 @@ header.support-header .mobile-toggle { display: none; }
 </div>
 </div>
 </div>
+
 <div class="tab-content" id="approach-content">
 <div class="tab-text">
-<h3>Human-Centric AI</h3>
-<p>We believe AI should augment human capabilities. Our approach empowers teams while automating routine tasks.</p>
+<h3>Practical, Not Flashy</h3>
+<p>We don't chase the latest AI trends. We focus on proven automation that saves you time and money. Our approach: identify your biggest pain points, implement one solution, prove the value, then expand.</p>
 <ul class="features-list">
-<li>Human-in-the-loop AI design philosophy</li>
-<li>Intuitive interfaces requiring minimal training</li>
-<li>Transparent AI decisions with explanations</li>
-<li>Gradual implementation minimizing disruption</li>
-<li>Continuous support and optimization</li>
+<li>Start with your most painful process</li>
+<li>Build and test within 2-3 weeks</li>
+<li>Train your team to manage it themselves</li>
+<li>No monthly retainers unless you want support</li>
+<li>Honest feedback—even if AI isn't the answer</li>
 </ul>
 </div>
 <div class="tab-visual">
@@ -1655,16 +1691,17 @@ header.support-header .mobile-toggle { display: none; }
 </div>
 </div>
 </div>
+
 <div class="tab-content" id="commitment-content">
 <div class="tab-text">
-<h3>Results-Driven Partnership</h3>
-<p>We're your AI transformation partner. Our success is measured by your success and long-term growth.</p>
+<h3>Your Success Partner</h3>
+<p>We succeed when you save time and money. Most of our clients start with one project, see real results, then come back for more. We're here for the long haul, growing alongside your business.</p>
 <ul class="features-list">
-<li>ROI guarantee on all AI implementations</li>
-<li>24/7 support and monitoring services</li>
-<li>Continuous optimization and improvement</li>
-<li>Flexible engagement models for any budget</li>
-<li>Long-term strategic AI roadmap development</li>
+<li>Transparent pricing—no hidden costs</li>
+<li>Email support included with every project</li>
+<li>Continuous optimization recommendations</li>
+<li>Flexible engagement—pay per project or monthly</li>
+<li>Free consultation to assess if AI makes sense</li>
 </ul>
 </div>
 <div class="tab-visual">
@@ -1683,76 +1720,92 @@ header.support-header .mobile-toggle { display: none; }
 <!-- Features Section -->
 <section class="section" id="features">
 <div class="section-header">
-<h2 class="section-title">Revolutionary AI Features</h2>
-<p class="section-subtitle">Experience the power of enterprise-grade AI technology designed to transform your business operations.</p>
+<h2 class="section-title">What We Can Automate</h2>
+<p class="section-subtitle">Practical AI solutions that save small businesses 8-20 hours per week—with affordable pricing and fast implementation.</p>
 </div>
 <div class="features-grid">
+
 <article class="feature-card">
 <div class="feature-icon">⚡</div>
-<h3>Intelligent Automation</h3>
-<p>Transform repetitive tasks into intelligent workflows that learn and adapt, freeing your team for strategic work.</p>
-<a class="feature-link" href="intelligent-automation.html">Explore Automation</a>
+<h3>Email & Admin Automation</h3>
+<p>Stop spending 10 hours/week sorting emails, data entry, scheduling meetings, and sending follow-ups. We set up AI assistants that handle these automatically.</p>
+<p style="font-size: 0.9rem; color: var(--neon-cyan); margin-top: 1rem;">Cost: $2,500-$5,000 setup</p>
+<a class="feature-link" href="#contact" onclick="openModal(); return false;">Automate My Admin</a>
 </article>
+
 <article class="feature-card">
 <div class="feature-icon">◈</div>
-<h3>Predictive Analytics</h3>
-<p>Harness machine learning to predict trends, customer behavior, and opportunities before competition.</p>
-<a class="feature-link" href="predictive-analytics.html">Discover Insights</a>
+<h3>Customer Insights</h3>
+<p>Turn customer feedback, reviews, and support tickets into actionable insights. Simple dashboards that update automatically to show what customers really want.</p>
+<p style="font-size: 0.9rem; color: var(--neon-cyan); margin-top: 1rem;">Cost: $3,000-$6,000</p>
+<a class="feature-link" href="#contact" onclick="openModal(); return false;">Understand My Customers</a>
 </article>
+
 <article class="feature-card">
 <div class="feature-icon">◉</div>
-<h3>Performance Optimization</h3>
-<p>AI-powered engines continuously improve operations, reducing costs while maximizing efficiency.</p>
-<a class="feature-link" href="performance-optimization.html">Maximize Performance</a>
+<h3>Smart Scheduling</h3>
+<p>Automate appointment booking, staff scheduling, and resource management. Clients book directly, automatic reminders sent, no more double-bookings.</p>
+<p style="font-size: 0.9rem; color: var(--neon-cyan); margin-top: 1rem;">Cost: $2,000-$4,000</p>
+<a class="feature-link" href="#contact" onclick="openModal(); return false;">Fix My Scheduling</a>
 </article>
+
 <article class="feature-card">
 <div class="feature-icon">○</div>
-<h3>Seamless Integration</h3>
-<p>Connect with existing tools through our AI platform that speaks every business language.</p>
-<a class="feature-link" href="business-intelligence.html">Connect Everything</a>
+<h3>Sales Follow-Up Automation</h3>
+<p>Never lose a lead. Capture leads automatically, send follow-up sequences, track who's interested, and get reminders when to reach out personally.</p>
+<p style="font-size: 0.9rem; color: var(--neon-cyan); margin-top: 1rem;">Cost: $2,500-$5,000</p>
+<a class="feature-link" href="#contact" onclick="openModal(); return false;">Improve My Sales</a>
 </article>
+
 <article class="feature-card">
 <div class="feature-icon">◢</div>
-<h3>AI-Powered Support</h3>
-<p>24/7 intelligent support powered by AI that learns your business inside and out.</p>
-<a class="feature-link" href="ai-support.html">Get Smart Support</a>
+<h3>Document Processing</h3>
+<p>Stop copying information from PDFs, invoices, receipts, and forms. AI reads documents, extracts data, and populates your spreadsheets automatically.</p>
+<p style="font-size: 0.9rem; color: var(--neon-cyan); margin-top: 1rem;">Cost: $3,000-$7,000</p>
+<a class="feature-link" href="#contact" onclick="openModal(); return false;">Stop Data Entry</a>
 </article>
+
 <article class="feature-card">
 <div class="feature-icon">◡</div>
-<h3>Business Intelligence</h3>
-<p>Transform data into actionable intelligence with AI that provides strategic recommendations.</p>
-<a class="feature-link" href="business-intelligence.html">Unlock Intelligence</a>
+<h3>Content Creation</h3>
+<p>Speed up marketing with AI-assisted social posts, email newsletters, product descriptions, and customer responses. Create in minutes, not hours.</p>
+<p style="font-size: 0.9rem; color: var(--neon-cyan); margin-top: 1rem;">Cost: $1,500-$3,000</p>
+<a class="feature-link" href="#contact" onclick="openModal(); return false;">Speed Up Marketing</a>
 </article>
+
 </div>
 </section>
 <!-- Use Cases Section -->
 <section class="tabs-section" id="use-cases">
 <div class="section-header">
-<h2 class="section-title">AI Use Case</h2>
-<p class="section-subtitle">Discover how MindWorth AI transforms different industries with tailored solutions.</p>
+<h2 class="section-title">Real Small Business Examples</h2>
+<p class="section-subtitle">See how businesses with 1-50 employees are saving time and money with practical AI automation.</p>
 </div>
 <div class="tabs-container">
 <div class="tab-buttons" role="tablist">
-<button class="tab-btn active" data-tab="retail" role="tab">Retail &amp; E-commerce</button>
-<button class="tab-btn" data-tab="manufacturing" role="tab">Manufacturing</button>
-<button class="tab-btn" data-tab="services" role="tab">Professional Services</button>
-<button class="tab-btn" data-tab="healthcare" role="tab">Healthcare</button>
+<button class="tab-btn active" data-tab="service" role="tab">Service Businesses</button>
+<button class="tab-btn" data-tab="retail" role="tab">Retail & E-commerce</button>
+<button class="tab-btn" data-tab="professional" role="tab">Professional Services</button>
+<button class="tab-btn" data-tab="trades" role="tab">Trades & Field Services</button>
 </div>
-<div class="tab-content active" id="retail-content">
+
+<div class="tab-content active" id="service-content">
 <div class="tab-text">
-<h3>Smart Retail Revolution</h3>
-<p>Transform retail operations with AI that predicts demand, optimizes inventory, and personalizes customer experiences.</p>
+<h3>3-Person Marketing Agency</h3>
+<p><strong>The Problem:</strong> Owner spending 15 hours/week on proposals, invoicing, client updates, and project tracking. No time for actual client work or business development.</p>
+<p><strong>What We Implemented:</strong></p>
 <ul class="features-list">
-<li>AI-powered inventory management and demand forecasting</li>
-<li>Personalized recommendations and dynamic pricing</li>
-<li>Customer behavior analysis and retention</li>
-<li>Automated supply chain management</li>
-<li>Intelligent customer service chatbots</li>
+<li>Auto-generated proposals from template library</li>
+<li>Automated project status emails to clients</li>
+<li>Time-tracking integration with invoicing</li>
+<li>Client portal for file sharing</li>
 </ul>
+<p><strong>Results After 2 Months:</strong> 12 hours/week saved, took on 2 additional clients (extra $6K/month), owner has time for strategic planning.</p>
+<p style="margin-top: 1.5rem;"><strong>Investment:</strong> $4,500 setup + $200/month tools<br><strong>Payback:</strong> 23 days</p>
 </div>
 <div class="tab-visual">
 <div class="data-orb">
-<div class="performance-metric">350%</div>
+<div class="performance-metric">12hrs</div>
 </div>
 <div class="data-rings">
 <div class="data-ring"></div>
@@ -1761,21 +1814,24 @@ header.support-header .mobile-toggle { display: none; }
 </div>
 </div>
 </div>
-<div class="tab-content" id="manufacturing-content">
+
+<div class="tab-content" id="retail-content">
 <div class="tab-text">
-<h3>Smart Manufacturing</h3>
-<p>Revolutionize manufacturing with AI-driven predictive maintenance, quality control, and production optimization.</p>
+<h3>Family-Owned Gift Shop (6 Employees)</h3>
+<p><strong>The Problem:</strong> Inventory chaos—constantly running out of bestsellers, overstocking slow items. Manual counting and spreadsheets every week consuming 8+ hours.</p>
+<p><strong>What We Implemented:</strong></p>
 <ul class="features-list">
-<li>Predictive maintenance to prevent breakdowns</li>
-<li>AI-powered quality control and defect detection</li>
-<li>Production scheduling and resource optimization</li>
-<li>Supply chain risk management</li>
-<li>Real-time performance monitoring</li>
+<li>Connected POS to inventory tracking system</li>
+<li>AI-powered reorder alerts based on sales trends</li>
+<li>Automated vendor ordering for top 20 products</li>
+<li>Sales reporting dashboard with insights</li>
 </ul>
+<p><strong>Results After 3 Months:</strong> 35% fewer stockouts, 18% reduction in excess inventory, $2,100/month increased sales from better stock availability.</p>
+<p style="margin-top: 1.5rem;"><strong>Investment:</strong> $5,500 setup + $150/month<br><strong>Payback:</strong> 2.6 months</p>
 </div>
 <div class="tab-visual">
 <div class="data-orb">
-<div class="performance-metric">275%</div>
+<div class="performance-metric">35%</div>
 </div>
 <div class="data-rings">
 <div class="data-ring"></div>
@@ -1784,21 +1840,24 @@ header.support-header .mobile-toggle { display: none; }
 </div>
 </div>
 </div>
-<div class="tab-content" id="services-content">
+
+<div class="tab-content" id="professional-content">
 <div class="tab-text">
-<h3>Professional Services Excellence</h3>
-<p>Elevate professional services with AI that automates tasks and optimizes resource allocation.</p>
+<h3>8-Person Accounting Firm</h3>
+<p><strong>The Problem:</strong> Tax season overwhelm—manually organizing client documents, chasing missing forms, data entry from paper to software. Staff working 80-hour weeks.</p>
+<p><strong>What We Implemented:</strong></p>
 <ul class="features-list">
-<li>Automated project management and resource allocation</li>
-<li>AI-powered client relationship management</li>
-<li>Intelligent document processing</li>
-<li>Predictive billing and financial optimization</li>
-<li>Knowledge management and expertise sharing</li>
+<li>Client document portal with auto-organization</li>
+<li>AI extraction of data from tax forms (OCR)</li>
+<li>Automated reminder emails for missing documents</li>
+<li>Workflow tracking per client with status updates</li>
 </ul>
+<p><strong>Results After One Tax Season:</strong> 40% faster document processing, 60% fewer status inquiry calls, took on 25 more clients with same staff size.</p>
+<p style="margin-top: 1.5rem;"><strong>Investment:</strong> $6,000 setup + $250/month<br><strong>Payback:</strong> One busy season</p>
 </div>
 <div class="tab-visual">
 <div class="data-orb">
-<div class="performance-metric">450%</div>
+<div class="performance-metric">40%</div>
 </div>
 <div class="data-rings">
 <div class="data-ring"></div>
@@ -1807,21 +1866,24 @@ header.support-header .mobile-toggle { display: none; }
 </div>
 </div>
 </div>
-<div class="tab-content" id="healthcare-content">
+
+<div class="tab-content" id="trades-content">
 <div class="tab-text">
-<h3>Healthcare &amp; Wellness AI</h3>
-<p>Transform patient care with AI solutions that improve outcomes and reduce costs.</p>
+<h3>12-Person HVAC Company</h3>
+<p><strong>The Problem:</strong> Scheduling nightmare—techs calling office for addresses, manual job tracking, invoicing delays causing cash flow issues, guessing on parts inventory.</p>
+<p><strong>What We Implemented:</strong></p>
 <ul class="features-list">
-<li>AI-powered patient scheduling optimization</li>
-<li>Predictive health analytics</li>
-<li>Automated administrative processes</li>
-<li>Intelligent patient communication</li>
-<li>Clinical decision support systems</li>
+<li>Mobile app for techs (job details, photos, time tracking)</li>
+<li>GPS-optimized routing to maximize daily jobs</li>
+<li>Automated invoicing after job completion</li>
+<li>Parts usage tracking and reorder alerts</li>
 </ul>
+<p><strong>Results After 4 Months:</strong> 2 additional jobs per tech per week, 50% faster invoicing (better cash flow), $1,800/month saved on parts inventory, office admin reduced from 2 to 1 person.</p>
+<p style="margin-top: 1.5rem;"><strong>Investment:</strong> $8,000 setup + $300/month<br><strong>Payback:</strong> 3.2 months</p>
 </div>
 <div class="tab-visual">
 <div class="data-orb">
-<div class="performance-metric">500%</div>
+<div class="performance-metric">+2</div>
 </div>
 <div class="data-rings">
 <div class="data-ring"></div>
@@ -1830,169 +1892,243 @@ header.support-header .mobile-toggle { display: none; }
 </div>
 </div>
 </div>
+
+</div>
+</section>
+<!-- Pricing Section -->
+<section class="pricing-section" id="pricing">
+<div class="section-header">
+<h2 class="section-title">Transparent Pricing</h2>
+<p class="section-subtitle">No hidden costs. No enterprise complexity. Just honest pricing for small businesses.</p>
+</div>
+<div class="pricing-grid">
+
+<div class="pricing-card">
+<h3 class="pricing-title">Quick Win Project</h3>
+<p class="pricing-subtitle">Perfect for first-time automation</p>
+<span class="pricing-value">$2.5K-$5K</span>
+<p class="pricing-timeline">2-3 weeks timeline</p>
+<ul class="pricing-features">
+<li>One process automated</li>
+<li>Email, scheduling, or data entry</li>
+<li>Training for your team</li>
+<li>30 days email support</li>
+<li>You own the solution</li>
+</ul>
+<button class="ai-cta" onclick="openModal()" style="width: 100%; margin-top: 1rem;">Get Started</button>
+</div>
+
+<div class="pricing-card">
+<h3 class="pricing-title">Multi-Process Package</h3>
+<p class="pricing-subtitle">Automate 3-5 key processes</p>
+<span class="pricing-value">$8K-$15K</span>
+<p class="pricing-timeline">6-8 weeks timeline</p>
+<ul class="pricing-features">
+<li>3-5 processes automated</li>
+<li>Custom integration between systems</li>
+<li>Video training library</li>
+<li>90 days email support</li>
+<li>Priority implementation</li>
+</ul>
+<button class="ai-cta" onclick="openModal()" style="width: 100%; margin-top: 1rem;">Schedule Consultation</button>
+</div>
+
+<div class="pricing-card">
+<h3 class="pricing-title">Ongoing Optimization</h3>
+<p class="pricing-subtitle">Continuous improvement</p>
+<span class="pricing-value">$500-$1.5K</span>
+<p class="pricing-timeline">Per month</p>
+<ul class="pricing-features">
+<li>Monthly review and optimization</li>
+<li>New automation as needs arise</li>
+<li>Priority email support</li>
+<li>Tool subscription management</li>
+<li>Quarterly strategy sessions</li>
+</ul>
+<button class="ai-cta" onclick="openModal()" style="width: 100%; margin-top: 1rem;">Learn More</button>
+</div>
+
+</div>
+<div style="text-align: center; margin-top: 4rem; padding: 0 5%;">
+<p style="font-size: 1.2rem; color: rgba(255, 255, 255, 0.8); margin-bottom: 2rem;">Not sure which package fits your needs?</p>
+<button class="btn-secondary" onclick="openModal()">Schedule Free 45-Minute Audit</button>
 </div>
 </section>
 <!-- CTA Section -->
 <section class="cta-section" id="contact">
 <div class="cta-content">
-<h2 class="cta-title">Ready to Transform Your Business?</h2>
-<p class="cta-text">Join hundreds of successful businesses who have revolutionized their operations with MindWorth AI. Your competitive advantage awaits.</p>
-<button class="cta-button" onclick="openModal()">Start Your AI Journey Today</button>
+<h2 class="cta-title">Still Doing Everything Manually?</h2>
+<p class="cta-text">If you're working 60-hour weeks and your to-do list keeps growing, AI automation might help. Schedule a free 45-minute audit and we'll tell you honestly if automation makes sense—and what it would cost.</p>
+<button class="cta-button" onclick="openModal()">Schedule Free Process Audit</button>
+<p style="margin-top: 2rem; font-size: 1rem; color: rgba(15, 15, 35, 0.7);">No pressure. No sales pitch. Just helpful advice.</p>
 </div>
 </section>
+
 <!-- How It Works Section -->
 <section class="section" id="how-it-works">
 <div class="section-header">
-<h2 class="section-title">How MindWorth Works</h2>
-<p class="section-subtitle">Our proven 4-step process transforms your business with minimal disruption and maximum impact.</p>
+<h2 class="section-title">How We Work With Small Businesses</h2>
+<p class="section-subtitle">A simple, transparent process designed for businesses without IT departments.</p>
 </div>
 <div class="features-grid">
+
 <article class="feature-card">
 <div class="feature-icon">◈</div>
-<h3>AI Discovery</h3>
-<p>We analyze your processes, identify opportunities, and create a customized AI roadmap.</p>
-<a class="feature-link" href="predictive-analytics.html">Start Discovery</a>
+<h3>Step 1: Free Process Audit</h3>
+<p>We hop on a 45-minute video call to map your biggest time drains, identify 2-3 quick wins, and give you honest feedback—even if AI isn't the answer. You'll get a ballpark cost estimate.</p>
+<p style="font-size: 0.9rem; color: var(--neon-cyan); margin-top: 1rem;">No cost • No obligation</p>
+<a class="feature-link" href="#contact" onclick="openModal(); return false;">Schedule Audit</a>
 </article>
+
 <article class="feature-card">
 <div class="feature-icon">◉</div>
-<h3>Smart Implementation</h3>
-<p>Seamless integration of AI solutions into existing workflows without disruption.</p>
-<a class="feature-link" href="intelligent-automation.html">See Implementation</a>
+<h3>Step 2: Quick Win Project</h3>
+<p>We pick ONE painful process and automate it. Week 1: Build the automation. Week 2: Test with your team. Week 3: Train you to manage it yourself. You own the solution.</p>
+<p style="font-size: 0.9rem; color: var(--neon-cyan); margin-top: 1rem;">2-3 weeks • $2,500-$5,000</p>
+<a class="feature-link" href="#pricing">See Pricing</a>
 </article>
+
 <article class="feature-card">
 <div class="feature-icon">○</div>
-<h3>Continuous Optimization</h3>
-<p>AI systems learn and adapt, automatically optimizing performance over time.</p>
-<a class="feature-link" href="performance-optimization.html">Optimize Performance</a>
+<h3>Step 3: See Real Results</h3>
+<p>Most clients save 8-20 hours per week after the first automation. You'll have concrete data on time saved and improved efficiency. No guessing—real measurements.</p>
+<p style="font-size: 0.9rem; color: var(--neon-cyan); margin-top: 1rem;">Typical payback: 1-4 months</p>
+<a class="feature-link" href="#use-cases">View Examples</a>
 </article>
+
 <article class="feature-card">
 <div class="feature-icon">◢</div>
-<h3>Exponential Growth</h3>
-<p>Experience unprecedented growth as AI transforms operations and unlocks opportunities.</p>
-<a class="feature-link" href="business-intelligence.html">Achieve Growth</a>
+<h3>Step 4: Expand What Works</h3>
+<p>Once you see results, we can automate additional processes, scale to more team members, or add advanced features. Most clients come back for 2-3 more projects over the next year.</p>
+<p style="font-size: 0.9rem; color: var(--neon-cyan); margin-top: 1rem;">Optional • Pay as you grow</p>
+<a class="feature-link" href="#contact" onclick="openModal(); return false;">Get Started</a>
 </article>
-</div>
-</section>
-<!-- Metrics Section -->
-<section class="metrics-section">
-<div class="section-header">
-<h2 class="section-title">Extraordinary Results</h2>
-<p class="section-subtitle">See the transformative impact MindWorth delivers with measurable results that exceed expectations.</p>
-</div>
-<div class="metrics-grid">
-<div class="metric-card">
-<span class="metric-value" data-target="400">0</span>
-<span class="metric-label">% Average ROI</span>
-</div>
-<div class="metric-card">
-<span class="metric-value" data-target="75">0</span>
-<span class="metric-label">% Cost Reduction</span>
-</div>
-<div class="metric-card">
-<span class="metric-value" data-target="98">0</span>
-<span class="metric-label">% Client Satisfaction</span>
-</div>
-<div class="metric-card">
-<span class="metric-value" data-target="30">0</span>
-<span class="metric-label">Days to Results</span>
-</div>
-<div class="metric-card">
-<span class="metric-value" data-target="500">0</span>
-<span class="metric-label">Businesses Transformed</span>
-</div>
-<div class="metric-card">
-<span class="metric-value" data-target="24">0</span>
-<span class="metric-label">Hour Support</span>
-</div>
+
 </div>
 </section>
 </main>
+
 <!-- Footer -->
 <footer>
 <div class="footer-grid">
+
 <div class="footer-section">
-<h3>AI Solutions</h3>
+<h3>Services</h3>
 <ul>
-<li><a href="intelligent-automation.html">Intelligent Automation</a></li>
-<li><a href="predictive-analytics.html">Predictive Analytics</a></li>
-<li><a href="performance-optimization.html">Performance Optimization</a></li>
-<li><a href="business-intelligence.html">Business Intelligence</a></li>
+<li><a href="#features">Email & Admin Automation</a></li>
+<li><a href="#features">Customer Insights</a></li>
+<li><a href="#features">Smart Scheduling</a></li>
+<li><a href="#features">Sales Follow-Up</a></li>
+<li><a href="#features">Document Processing</a></li>
+<li><a href="#features">Content Creation</a></li>
 </ul>
 </div>
+
 <div class="footer-section">
 <h3>Industries</h3>
 <ul>
-<li><a href="retail.html">Retail &amp; E-commerce</a></li>
-<li><a href="manufacturing.html">Manufacturing</a></li>
-<li><a href="professional-services.html">Professional Services</a></li>
-<li><a href="healthcare.html">Healthcare &amp; Wellness</a></li>
+<li><a href="#use-cases">Service Businesses</a></li>
+<li><a href="#use-cases">Retail & E-commerce</a></li>
+<li><a href="#use-cases">Professional Services</a></li>
+<li><a href="#use-cases">Trades & Field Services</a></li>
 </ul>
 </div>
+
 <div class="footer-section">
-<h3>Resources</h3>
+<h3>Free Resources</h3>
 <ul>
-<li><a href="case-study-1.html">Case Studies</a></li>
-<li><a href="whitepapers.html">Whitepapers</a></li>
-<li><a href="blog.html">Blog</a></li>
-<li><a href="webinars.html">Webinars</a></li>
+<li><a href="#contact" onclick="openModal(); return false;">Small Business AI Checklist</a></li>
+<li><a href="#pricing">Transparent Pricing</a></li>
+<li><a href="#use-cases">Real Client Examples</a></li>
+<li><a href="#contact" onclick="openModal(); return false;">Free Process Audit</a></li>
 </ul>
 </div>
+
 <div class="footer-section">
 <h3>Company</h3>
 <ul>
-<li><a href="about.html">About MindWorth</a></li>
-<li><a href="team.html">Our Team</a></li>
-<li><a href="careers.html">Careers</a></li>
-<li><a href="contact.html">Contact Us</a></li>
+<li><a href="#about">About MindWorth</a></li>
+<li><a href="#how-it-works">How We Work</a></li>
+<li><a href="#pricing">Pricing</a></li>
+<li><a href="#contact" onclick="openModal(); return false;">Contact Us</a></li>
 </ul>
 </div>
+
 </div>
 <div class="footer-bottom">
-<p>© 2025 MindWorth. All rights reserved. | <a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms of Service</a></p>
+<p>&copy; 2025 MindWorth. All rights reserved. | <a href="#privacy">Privacy Policy</a> | <a href="#terms">Terms of Service</a></p>
 </div>
 </footer>
 <!-- Modal -->
 <div aria-hidden="true" aria-labelledby="modal-title" class="modal" id="modal" role="dialog">
 <div class="modal-content">
 <button aria-label="Close modal" class="modal-close" onclick="closeModal()">×</button>
-<h2 class="modal-title" id="modal-title">Start Your AI Transformation</h2>
+<h2 class="modal-title" id="modal-title">Get Your Free Process Audit</h2>
 <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 2rem; line-height: 1.6;">
-                Ready to revolutionize your business with AI? Tell us about your challenges and our experts will contact you within 24 hours.
-            </p>
+In 45 minutes, we'll identify your 3 biggest time drains, explain which can be automated (and which can't), and give you a realistic cost and time estimate. No pressure. No sales pitch. Just helpful advice.
+</p>
 <form id="contactForm" novalidate="">
+
 <div class="form-group">
 <label for="name">Full Name *</label>
 <input aria-required="true" id="name" name="name" required="" type="text"/>
 </div>
+
 <div class="form-group">
 <label for="email">Email Address *</label>
 <input aria-required="true" id="email" name="email" required="" type="email"/>
 </div>
+
 <div class="form-group">
-<label for="company">Company Name</label>
+<label for="company">Business Name (Optional)</label>
 <input id="company" name="company" type="text"/>
 </div>
+
+<div class="form-group">
+<label for="employees">Number of Employees</label>
+<select id="employees" name="employees">
+<option value="">Select team size</option>
+<option value="1-5">1-5 employees</option>
+<option value="6-10">6-10 employees</option>
+<option value="11-20">11-20 employees</option>
+<option value="21-50">21-50 employees</option>
+<option value="50+">50+ employees</option>
+</select>
+</div>
+
 <div class="form-group">
 <label for="industry">Industry</label>
 <select id="industry" name="industry">
-<option value="">Select Your Industry</option>
-<option value="retail">Retail &amp; E-commerce</option>
-<option value="manufacturing">Manufacturing</option>
-<option value="services">Professional Services</option>
-<option value="healthcare">Healthcare &amp; Wellness</option>
+<option value="">Select your industry</option>
+<option value="service">Service Business (consulting, agency, professional)</option>
+<option value="retail">Retail/E-commerce</option>
+<option value="trades">Trades (contractor, plumber, electrician, HVAC)</option>
+<option value="restaurant">Restaurant/Hospitality</option>
+<option value="healthcare">Healthcare/Wellness</option>
 <option value="other">Other</option>
 </select>
 </div>
+
 <div class="form-group">
-<label for="message">Describe Your Challenge *</label>
-<textarea aria-required="true" id="message" name="message" placeholder="What processes would you like to optimize with AI?" required="" rows="4"></textarea>
+<label for="message">What takes the most time in your week? *</label>
+<textarea aria-required="true" id="message" name="message" placeholder="Example: Manually entering data from emails into spreadsheets, scheduling appointments, following up with leads..." required="" rows="4"></textarea>
 </div>
+
+<div class="form-group" style="margin-bottom: 1rem;">
+<label style="display: flex; align-items: center; cursor: pointer; font-weight: 400;">
+<input type="checkbox" id="research" name="research" style="width: auto; margin-right: 0.5rem;">
+<span>I'm just researching—send me info instead of scheduling a call</span>
+</label>
+</div>
+
 <button class="ai-cta" style="width: 100%; margin-top: 1rem;" type="submit">
-                    Get My AI Solution
-                </button>
+Schedule My Free Audit
+</button>
+
 </form>
 </div>
 </div>
+
 <!-- Back to Top -->
 <button aria-label="Back to top" class="back-to-top" id="backToTop">↑</button>
 <script>
@@ -2012,7 +2148,7 @@ header.support-header .mobile-toggle { display: none; }
             initializeModal();
             initializeAccessibility();
             
-            console.log('🚀 MindWorth AI website fully loaded and operational!');
+            console.log('MindWorth AI website loaded');
         }
 
         // Create Neural Network Background
@@ -2094,7 +2230,7 @@ header.support-header .mobile-toggle { display: none; }
             animateCursor();
 
             // Cursor interactions
-            const interactiveElements = document.querySelectorAll('a, button, .feature-card, .tab-btn, .metric-card, .stat');
+            const interactiveElements = document.querySelectorAll('a, button, .feature-card, .tab-btn, .pricing-card, .stat');
             interactiveElements.forEach(element => {
                 element.addEventListener('mouseenter', () => {
                     cursor.classList.add('expand');
@@ -2121,17 +2257,14 @@ header.support-header .mobile-toggle { display: none; }
                 const scrollPercent = (scrollTop / docHeight) * 100;
                 if (scrollProgress) scrollProgress.style.width = scrollPercent + '%';
 
-                // Header hide/show with improved logic
+                // Header hide/show
                 if (header) {
                     if (scrollTop > lastScrollTop && scrollTop > scrollThreshold) {
-                        // Scrolling down past threshold
                         header.classList.add('hidden');
                     } else if (scrollTop < lastScrollTop) {
-                        // Scrolling up
                         header.classList.remove('hidden');
                     }
                     
-                    // Always show at top
                     if (scrollTop <= 50) {
                         header.classList.remove('hidden');
                     }
@@ -2161,10 +2294,17 @@ header.support-header .mobile-toggle { display: none; }
 
         // Animated Counters
         function initializeCounters() {
-            const counters = document.querySelectorAll('.stat-number, .metric-value');
+            const counters = document.querySelectorAll('.stat-number, .pricing-value');
             
             const animateCounter = (counter) => {
-                const target = parseInt(counter.getAttribute('data-target'));
+                const text = counter.textContent.trim();
+                
+                // Skip if it contains non-numeric content like "$2.5K"
+                if (text.includes('K') || text.includes('$')) {
+                    return;
+                }
+                
+                const target = parseInt(text);
                 if (isNaN(target)) return;
                 
                 const duration = 2000;
@@ -2195,8 +2335,7 @@ header.support-header .mobile-toggle { display: none; }
 
             counters.forEach(animateCounter);
         }
-
-        // Tab System
+// Tab System
         function initializeTabs() {
             const tabContainers = document.querySelectorAll('.tabs-container');
             
@@ -2303,7 +2442,7 @@ header.support-header .mobile-toggle { display: none; }
                 submitBtn.disabled = true;
                 
                 setTimeout(() => {
-                    alert('🚀 Thank you! Our AI experts will contact you within 24 hours with a customized solution.');
+                    alert('Thank you! We will contact you within 24 hours to schedule your free process audit.');
                     form.reset();
                     closeModal();
                     submitBtn.textContent = originalText;
@@ -2354,8 +2493,13 @@ header.support-header .mobile-toggle { display: none; }
             // Smooth scrolling for anchor links
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (href === '#contact' && this.getAttribute('onclick')) {
+                        // Let the onclick handler deal with it
+                        return;
+                    }
                     e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
+                    const target = document.querySelector(href);
                     if (target) {
                         target.scrollIntoView({
                             behavior: 'smooth',
@@ -2381,7 +2525,7 @@ header.support-header .mobile-toggle { display: none; }
             }, observerOptions);
 
             // Observe elements for animations
-            const animatedElements = document.querySelectorAll('.feature-card, .metric-card, .stat');
+            const animatedElements = document.querySelectorAll('.feature-card, .pricing-card, .stat');
             animatedElements.forEach(el => {
                 el.style.opacity = '0';
                 el.style.transform = 'translateY(20px)';
@@ -2395,21 +2539,7 @@ header.support-header .mobile-toggle { display: none; }
             console.warn('System error detected:', e.error);
         });
 
-        // Performance monitoring
-        if ('PerformanceObserver' in window) {
-            const perfObserver = new PerformanceObserver((list) => {
-                list.getEntries().forEach((entry) => {
-                    if (entry.entryType === 'navigation') {
-                        console.log('🚀 Page load time:', entry.loadEventEnd - entry.loadEventStart, 'ms');
-                    }
-                });
-            });
-            perfObserver.observe({ entryTypes: ['navigation'] });
-        }
-
-        console.log('🌟 Welcome to MindWorth - The Future of AI Business Solutions');
-        console.log('🧠 All systems operational and ready for transformation');
-        console.log('⚡ Your business revolution starts here!');
+        console.log('Welcome to MindWorth - AI Automation for Small Businesses');
     </script>
 </body>
 </html>
