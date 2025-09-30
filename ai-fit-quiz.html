@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- External Stylesheets -->
+<link rel="stylesheet" href="../css/main.css">
+<link rel="stylesheet" href="../css/service-page.css">
     <title>AI Readiness Assessment - MindWorth AI Solutions</title>
     <style>
         :root {
@@ -940,7 +943,36 @@
     <div class="save-indicator" id="saveIndicator">
         <span>✓ Saved</span>
     </div>
-
+    <header class="support-header" id="header">
+    <nav aria-label="Main navigation" role="navigation">
+        <a aria-label="MindWorth Home" class="mindworth-logo" href="../index.html">
+            MindWorth
+        </a>
+        <ul class="nav-links">
+            <li><a class="nav-link" href="../index.html">Home</a></li>
+            <li><a class="nav-link" href="../index.html#about">About</a></li>
+            <li><a class="nav-link" href="../index.html#features">Features</a></li>
+            <li><a class="nav-link" href="../index.html#pricing">Pricing</a></li>
+            <li><a class="nav-link" href="../index.html#contact">Contact</a></li>
+            
+        </ul>
+        <button aria-expanded="false" aria-label="Toggle menu" class="mobile-toggle" id="mobileToggle">
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+        </button>
+    </nav>
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-nav-links">
+            <li><a class="nav-link" href="../index.html">Home</a></li>
+            <li><a class="nav-link" href="../index.html#about">About</a></li>
+            <li><a class="nav-link" href="../index.html#features">Features</a></li>
+            <li><a class="nav-link" href="../index.html#pricing">Pricing</a></li>
+            <li><a class="nav-link" href="../index.html#contact">Contact</a></li>
+           
+        </ul>
+    </div>
+</header>
     <div class="container">
         <!-- Header -->
         <div class="header">
@@ -2508,8 +2540,99 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
             }
         }
 
-        window.addEventListener('resize', enhanceMobileExperience);
+       window.addEventListener('resize', enhanceMobileExperience);
         enhanceMobileExperience();
+
+        // ====================================================================
+        // MOBILE MENU TOGGLE - ADDED FOR FUNCTIONALITY
+        // ====================================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileToggle = document.getElementById('mobileToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+
+            if (mobileToggle && mobileMenu) {
+                mobileToggle.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    mobileMenu.classList.toggle('active');
+                    
+                    // Animate hamburger lines
+                    const lines = mobileToggle.querySelectorAll('.hamburger-line');
+                    if (mobileMenu.classList.contains('active')) {
+                        lines[0].style.transform = 'rotate(45deg) translateY(10px)';
+                        lines[1].style.opacity = '0';
+                        lines[2].style.transform = 'rotate(-45deg) translateY(-10px)';
+                    } else {
+                        lines[0].style.transform = 'none';
+                        lines[1].style.opacity = '1';
+                        lines[2].style.transform = 'none';
+                    }
+                });
+
+                // Close mobile menu when clicking on links
+                const mobileLinks = mobileMenu.querySelectorAll('a');
+                mobileLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.remove('active');
+                        const lines = mobileToggle.querySelectorAll('.hamburger-line');
+                        lines[0].style.transform = 'none';
+                        lines[1].style.opacity = '1';
+                        lines[2].style.transform = 'none';
+                    });
+                });
+
+                // Close on outside click
+                document.addEventListener('click', function(e) {
+                    if (!mobileMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
+                        if (mobileMenu.classList.contains('active')) {
+                            mobileMenu.classList.remove('active');
+                            const lines = mobileToggle.querySelectorAll('.hamburger-line');
+                            lines[0].style.transform = 'none';
+                            lines[1].style.opacity = '1';
+                            lines[2].style.transform = 'none';
+                        }
+                    }
+                });
+            }
+        });
+
+        // ====================================================================
+        // HEADER HIDE/SHOW ON SCROLL - ADDED FOR FUNCTIONALITY
+        // ====================================================================
+        document.addEventListener('DOMContentLoaded', function() {
+            let lastScroll = 0;
+            const header = document.querySelector('header');
+            const scrollThreshold = 100;
+
+            if (header) {
+                window.addEventListener('scroll', () => {
+                    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+                    
+                    // Always show header at the very top
+                    if (currentScroll <= 50) {
+                        header.classList.remove('scroll-down');
+                        header.classList.remove('scroll-up');
+                        header.style.transform = 'translateY(0)';
+                        lastScroll = currentScroll;
+                        return;
+                    }
+                    
+                    // Hide header when scrolling down past threshold
+                    if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
+                        header.classList.add('scroll-down');
+                        header.classList.remove('scroll-up');
+                        header.style.transform = 'translateY(-100%)';
+                    } 
+                    // Show header when scrolling up
+                    else if (currentScroll < lastScroll) {
+                        header.classList.remove('scroll-down');
+                        header.classList.add('scroll-up');
+                        header.style.transform = 'translateY(0)';
+                    }
+                    
+                    lastScroll = currentScroll;
+                });
+            }
+        });
     </script>
 </body>
-</html>	
+</html>

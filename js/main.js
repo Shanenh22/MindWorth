@@ -5,8 +5,20 @@
 // ============================================================================
 const GOOGLE_SHEETS_CONFIG = {
     enabled: true,  // Set to false to disable form submissions
-    scriptUrl: 'PASTE_YOUR_WEB_APP_URL_HERE'  // Get this from Google Apps Script deployment
+    scriptUrl: 'https://script.google.com/macros/s/AKfycbySOHaCPS2QJTrytdbqmohCtGVuY-GssKV5VLODIzZmrl0xrMl451RpROLWMzygbXNyRQ/exec'  // Get this from Google Apps Script deployment
     // Example: 'https://script.google.com/macros/s/AKfycby.../exec'
+};
+
+// ============================================================================
+// PDF DOWNLOAD MAPPING
+// ============================================================================
+const PDF_DOWNLOADS = {
+    'checklist': 'content-creation-playbook.pdf',
+    'email-checklist': 'email-admin-automation-checklist.pdf',
+    'insights-guide': 'customer-insights-analysis-guide.pdf',
+    'scheduling-guide': 'smart-scheduling-implementation-guide.pdf',
+    'sales-playbook': 'sales-follow-up-playbook.pdf',
+    'document-blueprint': 'document-processing-blueprint.pdf'
 };
 
 // ============================================================================
@@ -169,12 +181,24 @@ function showSuccessMessage(type, form) {
     let message = '';
     let emoji = '';
     
-    if (type === 'audit') {
+    // Trigger PDF download if this is a lead magnet form
+    if (PDF_DOWNLOADS[type]) {
+        const pdfPath = `lead-magnets/${PDF_DOWNLOADS[type]}`;
+        
+        // Create invisible download link and trigger it
+        const downloadLink = document.createElement('a');
+        downloadLink.href = pdfPath;
+        downloadLink.download = PDF_DOWNLOADS[type];
+        downloadLink.style.display = 'none';
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+        
+        emoji = '📥';
+        message = "Success! Your download is starting now. Check your email for a copy and additional resources.";
+    } else if (type === 'audit') {
         emoji = '🎉';
         message = "Thank you! We'll contact you within 24 hours to schedule your free audit. Check your email for confirmation.";
-    } else if (type === 'checklist') {
-        emoji = '📥';
-        message = "Thank you! Check your email for the download link and automation guide.";
     } else {
         emoji = '✅';
         message = "Thank you! We'll be in touch soon.";
@@ -265,28 +289,40 @@ document.addEventListener('DOMContentLoaded', function() {
 // ============================================================================
 // Header Hide/Show on Scroll
 // ============================================================================
-let lastScroll = 0;
-const header = document.querySelector('header');
+document.addEventListener('DOMContentLoaded', function() {
+    let lastScroll = 0;
+    const header = document.querySelector('header');
+    const scrollThreshold = 100;
 
-window.addEventListener('scroll', () => {
-    const currentScroll = window.pageYOffset;
-    
-    if (currentScroll <= 0) {
-        header.classList.remove('scroll-up');
-        return;
+    if (header) {
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Always show header at the very top
+            if (currentScroll <= 50) {
+                header.classList.remove('scroll-down');
+                header.classList.remove('scroll-up');
+                header.style.transform = 'translateY(0)';
+                lastScroll = currentScroll;
+                return;
+            }
+            
+            // Hide header when scrolling down past threshold
+            if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
+                header.classList.add('scroll-down');
+                header.classList.remove('scroll-up');
+                header.style.transform = 'translateY(-100%)';
+            } 
+            // Show header when scrolling up
+            else if (currentScroll < lastScroll) {
+                header.classList.remove('scroll-down');
+                header.classList.add('scroll-up');
+                header.style.transform = 'translateY(0)';
+            }
+            
+            lastScroll = currentScroll;
+        });
     }
-    
-    if (currentScroll > lastScroll && !header.classList.contains('scroll-down')) {
-        // Scroll down
-        header.classList.remove('scroll-up');
-        header.classList.add('scroll-down');
-    } else if (currentScroll < lastScroll && header.classList.contains('scroll-down')) {
-        // Scroll up
-        header.classList.remove('scroll-down');
-        header.classList.add('scroll-up');
-    }
-    
-    lastScroll = currentScroll;
 });
 
 // ============================================================================
