@@ -5,7 +5,7 @@
 // ============================================================================
 const GOOGLE_SHEETS_CONFIG = {
     enabled: true,  // Set to false to disable form submissions
-    scriptUrl: 'https://script.google.com/macros/s/AKfycbySOHaCPS2QJTrytdbqmohCtGVuY-GssKV5VLODIzZmrl0xrMl451RpROLWMzygbXNyRQ/exec'  // Get this from Google Apps Script deployment
+    scriptUrl: 'PASTE_YOUR_WEB_APP_URL_HERE'  // Get this from Google Apps Script deployment
     // Example: 'https://script.google.com/macros/s/AKfycby.../exec'
 };
 
