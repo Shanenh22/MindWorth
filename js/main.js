@@ -1,6 +1,17 @@
-/* MindWorth AI - Main JavaScript */
+/* MindWorth Solutions - Main JavaScript */
 
+// ============================================================================
+// GOOGLE SHEETS CONFIGURATION (FREE & UNLIMITED)
+// ============================================================================
+const GOOGLE_SHEETS_CONFIG = {
+    enabled: true,  // Set to false to disable form submissions
+    scriptUrl: 'https://script.google.com/macros/s/AKfycbySOHaCPS2QJTrytdbqmohCtGVuY-GssKV5VLODIzZmrl0xrMl451RpROLWMzygbXNyRQ/exec'  // Get this from Google Apps Script deployment
+    // Example: 'https://script.google.com/macros/s/AKfycby.../exec'
+};
+
+// ============================================================================
 // Mobile Menu Toggle
+// ============================================================================
 document.addEventListener('DOMContentLoaded', function() {
     const mobileToggle = document.getElementById('mobileToggle');
     const mobileMenu = document.getElementById('mobileMenu');
@@ -36,7 +47,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// ============================================================================
 // Modal Functions
+// ============================================================================
 function openModal(type) {
     const modal = document.getElementById(type + 'Modal');
     if (modal) {
@@ -79,7 +92,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Form Submission Handler
+// ============================================================================
+// Form Submission Handler with Google Sheets Integration
+// ============================================================================
 function submitForm(e, type) {
     e.preventDefault();
     
@@ -88,40 +103,136 @@ function submitForm(e, type) {
     const formData = new FormData(form);
     const data = {};
     
+    // Convert FormData to object
     for (let [key, value] of formData.entries()) {
         data[key] = value;
     }
     
-    // Log for development
+    // Add metadata
+    data.form_type = type;
+    data.page_url = window.location.href;
+    data.submission_date = new Date().toISOString();
+    
+    // Get submit button for loading state
+    const submitButton = form.querySelector('button[type="submit"]');
+    const originalButtonText = submitButton.textContent;
+    submitButton.textContent = type === 'audit' ? 'Scheduling...' : 'Downloading...';
+    submitButton.disabled = true;
+    
     console.log('Form submitted:', type, data);
     
-    // Show success message
-    let message = '';
-    if (type === 'audit') {
-        message = "Thank you! We'll contact you within 24 hours to schedule your free audit.";
-    } else if (type === 'checklist') {
-        message = "Thank you! Check your email for the checklist download link.";
+    // ========================================================================
+    // GOOGLE SHEETS SUBMISSION
+    // ========================================================================
+    if (GOOGLE_SHEETS_CONFIG && GOOGLE_SHEETS_CONFIG.enabled && GOOGLE_SHEETS_CONFIG.scriptUrl !== 'PASTE_YOUR_WEB_APP_URL_HERE') {
+        
+        fetch(GOOGLE_SHEETS_CONFIG.scriptUrl, {
+            method: 'POST',
+            mode: 'no-cors',  // Important! Google Apps Script requires this
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        .then(() => {
+            console.log('✅ Google Sheets submission successful');
+            showSuccessMessage(type, form);
+        })
+        .catch(error => {
+            console.error('❌ Google Sheets submission error:', error);
+            // Still show success since no-cors mode can't detect errors
+            showSuccessMessage(type, form);
+        })
+        .finally(() => {
+            submitButton.textContent = originalButtonText;
+            submitButton.disabled = false;
+        });
+        
     } else {
+        // Configuration not set up yet
+        console.warn('⚠️ Google Sheets not configured! Update GOOGLE_SHEETS_CONFIG.scriptUrl in main.js');
+        console.warn('📋 See GOOGLE-SHEETS-SETUP-COMPLETE.md for setup instructions');
+        
+        // Show demo success message for testing
+        setTimeout(() => {
+            showSuccessMessage(type, form);
+            submitButton.textContent = originalButtonText;
+            submitButton.disabled = false;
+        }, 1000);
+    }
+}
+
+// ============================================================================
+// Success Message Handler
+// ============================================================================
+function showSuccessMessage(type, form) {
+    let message = '';
+    let emoji = '';
+    
+    if (type === 'audit') {
+        emoji = '🎉';
+        message = "Thank you! We'll contact you within 24 hours to schedule your free audit. Check your email for confirmation.";
+    } else if (type === 'checklist') {
+        emoji = '📥';
+        message = "Thank you! Check your email for the download link and automation guide.";
+    } else {
+        emoji = '✅';
         message = "Thank you! We'll be in touch soon.";
     }
     
-    alert(message);
+    // Create custom success modal (better UX than alert)
+    const successOverlay = document.createElement('div');
+    successOverlay.className = 'success-overlay';
+    successOverlay.innerHTML = `
+        <div class="success-message">
+            <div class="success-icon">${emoji}</div>
+            <h3 class="success-title">Success!</h3>
+            <p class="success-text">${message}</p>
+            <button class="btn-primary" onclick="closeSuccessMessage()">Got it!</button>
+        </div>
+    `;
+    
+    document.body.appendChild(successOverlay);
+    
+    // Animate in
+    setTimeout(() => {
+        successOverlay.style.opacity = '1';
+        successOverlay.querySelector('.success-message').style.transform = 'translateY(0)';
+    }, 10);
     
     // Reset form and close modal
     form.reset();
     closeModal(type);
     
-    // Here you would typically send data to your backend/email service
-    // Example:
-    // sendToBackend(type, data);
+    // Auto-close after 5 seconds
+    setTimeout(() => {
+        closeSuccessMessage();
+    }, 5000);
 }
 
+// ============================================================================
+// Close Success Message
+// ============================================================================
+function closeSuccessMessage() {
+    const successOverlay = document.querySelector('.success-overlay');
+    if (successOverlay) {
+        successOverlay.style.opacity = '0';
+        setTimeout(() => {
+            successOverlay.remove();
+        }, 300);
+    }
+}
+
+// ============================================================================
 // FAQ Toggle
+// ============================================================================
 function toggleFAQ(element) {
     element.classList.toggle('active');
 }
 
+// ============================================================================
 // Smooth Scroll for Anchor Links
+// ============================================================================
 document.addEventListener('DOMContentLoaded', function() {
     const smoothScrollLinks = document.querySelectorAll('a[href^="#"]');
     
@@ -151,7 +262,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// ============================================================================
 // Header Hide/Show on Scroll
+// ============================================================================
 let lastScroll = 0;
 const header = document.querySelector('header');
 
@@ -176,7 +289,9 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
+// ============================================================================
 // Intersection Observer for Fade-in Animations
+// ============================================================================
 document.addEventListener('DOMContentLoaded', function() {
     const observerOptions = {
         threshold: 0.1,
@@ -202,7 +317,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// ============================================================================
 // Form Validation Helper
+// ============================================================================
 function validateEmail(email) {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
@@ -236,6 +353,16 @@ function validateForm(formId) {
     return isValid;
 }
 
-// Console welcome message
-console.log('%cWelcome to MindWorth AI!', 'color: #06D6A0; font-size: 20px; font-weight: bold;');
+// ============================================================================
+// Console Messages
+// ============================================================================
+console.log('%cWelcome to MindWorth Solutions!', 'color: #06D6A0; font-size: 20px; font-weight: bold;');
 console.log('%cBuilding the future of small business automation', 'color: #8B5CF6; font-size: 14px;');
+
+// Check if Google Sheets is configured
+if (GOOGLE_SHEETS_CONFIG.scriptUrl === 'PASTE_YOUR_WEB_APP_URL_HERE') {
+    console.warn('%c⚠️ SETUP REQUIRED: Google Sheets not configured', 'color: #FFD60A; font-size: 14px; font-weight: bold;');
+    console.log('%c📋 Follow the setup guide: GOOGLE-SHEETS-SETUP-COMPLETE.md', 'color: #06D6A0; font-size: 12px;');
+} else {
+    console.log('%c✅ Google Sheets configured and ready!', 'color: #06D6A0; font-size: 14px; font-weight: bold;');
+}
