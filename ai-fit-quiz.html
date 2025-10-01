@@ -1698,15 +1698,9 @@
         </div>
 
     </div>
-   <!-- EmailJS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
+  
     <script>
-        // Initialize EmailJS
-        (function() {
-            emailjs.init("aIpJ43JHY7Y1GUVmX"); // Replace with your EmailJS user ID
-        })();
+       
 
         // Assessment Data & State
         let currentSection = 0;
@@ -2304,34 +2298,45 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
                 toggle.classList.add('active');
             }
         }
-	// Send Results via EmailJS
-        function sendResultsEmail(totalScore, readinessLevel) {
-           const emailParams = {
-                to_email: assessmentData.contact.email,
-                user_name: assessmentData.contact.fullName,
-                company_name: assessmentData.contact.company,
-                industry: assessmentData.contact.industry,
-                company_size: assessmentData.contact.companySize,
-                phone: assessmentData.contact.phone || 'Not provided',
-                total_score: totalScore,
-                readiness_level: readinessLevel.level,
-                business_foundation: assessmentData.sections.businessFoundation.score,
-                ai_knowledge: assessmentData.sections.aiKnowledge.score,
-                technical_readiness: assessmentData.sections.technicalReadiness.score,
-                team_management: assessmentData.sections.teamManagement.score,
-                assessment_date: new Date().toLocaleDateString()
-            };
+	// Replace your sendResultsEmail function with this:
+function sendResultsEmail(totalScore, readinessLevel) {
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbySOHaCPS2QJTrytdbqmohCtGVuY-GssKV5VLODIzZmrl0xrMl451RpROLWMzygbXNyRQ/exec'; // Add your deployed script URL here
+    
+    const quizData = {
+        submission_type: 'quiz',
+        fullName: assessmentData.contact.fullName,
+        email: assessmentData.contact.email,
+        company: assessmentData.contact.company,
+        industry: assessmentData.contact.industry,
+        companySize: assessmentData.contact.companySize,
+        phone: assessmentData.contact.phone,
+        totalScore: totalScore,
+        readinessLevel: readinessLevel.level,
+        businessFoundation: assessmentData.sections.businessFoundation.score,
+        aiKnowledge: assessmentData.sections.aiKnowledge.score,
+        technicalReadiness: assessmentData.sections.technicalReadiness.score,
+        teamManagement: assessmentData.sections.teamManagement.score,
+        // Include all answers
+        ...assessmentData.answers
+    };
 
-            // Send email via EmailJS
-            emailjs.send('service_9q1181g', 'template_7xlew3s', emailParams)
-                .then(function(response) {
-                    console.log('Email sent successfully!', response.status, response.text);
-                }, function(error) {
-                    console.log('Email failed to send, triggering PDF download as fallback', error);
-                    // Fallback: automatically download PDF if email fails
-                    downloadPDF();
-                });
-        }
+    fetch(scriptUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(quizData)
+    })
+    .then(() => {
+        console.log('Quiz results sent successfully');
+    })
+    .catch((error) => {
+        console.error('Error sending quiz results:', error);
+        // Fallback: download PDF
+        downloadPDF();
+    });
+}
 
         // Download PDF Report
         function downloadPDF() {
