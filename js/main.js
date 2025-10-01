@@ -396,13 +396,13 @@ function validateForm(formId) {
 // ============================================================================
 // Console Messages
 // ============================================================================
-console.log('%cWelcome to MindWorth Solutions!', 'color: #06D6A0; font-size: 20px; font-weight: bold;');
+console.log('%cWelcome to MindWorth Solutions!', 'color: #047857; font-size: 20px; font-weight: bold;');
 console.log('%cBuilding the future of small business automation', 'color: #8B5CF6; font-size: 14px;');
 
 // Check if Google Sheets is configured
 if (GOOGLE_SHEETS_CONFIG.scriptUrl === 'PASTE_YOUR_WEB_APP_URL_HERE') {
     console.warn('%c⚠️ SETUP REQUIRED: Google Sheets not configured', 'color: #FFD60A; font-size: 14px; font-weight: bold;');
-    console.log('%c📋 Follow the setup guide: GOOGLE-SHEETS-SETUP-COMPLETE.md', 'color: #06D6A0; font-size: 12px;');
+    console.log('%c📋 Follow the setup guide: GOOGLE-SHEETS-SETUP-COMPLETE.md', 'color: #047857; font-size: 12px;');
 } else {
-    console.log('%c✅ Google Sheets configured and ready!', 'color: #06D6A0; font-size: 14px; font-weight: bold;');
+    console.log('%c✅ Google Sheets configured and ready!', 'color: #047857; font-size: 14px; font-weight: bold;');
 }
