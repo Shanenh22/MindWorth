@@ -425,8 +425,9 @@ nav {
   font-family: inherit;
   cursor: pointer;
 
-  /* Visuals */
-  background-color: #1A1B3E; /* solid dark */
+  /* MATCH TEXT INPUT TRANSPARENCY EXACTLY */
+  background: rgba(255, 255, 255, 0.1); /* same as text inputs */
+  backdrop-filter: blur(10px);
   color: #FEFEFE;
 
   /* Reset browser quirks */
@@ -441,14 +442,14 @@ nav {
   outline: none;
   border-color: var(--neon-cyan);
   box-shadow: 0 0 20px rgba(6, 214, 160, 0.3);
-  background-color: #555555;
+  background: rgba(255, 255, 255, 0.15); /* match text input focus */
   color: #FEFEFE;
 }
 
-/* Dropdown options */
+/* Dropdown options - need solid color for readability */
 .form-group select option,
 .form-group select optgroup {
-  background-color: #555555 ;
+  background-color: #2A2A3E; /* slightly lighter than deep-space */
   color: #FEFEFE;
   font-size: 1rem;
   font-weight: 500;
@@ -457,8 +458,28 @@ nav {
 /* Highlight selected/hover states */
 .form-group select option:checked,
 .form-group select option:hover {
-  background-color: #06D6A0; /* neon cyan */
-  color: #0F0F23;           /* dark text for contrast */
+  background-color: #06D6A0;
+  color: #0F0F23;
+}
+
+/* Force transparency on all browsers */
+.form-group select {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: #FEFEFE !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+}
+
+.form-group select option {
+  background-color: #2A2A3E !important;
+  color: #FEFEFE !important;
+}
+
+.form-group select option:hover,
+.form-group select option:checked {
+  background-color: #06D6A0 !important;
+  color: #0F0F23 !important;
 }
 
 
@@ -624,24 +645,4 @@ button[type="submit"]:disabled {
     opacity: 0.6;
     cursor: not-allowed;
     transform: none !important;
-}
-/* Force select and option colors on all browsers */
-.form-group select {
-  background-color: #555555 !important;
-  color: #FEFEFE !important;
-  appearance: none !important;
-  -webkit-appearance: none !important;
-  -moz-appearance: none !important;
-}
-
-.form-group select option {
-  background-color: #555555 !important;
-  color: #FEFEFE !important;
-}
-
-/* States */
-.form-group select option:hover,
-.form-group select option:checked {
-  background-color: #06D6A0 !important;
-  color: #0F0F23 !important;
 }
