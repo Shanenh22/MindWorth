@@ -2410,45 +2410,11 @@ Schedule My Free Audit
 
             if (!modal || !form) return;
 
-            // Form submission
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                
-                const name = document.getElementById('name').value.trim();
-                const email = document.getElementById('email').value.trim();
-                const message = document.getElementById('message').value.trim();
-                
-                if (!name || !email || !message) {
-                    alert('Please fill in all required fields.');
-                    return;
-                }
-                
-                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(email)) {
-                    alert('Please enter a valid email address.');
-                    return;
-                }
-                
-                const submitBtn = form.querySelector('button[type="submit"]');
-                const originalText = submitBtn.textContent;
-                submitBtn.textContent = 'Processing...';
-                submitBtn.disabled = true;
-                
-                setTimeout(() => {
-                    alert('Thank you! We will contact you within 24 hours to schedule your free process audit.');
-                    form.reset();
-                    closeModal();
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
-                }, 1500);
-            });
-
-            // Close modal on outside click
-            modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
+            
+            // Form submission - call the proper submitForm function from main.js
+        form.addEventListener('submit', (e) => {
+         submitForm(e, 'audit');
+    });
 
             // Close on escape key
             document.addEventListener('keydown', (e) => {

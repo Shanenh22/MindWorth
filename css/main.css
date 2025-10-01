@@ -627,7 +627,7 @@ button[type="submit"]:disabled {
 }
 /* Force select and option colors on all browsers */
 .form-group select {
-  background-color: ##A9A9A9  !important;
+  background-color: #555555 !important;
   color: #FEFEFE !important;
   appearance: none !important;
   -webkit-appearance: none !important;
