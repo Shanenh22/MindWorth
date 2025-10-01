@@ -183,8 +183,11 @@ function showSuccessMessage(type, form) {
     
     // Trigger PDF download if this is a lead magnet form
     if (PDF_DOWNLOADS[type]) {
-        const REPO_BASE = '/MindWorth'; // e.g., '/MindWorth' if that's your GH Pages project path
-        const pdfPath = `${REPO_BASE}/lead-magnets/${PDF_DOWNLOADS[type]}`;
+        const baseLeadMagnetsDir = window.location.pathname.includes('/pages/')
+        ? '../lead-magnets'
+        : 'lead-magnets';
+
+        const pdfPath = `${baseLeadMagnetsDir}/${PDF_DOWNLOADS[type]}`;
         
         // Create invisible download link and trigger it
         const downloadLink = document.createElement('a');
