@@ -2060,15 +2060,16 @@ header.support-header .mobile-toggle { display: none; }
 <p style="color: rgba(255, 255, 255, 0.8); margin-bottom: 2rem; line-height: 1.6;">
 In 45 minutes, we'll identify your 3 biggest time drains, explain which can be automated (and which can't), and give you a realistic cost and time estimate. No pressure. No sales pitch. Just helpful advice.
 </p>
-<form id="contactForm" novalidate="">
+<!-- REPLACE YOUR ENTIRE FORM SECTION WITH THIS: -->
+<form id="contactForm" onsubmit="submitForm(event, 'audit'); return false;">
     <div class="form-group">
-        <label for="name">Full Name *</label>
-        <input aria-required="true" id="name" name="name" required="" type="text"/>
+        <label for="name">Full Name <span style="color: var(--sunset-coral);">*</span></label>
+        <input aria-required="true" id="name" name="name" required type="text"/>
     </div>
 
     <div class="form-group">
-        <label for="email">Email Address *</label>
-        <input aria-required="true" id="email" name="email" required="" type="email"/>
+        <label for="email">Email Address <span style="color: var(--sunset-coral);">*</span></label>
+        <input aria-required="true" id="email" name="email" required type="email"/>
     </div>
 
     <div class="form-group">
@@ -2077,8 +2078,8 @@ In 45 minutes, we'll identify your 3 biggest time drains, explain which can be a
     </div>
 
     <div class="form-group">
-        <label for="employees">Number of Employees</label>
-        <select id="employees" name="employees">
+        <label for="employees">Number of Employees <span style="color: var(--sunset-coral);">*</span></label>
+        <select id="employees" name="employees" required>
             <option value="">Select team size</option>
             <option value="1-5">1-5 employees</option>
             <option value="6-10">6-10 employees</option>
@@ -2089,8 +2090,8 @@ In 45 minutes, we'll identify your 3 biggest time drains, explain which can be a
     </div>
 
     <div class="form-group">
-        <label for="industry">Industry</label>
-        <select id="industry" name="industry">
+        <label for="industry">Industry <span style="color: var(--sunset-coral);">*</span></label>
+        <select id="industry" name="industry" required>
             <option value="">Select your industry</option>
             <option value="service">Service Business (consulting, agency, professional)</option>
             <option value="retail">Retail/E-commerce</option>
@@ -2102,13 +2103,21 @@ In 45 minutes, we'll identify your 3 biggest time drains, explain which can be a
     </div>
 
     <div class="form-group">
-        <label for="message">What takes the most time in your week? *</label>
-        <textarea aria-required="true" id="message" name="message" placeholder="Example: Manually entering data from emails into spreadsheets, scheduling appointments, following up with leads..." required="" rows="4"></textarea>
-    </div>
+    <label for="message">What takes the most time in your week? <span style="color: var(--sunset-coral);">*</span></label>
+    <textarea 
+        aria-required="true" 
+        id="message" 
+        name="message"
+        placeholder="Example: Manually entering data from emails into spreadsheets, scheduling appointments, following up with leads..." 
+        required 
+        rows="4"
+        maxlength="500">
+    </textarea>
+</div>
 
     <div class="form-group" style="margin-bottom: 1rem;">
         <label style="display: flex; align-items: center; cursor: pointer; font-weight: 400;">
-            <input type="checkbox" id="research" name="research" style="width: auto; margin-right: 0.5rem;">
+            <input type="checkbox" id="research" name="research" value="yes" style="width: auto; margin-right: 0.5rem;">
             <span>I'm just researching—send me info instead of scheduling a call</span>
         </label>
     </div>

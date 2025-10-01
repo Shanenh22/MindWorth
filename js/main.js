@@ -1,12 +1,12 @@
 /* MindWorth Solutions - Main JavaScript */
+/* UPDATED: Enhanced validation, error handling, and UX improvements */
 
 // ============================================================================
 // GOOGLE SHEETS CONFIGURATION (FREE & UNLIMITED)
 // ============================================================================
 const GOOGLE_SHEETS_CONFIG = {
     enabled: true,  // Set to false to disable form submissions
-    scriptUrl: 'https://script.google.com/macros/s/AKfycbySOHaCPS2QJTrytdbqmohCtGVuY-GssKV5VLODIzZmrl0xrMl451RpROLWMzygbXNyRQ/exechttps://script.google.com/macros/s/AKfycbySOHaCPS2QJTrytdbqmohCtGVuY-GssKV5VLODIzZmrl0xrMl451RpROLWMzygbXNyRQ/exec'  // Get this from Google Apps Script deployment
-    // Example: 'https://script.google.com/macros/s/AKfycby.../exec'
+    scriptUrl: 'https://script.google.com/macros/s/AKfycbySOHaCPS2QJTrytdbqmohCtGVuY-GssKV5VLODIzZmrl0xrMl451RpROLWMzygbXNyRQ/exec'  // FIXED: removed duplicate URL
 };
 
 // ============================================================================
@@ -29,7 +29,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const mobileMenu = document.getElementById('mobileMenu');
 
     if (mobileToggle && mobileMenu) {
-        mobileToggle.addEventListener('click', function() {
+        mobileToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
             mobileMenu.classList.toggle('active');
             
             // Animate hamburger lines
@@ -56,6 +57,19 @@ document.addEventListener('DOMContentLoaded', function() {
                 lines[2].style.transform = 'none';
             });
         });
+        
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (mobileMenu.classList.contains('active')) {
+                if (!mobileMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
+                    mobileMenu.classList.remove('active');
+                    const lines = mobileToggle.querySelectorAll('.hamburger-line');
+                    lines[0].style.transform = 'none';
+                    lines[1].style.opacity = '1';
+                    lines[2].style.transform = 'none';
+                }
+            }
+        });
     }
 });
 
@@ -67,6 +81,21 @@ function openModal(type) {
     if (modal) {
         modal.classList.add('active');
         document.body.style.overflow = 'hidden';
+        
+        // Reset form when opening modal
+        const form = modal.querySelector('form');
+        if (form) {
+            form.reset();
+            // Clear any error styling and messages
+            form.querySelectorAll('input, select, textarea').forEach(input => {
+                input.style.borderColor = '';
+                // Remove any error messages
+                const errorMsg = input.parentNode.querySelector('.error-message');
+                if (errorMsg) {
+                    errorMsg.remove();
+                }
+            });
+        }
     }
 }
 
@@ -105,13 +134,146 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ============================================================================
+// Enhanced Form Validation
+// ============================================================================
+function validateEmail(email) {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+}
+
+function showFieldError(input, message) {
+    input.style.borderColor = 'var(--sunset-coral)';
+    
+    // Remove existing error message if any
+    let errorMsg = input.parentNode.querySelector('.error-message');
+    if (!errorMsg) {
+        errorMsg = document.createElement('div');
+        errorMsg.className = 'error-message';
+        errorMsg.style.color = 'var(--sunset-coral)';
+        errorMsg.style.fontSize = '0.85rem';
+        errorMsg.style.marginTop = '0.5rem';
+        errorMsg.style.display = 'block';
+        input.parentNode.appendChild(errorMsg);
+    }
+    errorMsg.textContent = message;
+}
+
+function clearFieldError(input) {
+    input.style.borderColor = 'var(--electric-purple)';
+    const errorMsg = input.parentNode.querySelector('.error-message');
+    if (errorMsg) {
+        errorMsg.remove();
+    }
+}
+
+function validateForm(formElement) {
+    const errors = [];
+    
+    // Get all inputs
+    const nameInput = formElement.querySelector('input[name="name"]');
+    const emailInput = formElement.querySelector('input[type="email"]');
+    const industrySelect = formElement.querySelector('select[name="industry"]');
+    const employeesSelect = formElement.querySelector('select[name="employees"]');
+    
+    // Name validation
+    if (nameInput) {
+        const name = nameInput.value.trim();
+        if (name.length < 2) {
+            errors.push('Please enter your full name (at least 2 characters)');
+            showFieldError(nameInput, 'Name must be at least 2 characters');
+        } else {
+            clearFieldError(nameInput);
+        }
+    }
+    
+    // Email validation
+    if (emailInput) {
+        const email = emailInput.value.trim();
+        if (!email) {
+            errors.push('Please enter your email address');
+            showFieldError(emailInput, 'Email is required');
+        } else if (!validateEmail(email)) {
+            errors.push('Please enter a valid email address (e.g., name@company.com)');
+            showFieldError(emailInput, 'Invalid email format (use name@company.com)');
+        } else {
+            clearFieldError(emailInput);
+        }
+    }
+    
+    // COMPANY VALIDATION REMOVED - NOW OPTIONAL
+    
+    // Industry validation
+    if (industrySelect) {
+        if (!industrySelect.value || industrySelect.value === '') {
+            errors.push('Please select your industry');
+            showFieldError(industrySelect, 'Please select an industry');
+        } else {
+            clearFieldError(industrySelect);
+        }
+    }
+    
+    // Employees validation
+    if (employeesSelect) {
+        if (!employeesSelect.value || employeesSelect.value === '') {
+            errors.push('Please select your company size');
+            showFieldError(employeesSelect, 'Please select company size');
+        } else {
+            clearFieldError(employeesSelect);
+        }
+    }
+    
+    return errors;
+}
+
+// Real-time email validation
+document.addEventListener('DOMContentLoaded', function() {
+    // Wait a bit for DOM to be fully ready
+    setTimeout(() => {
+        const emailInputs = document.querySelectorAll('input[type="email"]');
+        
+        emailInputs.forEach(input => {
+            // Validate on blur (when user leaves the field)
+            input.addEventListener('blur', function() {
+                const email = this.value.trim();
+                if (email && !validateEmail(email)) {
+                    showFieldError(this, 'Invalid email format (use name@company.com)');
+                } else if (email) {
+                    clearFieldError(this);
+                }
+            });
+            
+            // Clear error on input (as they type)
+            input.addEventListener('input', function() {
+                const email = this.value.trim();
+                if (email && validateEmail(email)) {
+                    clearFieldError(this);
+                }
+            });
+        });
+    }, 500);
+});
+
+// ============================================================================
 // Form Submission Handler with Google Sheets Integration
 // ============================================================================
 function submitForm(e, type) {
     e.preventDefault();
     
-    // Get form data
     const form = e.target;
+    
+    // VALIDATE FORM FIRST
+    console.log('Validating form...');
+    const validationErrors = validateForm(form);
+    if (validationErrors.length > 0) {
+        console.warn('Validation failed:', validationErrors);
+        // Show first error in alert
+        alert('Please fix the following:\n\n' + validationErrors[0]);
+        return; // Stop submission
+    }
+    
+    console.log('Validation passed!');
+    
+    // Get form data
     const formData = new FormData(form);
     const data = {};
     
@@ -125,6 +287,13 @@ function submitForm(e, type) {
     data.page_url = window.location.href;
     data.submission_date = new Date().toISOString();
     
+    // Analytics tracking (ready for future GA integration)
+    console.log('📊 Form Analytics:', {
+        type: type,
+        page: window.location.pathname,
+        timestamp: data.submission_date
+    });
+    
     // Get submit button for loading state
     const submitButton = form.querySelector('button[type="submit"]');
     const originalButtonText = submitButton.textContent;
@@ -134,9 +303,17 @@ function submitForm(e, type) {
     console.log('Form submitted:', type, data);
     
     // ========================================================================
-    // GOOGLE SHEETS SUBMISSION
+    // GOOGLE SHEETS SUBMISSION with Timeout Handling
     // ========================================================================
     if (GOOGLE_SHEETS_CONFIG && GOOGLE_SHEETS_CONFIG.enabled && GOOGLE_SHEETS_CONFIG.scriptUrl !== 'PASTE_YOUR_WEB_APP_URL_HERE') {
+        
+        // Set timeout fallback (10 seconds)
+        const fetchTimeout = setTimeout(() => {
+            console.warn('⏱️ Request taking longer than expected, assuming success...');
+            showSuccessMessage(type, form);
+            submitButton.textContent = originalButtonText;
+            submitButton.disabled = false;
+        }, 10000);
         
         fetch(GOOGLE_SHEETS_CONFIG.scriptUrl, {
             method: 'POST',
@@ -147,12 +324,14 @@ function submitForm(e, type) {
             body: JSON.stringify(data)
         })
         .then(() => {
+            clearTimeout(fetchTimeout);
             console.log('✅ Google Sheets submission successful');
             showSuccessMessage(type, form);
         })
         .catch(error => {
+            clearTimeout(fetchTimeout);
             console.error('❌ Google Sheets submission error:', error);
-            // Still show success since no-cors mode can't detect errors
+            // Still show success since no-cors mode can't detect errors reliably
             showSuccessMessage(type, form);
         })
         .finally(() => {
@@ -181,7 +360,7 @@ function showSuccessMessage(type, form) {
     let message = '';
     let emoji = '';
     
-    // Trigger PDF download if this is a lead magnet form
+    // Trigger PDF download if this is a lead magnet form (with delay)
     if (PDF_DOWNLOADS[type]) {
         const baseLeadMagnetsDir = window.location.pathname.includes('/pages/')
         ? '../lead-magnets'
@@ -189,16 +368,19 @@ function showSuccessMessage(type, form) {
 
         const pdfPath = `${baseLeadMagnetsDir}/${PDF_DOWNLOADS[type]}`;
         
-        // Create invisible download link and trigger it
-        const downloadLink = document.createElement('a');
-        downloadLink.href = pdfPath;
-        downloadLink.download = PDF_DOWNLOADS[type];
-        downloadLink.style.display = 'none';
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
+        // Delay download slightly so user sees success message first
+        setTimeout(() => {
+            // Create invisible download link and trigger it
+            const downloadLink = document.createElement('a');
+            downloadLink.href = pdfPath;
+            downloadLink.download = PDF_DOWNLOADS[type];
+            downloadLink.style.display = 'none';
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
+        }, 500); // 500ms delay
         
-        emoji = '📥';
+        emoji = '🔥';
         message = "Success! Your download is starting now. Check your email for a copy and additional resources.";
     } else if (type === 'audit') {
         emoji = '🎉';
@@ -356,42 +538,6 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
 });
-
-// ============================================================================
-// Form Validation Helper
-// ============================================================================
-function validateEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-}
-
-function validateForm(formId) {
-    const form = document.getElementById(formId);
-    if (!form) return false;
-    
-    const emailInput = form.querySelector('input[type="email"]');
-    const requiredInputs = form.querySelectorAll('[required]');
-    
-    let isValid = true;
-    
-    // Check required fields
-    requiredInputs.forEach(input => {
-        if (!input.value.trim()) {
-            isValid = false;
-            input.style.borderColor = 'var(--sunset-coral)';
-        } else {
-            input.style.borderColor = 'var(--electric-purple)';
-        }
-    });
-    
-    // Validate email format
-    if (emailInput && emailInput.value && !validateEmail(emailInput.value)) {
-        isValid = false;
-        emailInput.style.borderColor = 'var(--sunset-coral)';
-    }
-    
-    return isValid;
-}
 
 // ============================================================================
 // Console Messages
