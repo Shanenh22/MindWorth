@@ -2419,12 +2419,7 @@ In 45 minutes, we'll identify your 3 biggest time drains, explain which can be a
             if (!modal || !form) return;
 
             
-            // Form submission - call the proper submitForm function from main.js
-        form.addEventListener('submit', (e) => {
-         submitForm(e, 'audit');
-    });
-
-            // Close on escape key
+           // Close on escape key
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && modal.classList.contains('active')) {
                     closeModal();
